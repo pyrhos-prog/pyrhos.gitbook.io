@@ -1,3 +1,20 @@
+---
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: false
+  outline:
+    visible: false
+  pagination:
+    visible: true
+  metadata:
+    visible: false
+---
+
 # Introducción
 
 ## ¿Qué es Pyrhos Wiki?
@@ -24,7 +41,5 @@ Pyrhos Wiki está dirigida a:
 ### Mi misión
 
 Mi objetivo es crear un recurso útil y accesible para todos, como estudiante sé lo importante que es tener material confiable y bien organizado y quiero ofrecer ese mismo valor a la comunidad.
-
-***
 
 {% embed url="https://pyrhos-map-wiki-appio.vercel.app/" %}
