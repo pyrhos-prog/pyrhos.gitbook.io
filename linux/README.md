@@ -14,16 +14,14 @@ layout:
     visible: true
   metadata:
     visible: true
-metaLinks:
-  alternates:
-    - https://app.gitbook.com/s/yE16Xb3IemPxJWydtPOj/
+metaLinks: {}
 ---
 
 # Introducción a Linux
 
 ### ¿Que es Linux?
 
-Linux es un kernel Open Source basado en Unix creado por Linus Torvald, a diferencia de Windows o MacOS, linux es de codigo abierto por lo que cualquiera puede modificar su codigo fuente y crear sus propias versiones de Linux.&#x20;
+Linux es un kernel Open Source basado en Unix creado por Linus Torvald, a diferencia de Windows o MacOS, linux es de codigo abierto por lo que cualquiera puede modificar su codigo fuente y crear sus propias versiones de Linux.
 
 #### Filosofía del software libre
 
@@ -38,10 +36,6 @@ Linux es un kernel Open Source basado en Unix creado por Linus Torvald, a difere
 * No necesita muchos recursos para funcionar.
 * Es compatible con una amplia gama de hardware, desde componentes muy viejos a componentes muy nuevos.
 
-
-
-
-
 ### Las distribuciones mas importantes
 
-<table data-view="cards"><thead><tr><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><h4><i class="fa-bolt">:bolt:</i> <strong>Debian</strong></h4></td><td><a href=".gitbook/assets/Debian-logo-500x281.png">Debian-logo-500x281.png</a></td><td></td><td><a href="distribuciones/debian.md">debian.md</a></td></tr><tr><td><h4><i class="fa-leaf">:leaf:</i> <strong>Arch</strong></h4></td><td><a href=".gitbook/assets/Arch-Linux-logo-500x313.png">Arch-Linux-logo-500x313.png</a></td><td></td><td><a href="distribuciones/arch-linux.md">arch-linux.md</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th data-hidden data-card-cover data-type="files"></th><th data-hidden></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td><i class="fa-bolt">:bolt:</i> <strong>Debian</strong></td><td><a href=".gitbook/assets/Debian-logo-500x281.png">Debian-logo-500x281.png</a></td><td></td><td><a href="distribuciones/debian.md">debian.md</a></td></tr><tr><td><i class="fa-leaf">:leaf:</i> <strong>Arch</strong></td><td><a href=".gitbook/assets/Arch-Linux-logo-500x313.png">Arch-Linux-logo-500x313.png</a></td><td></td><td><a href="distribuciones/arch-linux.md">arch-linux.md</a></td></tr></tbody></table>
