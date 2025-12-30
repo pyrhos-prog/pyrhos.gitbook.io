@@ -14,8 +14,10 @@
 
 ## Uso de la terminal
 
+* [Estructura de directorios del sistema](uso-de-la-terminal/estructura-de-directorios-del-sistema.md)
 * [Path de linux](uso-de-la-terminal/path-de-linux.md)
 * [Comandos](uso-de-la-terminal/comandos/README.md)
+  * [Lista de comandos](uso-de-la-terminal/comandos/lista-de-comandos.md)
   * [Comando find](uso-de-la-terminal/comandos/comando-find.md)
   * [Comando grep](uso-de-la-terminal/comandos/comando-grep.md)
   * [Comando id](uso-de-la-terminal/comandos/comando-id.md)
@@ -31,6 +33,12 @@
   * [Permisos especiales - SUID ySGID](uso-de-la-terminal/gestion-de-permisos/permisos-especiales-suid-ysgid.md)
 * [Control de atributos de ficheros](uso-de-la-terminal/control-de-atributos-de-ficheros.md)
 * [Control del flujo stdout, stdin y stderr](uso-de-la-terminal/control-del-flujo-stdout-stdin-y-stderr.md)
-* [Estructura de directorios del sistema](uso-de-la-terminal/estructura-de-directorios-del-sistema.md)
 * [Descriptores de archivos](uso-de-la-terminal/descriptores-de-archivos.md)
 * [Comandos (mover a otra categoria)](uso-de-la-terminal/comandos-mover-a-otra-categoria.md)
+
+## Hardening
+
+* [Firewall](hardening/firewall.md)
+* [IDS](hardening/ids.md)
+* [Protección del GRUB](hardening/proteccion-del-grub.md)
+* [Cifrado de disco](hardening/cifrado-de-disco.md)

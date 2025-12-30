@@ -1,0 +1,2 @@
+# Protección del GRUB
+
