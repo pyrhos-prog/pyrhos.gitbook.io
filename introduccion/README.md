@@ -29,6 +29,7 @@ Podrás encontrar contenido sobre temas como:
 * **Linux**: Comandos, administración de sistemas y prácticas de seguridad en entornos Linux.
 * **Ciberseguridad**: Técnicas de hacking ético, herramientas de seguridad y vulnerabilidades comunes.
 * **OSINT**: Métodos y herramientas para la recolección de información a partir de fuentes públicas.
+* **Programación:** Apuntes de programación en Python y Bash para hacer scripting.
 
 #### ¿A quién está dirigida esta wiki?
 
