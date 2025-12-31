@@ -1,6 +1,6 @@
 # Wireshark
 
-Wireshark es una herramienta para analizar el tráfico de una red, en hacking web nos va a servir para analizar y comprender el trafico.
+Wireshark es una herramienta para analizar el tráfico de una red, en hacking web nos va a servir para analizar y comprender el tráfico.
 
 ### Funciones en hacking web
 
