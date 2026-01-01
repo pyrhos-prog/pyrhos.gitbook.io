@@ -58,6 +58,8 @@ metaLinks:
 
 * `device:webcam` → dispositivos que sean cámaras
 * `title:camera`  → cámaras a través del titulo
+* `netcam country:ES` →dispositivos netcam en España
+* `default password` → dipositivos o servicios como webs con claves por defecto
 
 **Web / HTML**
 
