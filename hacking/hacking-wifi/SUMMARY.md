@@ -22,7 +22,7 @@
 ## Herramientas
 
 * [Suite de aircrack-ng](herramientas/suite-de-aircrack-ng.md)
-* [hcxdumptool y hcxpcapngtool](herramientas/hcxdumptool-y-hcxpcapngtool.md)
+* [Suite de hxctools](herramientas/suite-de-hxctools.md)
 * [Wireshark](herramientas/wireshark.md)
 
 ## Ataques Wi-Fi
