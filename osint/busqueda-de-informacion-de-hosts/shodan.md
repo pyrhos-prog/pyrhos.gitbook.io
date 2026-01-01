@@ -54,6 +54,11 @@ metaLinks:
 * `version:"1.2.3"` → versión
 * `os:windows` · `os:"linux 2.6"` → sistema operativo
 
+#### Cámaras
+
+* `device:webcam` → dispositivos que sean cámaras
+* `title:camera`  → cámaras a través del titulo
+
 **Web / HTML**
 
 * `http.title:"texto"` → dentro de
