@@ -1,6 +1,6 @@
-# Fuzzing de directorios
+# Fuzzing web
 
-El fuzzing de directorios es una tecnica para descubrir rutas, archivos y recursos ocultos en un servidor web.
+El ffuzzing web es una tecnica para descubrir rutas, archivos y recursos ocultos en un servidor web.
 
 Se basa en probar automaticamente nombres de directorios y archivos mediante diccionarios.
 
