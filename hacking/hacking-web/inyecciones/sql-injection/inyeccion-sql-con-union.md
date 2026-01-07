@@ -2,11 +2,11 @@
 
 Ahora que sabemos cómo funciona la cláusula UNION y cómo usarla, aprendamos cómo utilizarla en nuestras inyecciones SQL. Tomemos el siguiente ejemplo:
 
-![Interfaz de búsqueda con un cuadro de texto y un botón denominado 'Buscar'. A continuación se muestra una tabla con columnas: Código del puerto, Ciudad del puerto y Volumen del puerto. Las entradas incluyen CN SHA, Shanghai, 37.13 y CN SHE, Shenzhen, 23.97](../../.gitbook/assets/ports_cn.png)
+![](../../.gitbook/assets/ports_cn.png)
 
 Vemos una posible inyección SQL en los parámetros de búsqueda. Aplicamos los pasos de SQLi Discovery inyectando una sola cita (`'`), y recibimos un error:
 
-![Interfaz de búsqueda con un cuadro de texto y un botón denominado 'Buscar'. A continuación se muestra una tabla con columnas: Código del puerto, Ciudad del puerto y Volumen del puerto. Un mensaje de error indica: Tiene un error en su sintaxis SQL; consulte el manual para conocer la sintaxis correcta cerca](../../.gitbook/assets/ports_quote.png)
+![](../../.gitbook/assets/ports_quote.png)
 
 Dado que causamos un error, esto puede significar que la página es vulnerable a la inyección SQL. Este escenario es ideal para su explotación mediante inyección basada en UNION, ya que podemos ver los resultados de nuestras consultas.
 
