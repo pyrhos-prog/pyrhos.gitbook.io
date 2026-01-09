@@ -254,17 +254,13 @@ Donde:
 
 ***
 
-### NMAP EN WINDOWS (Con Zenmap)
+### Interfaz gráfica de Nmap (Zenmap)
 
-Zenmap es el asistente gráfico de nmap en Windows:
+Zenmap es la interfaz gráfica de nmap:
 
-!\[\[Pasted image 20230217135652.png]]
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-También se pueden crear y usar perfiles con objetivos y parámetros guardados:
-
-!\[\[Pasted image 20230218081525.png]] !\[\[Pasted image 20230218081748.png]] !\[\[Pasted image 20230218081832.png]]
-
-***
+También se pueden crear y usar perfiles con objetivos y parámetros guardados.
 
 ### SOURCE PORT (Regular el origen de los paquetes)
 
