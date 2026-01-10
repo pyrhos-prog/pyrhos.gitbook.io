@@ -170,14 +170,6 @@ nmap -sT [ip]
 nmap -sUV [ip]
 ```
 
-## Interfaz gráfica de Nmap (Zenmap)
-
-Zenmap es la interfaz gráfica de nmap:
-
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
-
-También se pueden crear y usar perfiles con objetivos y parámetros guardados.
-
 ### CÓMO HACER UN ESCANEO DE NMAP MUCHO MÁS RÁPIDO Y EFICIENTE
 
 * Ponemos triple verbose para ver resultados mientras analiza.
@@ -192,4 +184,10 @@ Ejemplo:
 nmap -p- --open -sS -sC -sV --min-rate 5000 -vvv -n -Pn 10.10.11.191 -oN escaneo
 ```
 
-***
+## Interfaz gráfica de Nmap (Zenmap)
+
+Zenmap es la interfaz gráfica de nmap:
+
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+También se pueden crear y usar perfiles con objetivos y parámetros guardados.
