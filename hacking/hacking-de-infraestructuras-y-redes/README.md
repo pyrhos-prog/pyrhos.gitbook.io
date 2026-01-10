@@ -142,11 +142,11 @@ Sirve para confundir el firewall indicando direcciones IP señuelo, disimulando 
 nmap -D [ip-falsa],[ip-falsa],[ip-falsa],[ip-real]
 ```
 
-### --script-mpu
+#### --script-mpu
 
 El parámetro mpu sirve para ajustar el tamaño máximo de paquete sin fragmentar (MPU) para los paquetes enviados durante las pruebas de detección de firewall. Debe ponerse siempre un número múltiplo de 8 (8, 16, ...):
 
-### --spoof-mac (cambiar MAC)
+#### --spoof-mac (cambiar MAC)
 
 Con la opción --spoof-mac podremos cambiar la MAC
 
