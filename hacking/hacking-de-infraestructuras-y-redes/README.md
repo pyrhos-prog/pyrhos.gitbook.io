@@ -138,7 +138,7 @@ nmap -S [ip-a-utilizar] [ip]
 
 Sirve para confundir el firewall indicando direcciones IP señuelo, disimulando el análisis:
 
-```
+```bash
 nmap -D [ip-falsa],[ip-falsa],[ip-falsa],[ip-real]
 ```
 
@@ -154,19 +154,19 @@ Con la opción --spoof-mac podremos cambiar la MAC
 
 #### Syn Scan
 
-```
+```bash
 nmap -sS [ip]
 ```
 
 #### TCP Scan
 
-```
+```bash
 nmap -sT [ip]
 ```
 
 #### UDP Scan
 
-```
+```bash
 nmap -sUV [ip]
 ```
 
@@ -177,52 +177,6 @@ Zenmap es la interfaz gráfica de nmap:
 <figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 También se pueden crear y usar perfiles con objetivos y parámetros guardados.
-
-### SOURCE PORT (Regular el origen de los paquetes)
-
-Por defecto nmap usa un puerto de origen aleatorio. Algunos firewalls permiten puertos comunes en lista blanca; se puede forzar el puerto de origen (ej. 53):
-
-!\[\[Pasted image 20230413074240.png]] !\[\[Pasted image 20230413074738.png]]
-
-En Wireshark se verá el tráfico con el puerto de origen especificado:
-
-!\[\[Pasted image 20230413074849.png]]
-
-***
-
-### DATA LENGTH (Modificar la longitud del paquete)
-
-Algunos firewalls filtran según tamaño de paquete. Podemos ajustar el mínimo y añadir longitud adicional con --data-length:
-
-!\[\[Pasted image 20230413075148.png]] !\[\[Pasted image 20230413075434.png]]
-
-En Wireshark se verá el aumento del tamaño de los paquetes:
-
-!\[\[Pasted image 20230413075730.png]]
-
-***
-
-## SCRIPTS DE NMAP (detallado)
-
-Nmap cuenta con scripts para automatizar reconocimiento. Ejemplos:
-
-* -sC: ejecutar scripts por defecto; combinado con -sV muestra versiones de servicios:
-
-!\[\[Pasted image 20230413081220.png]]
-
-* Ejecutar un script concreto (ej. vuln):
-
-!\[\[Pasted image 20230413081456.png]]
-
-* Ejecutar vuln junto a safe (menos intrusivo que vuln solo):
-
-!\[\[Pasted image 20230413081949.png]]
-
-* http-enum para fuzzing web sencillo:
-
-!\[\[Pasted image 20230413082307.png]]
-
-***
 
 ### CÓMO HACER UN ESCANEO DE NMAP MUCHO MÁS RÁPIDO Y EFICIENTE
 
