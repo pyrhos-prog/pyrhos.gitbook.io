@@ -170,7 +170,7 @@ nmap -sT [ip]
 nmap -sUV [ip]
 ```
 
-### CÓMO HACER UN ESCANEO DE NMAP MUCHO MÁS RÁPIDO Y EFICIENTE
+### Escaneo de Nmap rápido y eficiente
 
 * Ponemos triple verbose para ver resultados mientras analiza.
 * -n evita la resolución DNS.
