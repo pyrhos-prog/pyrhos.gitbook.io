@@ -1,260 +1,176 @@
 # Nmap
 
-## PARÁMETROS DE NMAP
+## Sintaxis básica
 
-{% stepper %}
-{% step %}
-### sP (Sondeo de Ping)
-
-Esto sirve para detectar equipos conectados a mi red utilizando un ping.
-{% endstep %}
-
-{% step %}
-### -sn
-
-Este parámetro sirve para detectar equipos encendidos dentro de nuestra web, es algo similar al arp-scan:
-
-```
-pyrhos@debian-laptop:~$ nmap -sn 192.168.1.1/24 
-Starting Nmap 7.95 ( https://nmap.org ) at 2025-11-20 09:01 CET
-Nmap scan report for router.asus.com (192.168.1.1)
-Host is up (0.013s latency).
-Nmap scan report for debian-laptop (192.168.1.233)
-Host is up (0.00072s latency).
-Nmap scan report for jaime-aspirea31542 (192.168.1.245)
-Host is up (0.11s latency).
-Nmap scan report for 192.168.1.249
-Host is up (0.096s latency).
-Nmap scan report for HONOR-200-Lite (192.168.1.251)
-Host is up (0.13s latency).
-Nmap done: 256 IP addresses (5 hosts up) scanned in 7.12 seconds
-```
-{% endstep %}
-
-{% step %}
-### -sS (TCP Syn)
-
-Con esta opción podremos hacer un escaneo más sigiloso sin dejar rastro en la máquina objetivo:
-
-```
-  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans
-```
-{% endstep %}
-
-{% step %}
-### -T (Plantillas de temporizado)
-
-El parámetro -T de nmap sirve para aplicar una plantilla para hacer más rápidos o no los escaneos; y tenemos hasta 5 posibles plantillas, siendo la 5 la más rápida.
-
-```
-  -T<0-5>: Set timing template (higher is faster)
-```
-{% endstep %}
-
-{% step %}
-### -vvv (Triple verbose)
-
-Esto sirve para que a medida que encuentre algo, nos lo vaya reportando al mismo tiempo:
-
-```
-pyrhos@debian-laptop:~$ nmap 192.168.1.1 -vvv
-Starting Nmap 7.95 ( https://nmap.org ) at 2025-11-20 09:05 CET
-Initiating Ping Scan at 09:05
-Scanning 192.168.1.1 [2 ports]
-Completed Ping Scan at 09:05, 0.02s elapsed (1 total hosts)
-Initiating Parallel DNS resolution of 1 host. at 09:05
-Completed Parallel DNS resolution of 1 host. at 09:05, 0.01s elapsed
-DNS resolution of 1 IPs took 0.01s. Mode: Async [#: 1, OK: 1, NX: 0, DR: 0, SF: 0, TR: 1, CN: 0]
-Initiating Connect Scan at 09:05
-Scanning router.asus.com (192.168.1.1) [1000 ports]
-Discovered open port 53/tcp on 192.168.1.1
-Discovered open port 80/tcp on 192.168.1.1
-Discovered open port 9998/tcp on 192.168.1.1
-Discovered open port 515/tcp on 192.168.1.1
-Discovered open port 9100/tcp on 192.168.1.1
-Completed Connect Scan at 09:05, 0.14s elapsed (1000 total ports)
-Nmap scan report for router.asus.com (192.168.1.1)
-Host is up, received syn-ack (0.0071s latency).
-Scanned at 2025-11-20 09:05:50 CET for 0s
-Not shown: 995 closed tcp ports (conn-refused)
-PORT     STATE SERVICE    REASON
-53/tcp   open  domain     syn-ack
-80/tcp   open  http       syn-ack
-515/tcp  open  printer    syn-ack
-9100/tcp open  jetdirect  syn-ack
-9998/tcp open  distinct32 syn-ack
-
-Read data files from: /usr/bin/../share/nmap
-Nmap done: 1 IP address (1 host up) scanned in 0.20 seconds
-
-```
-{% endstep %}
-
-{% step %}
-### Rango de puertos (-p)
-
-Con el parámetro -p podemos elegir que puertos escanear o definir un rango de puertos que escanee.
-
-Escaneo de un puerto o puertos en especifico
-
-```
-nmap -p22 <IP>
-nmap -p22,80,443 <IP>
+```bash
+nmap [ip]
+# Ejemplo nmap 192.168.1.1
 ```
 
-Escaneo de un rango de puertos:
+### Escaneo de puertos
 
-```
-nmap -p1-65565 <IP>
-```
+#### Puertos específicos
 
-O también se puede poner de estas manera:
-
-```
-nmap -p- <IP>
+```bash
+nmap -p [puerto o puertos separados por comas] [ip]
+# Ejemplo: nmap -p 22,80 192.168.1.1
 ```
 
-### Sondeo UDP (-sU)
+#### Rango de puertos
 
-Para hacer escaneos por UDP utilizamos la opción -sU:
-
+```bash
+nmap -p 1-65535 [ip]
+# o para un escaneo mas rapido de todos los puertos
+nmap -p- --min-rate 1000 [ip]
 ```
-pyrhos@debian-laptop:~$ sudo nmap -sU 192.168.1.1 --top-ports 100
-Starting Nmap 7.95 ( https://nmap.org ) at 2025-11-20 09:16 CET
-Nmap scan report for router.asus.com (192.168.1.1)
-Host is up (0.018s latency).
-Not shown: 96 closed udp ports (port-unreach)
-PORT     STATE SERVICE
-53/udp   open  domain
-67/udp   open  dhcps
-1900/udp open  upnp
-5353/udp open  zeroconf
-MAC Address: 2C:4D:54:1A:E8:10 (ASUSTek Computer)
 
-Nmap done: 1 IP address (1 host up) scanned in 94.67 seconds
+### Detección de versiones de servicios
 
+#### Detección de versión
+
+```bash
+nmap -sV [ip]
 ```
-{% endstep %}
 
-{% step %}
-### Sondeo TCP ACK (Detectar tipo de Firewall)
+#### Detección de sistema operativo
+
+```bash
+nmap -O [ip]
+```
+
+#### Detección del sistema operativo y versión
+
+```bash
+nmap -A [ip]
+```
+
+### Escaneo de múltiples objetivos
+
+```bash
+nmap [ip] [ip]
+```
+
+#### Escaneo de rangos de IP&#x20;
+
+```bash
+nmap [ip]/[mascara de red]
+# Ejemplo
+nmap 192.168.1.1/24
+```
+
+#### Escaneo de lista de IP
+
+```bash
+nmap -iL ips.txt
+```
+
+### Formatos de salida
+
+```bash
+nmap -oN output.txt # Archivo txt 
+nmap -oN output.xml # Archivo XML
+nmap -oG salida.gnmap # Archivo Grepable
+```
+
+### Scripts NSE
+
+Los scripts NSE sirven para detectar vulnerabilidades, hacer fuerza bruta o enumerar usuarios automaticamente.
+
+#### Lista de scripts
+
+```bash
+ls /usr/share/nmap/scripts/
+```
+
+#### Ejecutar script
+
+```bash
+nmap --script [nombre-script] [ip]
+# Ejemplo
+nmap --script http-title 192.168.1.234
+```
+
+#### Ejecutar categoria de scripts
+
+```bash
+nmap --script [nombre-categoria] [ip]
+# Ejemplo
+nmap --script vuln 192.168.1.231
+```
+
+### Técnica de evasión
+
+#### Sondeo TCP ACK (Detectar tipo de Firewall)
 
 Con la opcion -sA podemos detectar el tipo de firewall:
 
 ```
 nmap -sA <ip>
 ```
-{% endstep %}
 
-{% step %}
-### Scripts de Nmap (resumen)
+#### Velocidad de escaneo
 
-* Con <kbd>nmap --scrip default</kbd> ejecutamos los scripts de nmap por defecto para obtener información de las máquinas objetivo:
-* El script <kbd>nmap --script "vuln and safe"</kbd> brinda información sobre vulnerabilidades:
-* El script <kbd>nmap --script all</kbd> ejecuta todos los scripts de nmap:
-* El script <kbd>nmap --script auth</kbd> comprueba contraseñas vacías o por defecto:
-* <kbd>nmap --script=http-enum</kbd> fuzzer / enumerador web
-* Fuerza bruta FTP (ejemplo con script de nmap)
+El parámetro <kbd>-T</kbd> permite cambiar la velocidad de escaneo en un rango del 0 al 5 siendo el 5 la opción mas rápida y agresiva, para evadir sistemas de protección la velocidad tiene que ser lo mas baja posible.
 
-`nmap --script=ftp-brute --script=args userdb="users.txt",passdb="pass.txt" -p21 "ip"`
+```bash
+nmap -T3 [ip]
+```
 
-* Fuerza bruta SSH (ssh-brute):
+#### Fragmentación de paquetes
 
-`nmap --script=ssh-brute --script=args userdb="users.txt",passdb="pass.txt" -p22 "ip"`
+```bash
+nmap -f [ip]
+```
 
-* Detección de vulnerabilidades en firewall (ejemplo):
+#### Cambiar puerto de origen
 
-`nmap -n -Pn -v --script=firewall-bypass --script args firewall-bypass,helper="ftp",firewall-bypass,target=22 <ip>`
-{% endstep %}
+```bash
+nmap --source-port [puerto] [ip]
+```
 
-{% step %}
-### -f (fragmentar paquetes)
+#### Spoofing de IP&#x20;
 
-Con el parámetro -f podemos fragmentar los paquetes a la hora de hacer el escaneo, por lo que de esta forma es posible que los puertos que se encuentren filtrados podamos llegar a verlos:
+```bash
+nmap -S [ip-a-utilizar] [ip]
+```
 
+#### Decoys
 
-{% endstep %}
+Sirve para confundir el firewall indicando direcciones IP señuelo, disimulando el análisis:
 
-{% step %}
+```
+nmap -D [ip-falsa],[ip-falsa],[ip-falsa],[ip-real]
+```
+
 ### --script-mpu
 
 El parámetro mpu sirve para ajustar el tamaño máximo de paquete sin fragmentar (MPU) para los paquetes enviados durante las pruebas de detección de firewall. Debe ponerse siempre un número múltiplo de 8 (8, 16, ...):
 
-
-{% endstep %}
-
-{% step %}
-### -D (decoy)
-
-Sirve para confundir el firewall indicando direcciones IP señuelo, disimulando el análisis:
-
-
-
-Si guardamos esto en un fichero .cap y lo analizamos con Wireshark veremos tráfico también desde la IP señuelo:
-
-
-{% endstep %}
-
-{% step %}
 ### --spoof-mac (cambiar MAC)
 
 Con la opción --spoof-mac podremos cambiar la MAC
 
+### Escaneo sigiloso
 
-{% endstep %}
-{% endstepper %}
+#### Syn Scan
 
-***
-
-### GUARDAR TRÁFICO DE NMAP EN FICHERO .CAP CON TCPDUMP
-
-Podemos utilizar tcpdump para guardar un determinado tráfico que corre por una interfaz dentro de un fichero con extensión .cap.
-
-Primero nos ponemos en escucha con tcpdump guardando el tráfico en un fichero y por la interfaz correspondiente:
-
-
-
-Mientras tcpdump está en escucha, lanzamos por ejemplo un escaneo al puerto 22:
-
-!\[\[Pasted image 20230412012708.png]]
-
-Se hace el reporte:
-
-!\[\[Pasted image 20230412012729.png]]
-
-Ya tenemos el fichero .cap con el tráfico interceptado:
-
-!\[\[Pasted image 20230412012801.png]]
-
-Ahora lanzamos Wireshark con la captura:
-
-!\[\[Pasted image 20230412012839.png]] !\[\[Pasted image 20230412012855.png]]
-
-***
-
-### ESCANEOS SILENCIOSOS CON NMAP
-
-Para hacer un escaneo lo más silencioso posible, puede usar:
-
-* -sS para SYN Stealth (en lugar de TCP completo).
-* -T2 para velocidad de escaneo baja.
-* -Pn para no hacer detección de hosts.
-
-Ejemplo:
-
-```python
-nmap -sS -T2 -Pn <dirección_ip>
+```
+nmap -sS [ip]
 ```
 
-Donde:
+#### TCP Scan
 
-* "-sS" escaneo SYN Stealth.
-* "-T2" velocidad baja.
-* "-Pn" desactiva detección de hosts (no ping).
+```
+nmap -sT [ip]
+```
 
-***
+#### UDP Scan
 
-### Interfaz gráfica de Nmap (Zenmap)
+```
+nmap -sUV [ip]
+```
+
+## Interfaz gráfica de Nmap (Zenmap)
 
 Zenmap es la interfaz gráfica de nmap:
 
