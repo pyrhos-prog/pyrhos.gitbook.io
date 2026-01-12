@@ -22,4 +22,16 @@ sudo nmap -PE -PM -PP -sn 192.168.1.1/24
 fping -g 199.66.11.0/24
 ```
 
-*
+#### Netdiscover
+
+```
+sudo netdiscover -i wlan0
+```
+
+### Enumeración de hosts con ARP
+
+#### Arp-scan
+
+```
+arp-scan --localnet
+```
