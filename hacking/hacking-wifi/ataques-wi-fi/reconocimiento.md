@@ -110,7 +110,7 @@ airodump-ng --bssid AA:BB:CC:DD:EE:FF -C [canal] -w captura [interfaz]
 
 Obtener material sin necesidad de clientes activos.
 
-```
+```bash
 hcxdumptool -i [interfaz] -o captura.pcapng --enable_status=1
 ```
 
@@ -118,12 +118,12 @@ hcxdumptool -i [interfaz] -o captura.pcapng --enable_status=1
 
 Extraer hashes útiles
 
-```
+```bash
 hcxpcapngtool -o hash.hc22000 captura.pcapng
 ```
 
 Verificación:
 
-```
+```bash
 hcxpcapngtool -I captura.pcapng
 ```

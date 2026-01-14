@@ -28,7 +28,6 @@
 ## Ataques Wi-Fi
 
 * [Reconocimiento](ataques-wi-fi/reconocimiento.md)
-* [Captura de Handshake](ataques-wi-fi/captura-de-handshake.md)
 * [Ataques WPA/WPA2-PSK](ataques-wi-fi/ataques-wpa-wpa2-psk.md)
 * [Evil Twin](ataques-wi-fi/evil-twin.md)
 * [Ataque WPS](ataques-wi-fi/ataque-wps.md)
