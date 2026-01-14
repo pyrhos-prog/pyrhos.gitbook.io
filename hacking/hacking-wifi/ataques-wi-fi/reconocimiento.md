@@ -2,9 +2,9 @@
 
 El reconocimiento en hacking Wi-Fi es la fase en la que se **recopila información de las redes inalámbricas** disponibles sin interactuar directamente con ellas.<br>
 
-### Tipo de reconocimiento
+## Tipo de reconocimiento
 
-#### Reconocimiento pasivo
+### Reconocimiento pasivo
 
 No se envian paquetes, solo se capturan tramas emitidas por los dipositivos y puntos de acceso cercanos.
 
@@ -16,7 +16,7 @@ No se envian paquetes, solo se capturan tramas emitidas por los dipositivos y pu
 * Tipo de cifrado
 * Clientes
 
-#### Reconocimiento activo
+### Reconocimiento activo
 
 Se envian tramas a los clientes y los puntos de acceso.
 
@@ -27,9 +27,9 @@ Se envian tramas a los clientes y los puntos de acceso.
 * Repuestas del AP
 * Redes ocultas
 
-### Herramientas habituales
+## Herramientas habituales
 
-#### airodump-ng
+### airodump-ng
 
 ```bash
 airodump-ng [interfaz]
@@ -39,7 +39,7 @@ airodump-ng [interfaz]
 * Detecta clientes
 * Captura handshakes
 
-#### hcxdumptool
+### hcxdumptool
 
 ```bash
 hcxdumptool -i [interfaz] -o captura.pcapng
@@ -49,7 +49,7 @@ hcxdumptool -i [interfaz] -o captura.pcapng
 * Tramas de gestión&#x20;
 * PMKID
 
-#### bettercap
+### bettercap
 
 ```bash
 wifi.recon on
@@ -62,19 +62,19 @@ Muestra:
 * Cifrado
 * Canales
 
-### Fases del reconocimiento
+## Fases del reconocimiento
 
 {% hint style="info" %}
 Para poder ejecutar el reconocimiento hay que tener la antena en modo monitor.
 {% endhint %}
 
-#### 1. Descubrimiento de redes
+### 1. Descubrimiento de redes
 
 ```bash
 airodump-ng [interfaz]
 ```
 
-#### 2. Clasificación del objetivo
+### 2. Clasificación del objetivo
 
 Filtrado por canal
 
@@ -82,7 +82,7 @@ Filtrado por canal
 airodump-ng -c [canal] [interfaz]
 ```
 
-#### 3. Enumeración de clientes
+### 3. Enumeración de clientes
 
 Identificación de dispositivos asociados al AP.
 
@@ -90,7 +90,7 @@ Identificación de dispositivos asociados al AP.
 airodump-ng -c [canal] -bssid AA:BB:CC:DD:EE:FF [interfaz]
 ```
 
-#### 4. Analisis de cifrado y autenticación
+### 4. Analisis de cifrado y autenticación
 
 Comprobar el método de seguridad
 
@@ -98,7 +98,7 @@ Comprobar el método de seguridad
 airodump-ng --bssid AA:BB:CC:DD:EE:FF -c [canal] [interfaz]
 ```
 
-#### 6. Captura del tráfico relevante
+### 6. Captura del tráfico relevante
 
 Guardar tráfico para el  analisis posterior
 
@@ -106,7 +106,7 @@ Guardar tráfico para el  analisis posterior
 airodump-ng --bssid AA:BB:CC:DD:EE:FF -C [canal] -w captura [interfaz]
 ```
 
-#### 7. Captura del PMKID
+### 7. Captura del PMKID
 
 Obtener material sin necesidad de clientes activos.
 
@@ -114,7 +114,7 @@ Obtener material sin necesidad de clientes activos.
 hcxdumptool -i [interfaz] -o captura.pcapng --enable_status=1
 ```
 
-#### 8. Procesamiento de capturas
+### 8. Procesamiento de capturas
 
 Extraer hashes útiles
 
