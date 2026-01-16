@@ -32,4 +32,3 @@
 * [Evil Twin](ataques-wi-fi/evil-twin.md)
 * [Ataque WPS](ataques-wi-fi/ataque-wps.md)
 * [Rogue AP](ataques-wi-fi/rogue-ap.md)
-* [PMKID](ataques-wi-fi/pmkid.md)
