@@ -81,6 +81,10 @@
 
 * [¿Porque usar una metodologia?](metodologias/porque-usar-una-metodologia.md)
 * [PTES (Penetration Testing Execution Standart)](metodologias/ptes-penetration-testing-execution-standart.md)
+* [NIST 800-115](metodologias/nist-800-115.md)
+* [OSSTMM (Open Source Security Testing Methodology Manual)](metodologias/osstmm-open-source-security-testing-methodology-manual.md)
+* [MITRE ATT\&CK](metodologias/mitre-att-and-ck.md)
+* [OWASP TG](metodologias/owasp-tg.md)
 
 ## HACKING WEB
 
