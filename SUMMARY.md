@@ -6,6 +6,7 @@
 
 * [Preparación del entorno](introduccion-a-la-ciberseguridad/preparacion-del-entorno/README.md)
   * [Kali Linux en Virtualbox](introduccion-a-la-ciberseguridad/preparacion-del-entorno/kali-linux-en-virtualbox.md)
+  * [Configuración de Kali Linux](introduccion-a-la-ciberseguridad/preparacion-del-entorno/configuracion-de-kali-linux.md)
 * [Metodologías](introduccion-a-la-ciberseguridad/metodologias/README.md)
   * [PTES (Penetration Testing Execution Standart)](introduccion-a-la-ciberseguridad/metodologias/ptes-penetration-testing-execution-standart.md)
   * [NIST 800-115](introduccion-a-la-ciberseguridad/metodologias/nist-800-115.md)
