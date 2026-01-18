@@ -4,7 +4,9 @@
 
 ## Introduccion a la ciberseguridad
 
-* [METODOLOGIAS](introduccion-a-la-ciberseguridad/metodologias/README.md)
+* [Preparación del entorno](introduccion-a-la-ciberseguridad/preparacion-del-entorno/README.md)
+  * [Kali Linux en Virtualbox](introduccion-a-la-ciberseguridad/preparacion-del-entorno/kali-linux-en-virtualbox.md)
+* [Metodologías](introduccion-a-la-ciberseguridad/metodologias/README.md)
   * [PTES (Penetration Testing Execution Standart)](introduccion-a-la-ciberseguridad/metodologias/ptes-penetration-testing-execution-standart.md)
   * [NIST 800-115](introduccion-a-la-ciberseguridad/metodologias/nist-800-115.md)
   * [OSSTMM (Open Source Security Testing Methodology Manual)](introduccion-a-la-ciberseguridad/metodologias/osstmm-open-source-security-testing-methodology-manual.md)
@@ -20,7 +22,6 @@
   * [Debian](linux/distribuciones/debian.md)
   * [Arch Linux](linux/distribuciones/arch-linux.md)
   * [Kali Linux](linux/distribuciones/kali-linux.md)
-* [Instalación de Linux](linux/instalacion-de-linux.md)
 * [Uso de la terminal](linux/uso-de-la-terminal/README.md)
   * [Lista de comandos](linux/uso-de-la-terminal/lista-de-comandos.md)
   * [Concatenar comandos](linux/uso-de-la-terminal/concatenar-comandos.md)
