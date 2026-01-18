@@ -1,2 +1,0 @@
-# Cifrado de disco
-
