@@ -4,53 +4,71 @@ icon: arrow-progress
 
 # PTES (Penetration Testing Execution Standart)
 
-> Esta metodología se divide en 7 fases
+> Metodología estándar para la ejecución de pruebas de penetración, dividida en 7 fases bien definidas.
 
-## Fases de PTES
+### Fases de PTES
 
 {% stepper %}
 {% step %}
-### Interacciones previas al compromiso
+#### Interacciones previas al compromiso
 
-* Contacto inicial
-* Definición del scope
-* Contratos
-* Acuerdo de No Divulgación (DNA)
+* Contacto inicial con el cliente
+* Definición del alcance (scope)
+* Reglas de compromiso
+* Contratos legales
+* Acuerdo de No Divulgación (NDA)
 {% endstep %}
 
 {% step %}
-### Recopilación de información
+#### Recopilación de información
 
-* Reconocimiento Activo&#x20;
-* Reconocimiento Pasivo
+* Reconocimiento pasivo
+* Reconocimiento activo
 * OSINT
+* Enumeración inicial de activos
 {% endstep %}
 
 {% step %}
-### Threat modeling
+#### Threat Modeling
 
-Identificación de los vectores probables de ataque.
-
-
+* Identificación de activos críticos
+* Análisis de posibles vectores de ataque
+* Priorización de objetivos
+* Evaluación del impacto potencial
 {% endstep %}
 
 {% step %}
-### Analisis de vulnerabilidades
+#### Análisis de vulnerabilidades
 
 * Escaneo de vulnerabilidades
-* Comprobación de las vulnerabilidades
+* Identificación de servicios vulnerables
+* Validación de vulnerabilidades detectadas
 {% endstep %}
 
 {% step %}
-### Post explotación
+#### Explotación
 
-Explotación de las vulnerabilidades
+* Explotación controlada de vulnerabilidades
+* Obtención de acceso inicial
+* Verificación del impacto real
 {% endstep %}
 
 {% step %}
-### Reporte
+#### Post-explotación
 
-Entregar el informe con los descubrimientos, pasos de ejecución y posibles soluciones.
+* Escalada de privilegios
+* Movimiento lateral
+* Persistencia
+* Extracción de información sensible
+* Evaluación del impacto completo
+{% endstep %}
+
+{% step %}
+#### Reporte
+
+* Documentación de hallazgos
+* Evidencias técnicas
+* Riesgos identificados
+* Recomendaciones y mitigaciones
 {% endstep %}
 {% endstepper %}
-
