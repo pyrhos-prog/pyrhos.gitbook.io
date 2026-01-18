@@ -77,6 +77,10 @@
   * [os](python/librerias/os.md)
   * [requests](python/librerias/requests.md)
 
+## METODOLOGIAS&#x20;
+
+* [¿Porque usar una metodologia?](metodologias/porque-usar-una-metodologia.md)
+
 ## HACKING WEB
 
 * [Reconocimiento](hacking-web/reconocimiento/README.md)
