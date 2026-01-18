@@ -80,6 +80,7 @@
 ## METODOLOGIAS&#x20;
 
 * [¿Porque usar una metodologia?](metodologias/porque-usar-una-metodologia.md)
+* [PTES (Penetration Testing Execution Standart)](metodologias/ptes-penetration-testing-execution-standart.md)
 
 ## HACKING WEB
 
