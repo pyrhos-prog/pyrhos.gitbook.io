@@ -2,6 +2,15 @@
 
 * [Home](README.md)
 
+## Introduccion a la ciberseuridad
+
+* [METODOLOGIAS](introduccion-a-la-ciberseuridad/metodologias/README.md)
+  * [PTES (Penetration Testing Execution Standart)](metodologias/ptes-penetration-testing-execution-standart.md)
+  * [NIST 800-115](metodologias/nist-800-115.md)
+  * [OSSTMM (Open Source Security Testing Methodology Manual)](metodologias/osstmm-open-source-security-testing-methodology-manual.md)
+  * [MITRE ATT\&CK](metodologias/mitre-att-and-ck.md)
+  * [OWASP TG](metodologias/owasp-tg.md)
+
 ## Linux
 
 * [Introducción a Linux](linux/introduccion-a-linux/README.md)
@@ -76,15 +85,6 @@
 * [Librerias](python/librerias/README.md)
   * [os](python/librerias/os.md)
   * [requests](python/librerias/requests.md)
-
-## Introduccion a la ciberseuridad
-
-* [METODOLOGIAS](introduccion-a-la-ciberseuridad/metodologias/README.md)
-  * [PTES (Penetration Testing Execution Standart)](introduccion-a-la-ciberseuridad/metodologias/ptes-penetration-testing-execution-standart.md)
-  * [NIST 800-115](introduccion-a-la-ciberseuridad/metodologias/nist-800-115.md)
-  * [OSSTMM (Open Source Security Testing Methodology Manual)](introduccion-a-la-ciberseuridad/metodologias/osstmm-open-source-security-testing-methodology-manual.md)
-  * [MITRE ATT\&CK](introduccion-a-la-ciberseuridad/metodologias/mitre-att-and-ck.md)
-  * [OWASP TG](introduccion-a-la-ciberseuridad/metodologias/owasp-tg.md)
 
 ## HACKING WEB
 
