@@ -51,6 +51,8 @@
 * [Tipos de redes](redes/tipos-de-redes/README.md)
   * [WAN](redes/tipos-de-redes/wan.md)
   * [LAN/WLAN](redes/tipos-de-redes/lan-wlan.md)
+  * [VPN](redes/tipos-de-redes/vpn.md)
+  * [GAN](redes/tipos-de-redes/gan.md)
 * [Arquitecturas de red](redes/arquitecturas-de-red/README.md)
   * [Arquitectura Cliente-Servidor](redes/arquitecturas-de-red/arquitectura-cliente-servidor.md)
   * [Arquitectura P2P](redes/arquitecturas-de-red/arquitectura-p2p.md)
