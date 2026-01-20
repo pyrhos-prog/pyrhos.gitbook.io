@@ -48,6 +48,8 @@
 * [Modelos de referencia](redes/modelos-de-referencia/README.md)
   * [Modelo OSI](redes/modelos-de-referencia/modelo-osi.md)
   * [Modelo TCP/IP](redes/modelos-de-referencia/modelo-tcp-ip.md)
+* [Tipos de redes](redes/tipos-de-redes/README.md)
+  * [WAN](redes/tipos-de-redes/wan.md)
 * [Arquitecturas de red](redes/arquitecturas-de-red/README.md)
   * [Arquitectura Cliente-Servidor](redes/arquitecturas-de-red/arquitectura-cliente-servidor.md)
   * [Arquitectura P2P](redes/arquitecturas-de-red/arquitectura-p2p.md)
