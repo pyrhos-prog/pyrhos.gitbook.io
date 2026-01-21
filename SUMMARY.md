@@ -62,6 +62,7 @@
 * [Analisis de tráfico](redes/analisis-de-trafico/README.md)
   * [Wireshark](redes/analisis-de-trafico/wireshark.md)
   * [Nmap](redes/analisis-de-trafico/nmap.md)
+* [Subnetting](redes/subnetting.md)
 
 ## Python
 
