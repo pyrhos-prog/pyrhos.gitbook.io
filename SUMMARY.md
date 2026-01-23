@@ -199,4 +199,4 @@
 
 ## Blue Team
 
-* [Page 2](blue-team/page-2.md)
+* [Introducción al Blue Team](blue-team/introduccion-al-blue-team.md)
