@@ -39,7 +39,7 @@
 * [Gestión de permisos](linux/gestion-de-permisos/README.md)
   * [Permisos](linux/gestion-de-permisos/permisos.md)
   * [Permisos especiales - Sticky Bit](linux/gestion-de-permisos/permisos-especiales-sticky-bit.md)
-  * [Permisos especiales - SUID ySGID](linux/gestion-de-permisos/permisos-especiales-suid-ysgid.md)
+  * [Permisos especiales - SUID y SGID](linux/gestion-de-permisos/permisos-especiales-suid-y-sgid.md)
 * [Hardening](linux/hardening.md)
 
 ## Redes

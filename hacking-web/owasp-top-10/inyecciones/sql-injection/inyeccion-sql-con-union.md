@@ -14,11 +14,12 @@ Vemos una posible inyección SQL en los parámetros de búsqueda. Aplicamos los 
 
 Dado que causamos un error, esto puede significar que la página es vulnerable a la inyección SQL. Este escenario es ideal para su explotación mediante inyección basada en UNION, ya que podemos ver los resultados de nuestras consultas.
 
-***
-
 #### Detectar número de columnas
 
-Antes de seguir adelante y explotar las consultas basadas en UNION, necesitamos encontrar la cantidad de columnas seleccionadas por el servidor. Hay dos métodos para detectarlo: usando ORDER BY o usando UNION. A continuación se muestran ambas técnicas.
+Antes de seguir adelante y explotar las consultas basadas en UNION, necesitamos encontrar la cantidad de columnas seleccionadas por el servidor. Hay dos métodos para detectarlo:&#x20;
+
+* usando ORDER BY&#x20;
+* usando UNION
 
 {% stepper %}
 {% step %}
@@ -79,8 +80,6 @@ Si la inyección es correcta veremos los resultados y sabremos que la tabla tien
 Conclusión: la tabla tiene 4 columnas. Ambos métodos son válidos para determinar el número de columnas.
 {% endstep %}
 {% endstepper %}
-
-***
 
 #### Ubicación de la inyección
 
