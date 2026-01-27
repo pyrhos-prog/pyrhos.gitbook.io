@@ -146,7 +146,10 @@
   * [Suite de hxctools](hacking-wifi/herramientas/suite-de-hxctools.md)
   * [Wireshark](hacking-wifi/herramientas/wireshark.md)
 * [Ataques Wi-Fi](hacking-wifi/ataques-wi-fi/README.md)
-  * [Page 3](hacking-wifi/ataques-wi-fi/page-3.md)
+  * [Reconocimiento](hacking-wifi/ataques-wi-fi/reconocimiento.md)
+  * [Ataque a hashes WPA2](hacking-wifi/ataques-wi-fi/ataque-a-hashes-wpa2.md)
+  * [Evil Twin](hacking-wifi/ataques-wi-fi/evil-twin.md)
+  * [Rogue AP](hacking-wifi/ataques-wi-fi/rogue-ap.md)
 
 ## Hacking de Infraestructura y red
 
