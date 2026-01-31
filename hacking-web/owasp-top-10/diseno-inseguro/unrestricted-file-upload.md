@@ -15,8 +15,3 @@ Incluso si solo se permite subir ciertos tipos de archivos, aún pueden darse at
 * XSS o XXE
 * Denegación de servicio (DoS)
 * Sobrescritura de archivos o configuraciones importantes
-
-{% hint style="info" %}
-Estas vulnerabilidades también pueden aparecer por **usar librerías antiguas o inseguras**.\
-Por eso, es clave aplicar **buenas prácticas de seguridad** para validar y manejar correctamente los archivos subidos.
-{% endhint %}
