@@ -8,7 +8,7 @@ icon: windows
 {% step %}
 ### Conocer adaptadores de red y las IPs
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 {% endstep %}
 
 {% step %}
@@ -20,7 +20,7 @@ ipconfig /all
 {% endstep %}
 
 {% step %}
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Conocer enrutamiento direcciones IP
 
