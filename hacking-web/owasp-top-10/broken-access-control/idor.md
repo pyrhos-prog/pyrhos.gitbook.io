@@ -1,3 +1,7 @@
+---
+icon: lock-keyhole-open
+---
+
 # IDOR
 
 Un IDOR es una vulnerabilidad que permite acceder a objetos internos (Ds, UUIDs, nombres de archivos, índices) sin verificar si el usuario autenticado esta autorizado o no.

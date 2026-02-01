@@ -107,8 +107,9 @@
   * [Transferencias de zona DNS](hacking-web/reconocimiento/transferencias-de-zona-dns.md)
   * [Email Services](hacking-web/reconocimiento/email-services.md)
 * [OWASP TOP 10](hacking-web/owasp-top-10/README.md)
-  * [Broken Access Authentication](hacking-web/owasp-top-10/broken-access-authentication/README.md)
-    * [IDOR](hacking-web/owasp-top-10/broken-access-authentication/idor.md)
+  * [Broken Access Control](hacking-web/owasp-top-10/broken-access-control/README.md)
+    * [Path Traversal](hacking-web/owasp-top-10/broken-access-control/path-traversal.md)
+    * [IDOR](hacking-web/owasp-top-10/broken-access-control/idor.md)
   * [Fallos criptográficos](hacking-web/owasp-top-10/fallos-criptograficos.md)
   * [Inyecciones](hacking-web/owasp-top-10/inyecciones/README.md)
     * [SQL Injection](hacking-web/owasp-top-10/inyecciones/sql-injection/README.md)
@@ -124,8 +125,12 @@
       * [Sentencias SQL](hacking-web/owasp-top-10/inyecciones/sql-injection/sentencias-sql.md)
     * [Cross-Site Scripting (XSS)](hacking-web/owasp-top-10/inyecciones/cross-site-scripting-xss.md)
     * [Command Injection](hacking-web/owasp-top-10/inyecciones/command-injection.md)
-  * [Diseño Inseguro](hacking-web/owasp-top-10/diseno-inseguro/README.md)
-    * [Unrestricted File Upload](hacking-web/owasp-top-10/diseno-inseguro/unrestricted-file-upload.md)
+  * [Security Misconfiguration](hacking-web/owasp-top-10/security-misconfiguration/README.md)
+    * [Unrestricted File Upload](hacking-web/owasp-top-10/security-misconfiguration/unrestricted-file-upload.md)
+    * [Exposed Directories](hacking-web/owasp-top-10/security-misconfiguration/exposed-directories.md)
+  * [Identification and Authentication Failures](hacking-web/owasp-top-10/identification-and-authentication-failures/README.md)
+    * [Login bypass](hacking-web/owasp-top-10/identification-and-authentication-failures/login-bypass.md)
+  * [Server Side Request Forgery](hacking-web/owasp-top-10/server-side-request-forgery.md)
 
 ## Hacking Wifi
 
