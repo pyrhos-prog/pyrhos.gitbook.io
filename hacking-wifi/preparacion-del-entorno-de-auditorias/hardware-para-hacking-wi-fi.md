@@ -8,6 +8,8 @@ Además de las tarjetas Wi-Fi, existen mas herramientas físicas para auditar re
 
 #### WiFi Pineapple (Hak5)
 
+{% embed url="https://www.youtube.com/watch?embeds_referring_euri=https://cdn.iframe.ly/&v=_s5NDXYY-Z8" %}
+
 **Descripción**
 
 Dispositivo dedicado a auditoría Wi-Fi que funciona de forma autónoma. Está orientado a ataques controlados y automatizados en entornos de pentesting.
@@ -20,6 +22,8 @@ Dispositivo dedicado a auditoría Wi-Fi que funciona de forma autónoma. Está o
 * Interfaz web de gestión
 
 #### Flipper Zero
+
+{% embed url="https://youtu.be/jQOCzk2HDOM" %}
 
 **Descripción**
 
@@ -34,6 +38,8 @@ Dispositivo portátil multifunción enfocado a pruebas de seguridad inalámbrica
 
 #### M5Stick
 
+{% embed url="https://www.youtube.com/watch?embeds_referring_euri=https://cdn.iframe.ly/&v=Lphkt7DQ8s0" %}
+
 **Descripción**
 
 Placa compacta basada en ESP32 con pantalla y batería integrada, utilizada en proyectos experimentales de análisis Wi-Fi.
@@ -46,6 +52,8 @@ Placa compacta basada en ESP32 con pantalla y batería integrada, utilizada en p
 * Uso habitual en wardriving y escaneo pasivo
 
 #### ESP32 Marauder
+
+{% embed url="https://www.youtube.com/watch?embeds_referring_euri=https://cdn.iframe.ly/&v=lcokJQMivwY" %}
 
 **Descripción**
 
@@ -60,6 +68,8 @@ Firmware para ESP32 orientado a ataques y análisis Wi-Fi y Bluetooth.
 * No permite cracking WPA real
 
 #### T-Embed
+
+{% embed url="https://www.youtube.com/watch?embeds_referring_euri=https://cdn.iframe.ly/&v=u-uCiy7gFHE" %}
 
 **Descripción**
 
