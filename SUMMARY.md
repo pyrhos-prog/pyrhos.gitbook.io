@@ -173,6 +173,7 @@
   * [Enumeración de dominio](hacking-active-directory/enumeracion/enumeracion-de-dominio.md)
 * [Ataques](hacking-active-directory/ataques.md)
 * [Tools](hacking-active-directory/tools.md)
+* [Cheat sheet](hacking-active-directory/cheat-sheet.md)
 
 ## OSINT
 

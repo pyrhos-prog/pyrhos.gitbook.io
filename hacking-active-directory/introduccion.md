@@ -13,9 +13,9 @@ El Active Directory es el "cerebro" de la mayoría de las redes corporativas que
 * Gestiona y centraliza la identidad.
 * Gestiona la autenticación de todos los usuarios, equipos, permisos y políticas de seguridad de la organización.
 
-### &#x20;**Cual es el objetivo?**
+### **Objetivo**
 
-El objetivo final de un atacante al vulnerar un Active Directory es obtener el control total de la red. (conseguir el Administrador de Dominio).
+El objetivo  es obtener el control total de la red. (conseguir el Administrador de Dominio).
 
 #### **Una vez que un atacante tiene estas credenciales, puede:**
 
