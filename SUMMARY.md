@@ -172,8 +172,9 @@
   * [Enumeración de usuario](hacking-active-directory/enumeracion/enumeracion-de-usuario.md)
   * [Enumeración de dominio](hacking-active-directory/enumeracion/enumeracion-de-dominio.md)
 * [Ataques](hacking-active-directory/ataques.md)
-* [Tools](hacking-active-directory/tools.md)
-* [Cheat sheet](hacking-active-directory/cheat-sheet.md)
+* [Tools](hacking-active-directory/tools/README.md)
+  * [Kerbrute](hacking-active-directory/tools/kerbrute.md)
+* [Cheat sheet  Active Directory](hacking-active-directory/cheat-sheet-active-directory.md)
 
 ## OSINT
 
