@@ -4,8 +4,6 @@ icon: windows
 
 # Enumeración
 
-## Active Directory Enumeration Cheatsheet
-
 ### 1. Identificación Inicial sin credenciales
 
 _Objetivo: Identificar el Controlador de Dominio (DC), el nombre del dominio y posibles vectores de entrada anónimos._
