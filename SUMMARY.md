@@ -105,7 +105,7 @@
     * [FeroxBuster](hacking-web/reconocimiento/fuzzing-web/feroxbuster.md)
   * [Excavado de DNS](hacking-web/reconocimiento/excavado-de-dns.md)
   * [Transferencias de zona DNS](hacking-web/reconocimiento/transferencias-de-zona-dns.md)
-  * [Email Services](hacking-web/reconocimiento/email-services.md)
+  * [Servicios de email](hacking-web/reconocimiento/servicios-de-email.md)
 * [OWASP TOP 10](hacking-web/owasp-top-10/README.md)
   * [Broken Access Control](hacking-web/owasp-top-10/broken-access-control/README.md)
     * [Path Traversal](hacking-web/owasp-top-10/broken-access-control/path-traversal.md)

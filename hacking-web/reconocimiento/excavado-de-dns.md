@@ -4,8 +4,6 @@ icon: spider-web
 
 # Excavado de DNS
 
-Tras comprender a fondo los fundamentos del DNS y sus diversos tipos de registros, pasemos a la práctica. Esta sección explorará las herramientas y técnicas para aprovechar el DNS para el reconocimiento web.
-
 #### Herramientas DNS
 
 El reconocimiento DNS implica el uso de herramientas especializadas diseñadas para consultar servidores DNS y extraer información valiosa. Estas son algunas de las herramientas más populares y versátiles que ofrecen los profesionales del reconocimiento web:
