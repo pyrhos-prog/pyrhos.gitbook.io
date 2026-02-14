@@ -1,19 +1,5 @@
 ---
 icon: linux
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
 ---
 
 # Arch Linux
@@ -29,8 +15,6 @@ Arch destaca por ofrecer un sistema operativo:
 
 Es la distribución ideal para quienes quieren aprender y tener control absoluto sobre su sistema.
 
-***
-
 ### **Distribuciones basadas en Arch Linux**
 
 Arch es tan flexible y potente que ha inspirado una gran cantidad de derivadas que buscan mantener su esencia mientras facilitan la instalación o el uso diario.
@@ -42,3 +26,6 @@ Algunas de las más reconocidas son:
 * **ArcoLinux** — Enfoque educativo, con varias ediciones para aprender Arch paso a paso.
 * **Garuda Linux** — Visualmente llamativa, enfocada en rendimiento y gaming.
 * **Archcraft** — Ligera, elegante y ya personalizada por defecto.
+
+### Instalación de Arch
+
