@@ -22,12 +22,7 @@ Las direcciones IP están compuestas por 32 bits de 4 octetos cada uno. Cada cla
 
 ## Dirección clase A, B, C, D y E
 
-| **A** |  1 - 126  |   255.0.0.0   |    128    | 16,777,214 |  Redes muy grandes  |
-| :---: | :-------: | :-----------: | :-------: | :--------: | :-----------------: |
-| **B** | 128 - 191 |  255.255.0.0  |   16,384  |   65,534   |    Redes medianas   |
-| **C** | 192 - 223 | 255.255.255.0 | 2,097,152 |     254    | Redes locales (LAN) |
-| **D** | 224 - 239 |  No definida  |    N/A    |     N/A    |      Multicast      |
-| **E** | 240 - 255 |  No definida  |    N/A    |     N/A    |    Investigación    |
+<table><thead><tr><th align="center">CLASE</th><th align="center">RANGO</th><th align="center">Máscara por defecto</th><th width="128" align="center">Cantidad de redes</th><th align="center">Cantidad de Hosts</th><th align="center">Aplicación</th></tr></thead><tbody><tr><td align="center"><strong>A</strong></td><td align="center">1 - 126</td><td align="center">255.0.0.0</td><td align="center">128</td><td align="center">16,777,214</td><td align="center">Redes muy grandes</td></tr><tr><td align="center"><strong>B</strong></td><td align="center">128 - 191</td><td align="center">255.255.0.0</td><td align="center">16,384</td><td align="center">65,534</td><td align="center">Redes medianas</td></tr><tr><td align="center"><strong>C</strong></td><td align="center">192 - 223</td><td align="center">255.255.255.0</td><td align="center">2,097,152</td><td align="center">254</td><td align="center">Redes locales (LAN)</td></tr><tr><td align="center"><strong>D</strong></td><td align="center">224 - 239</td><td align="center">No definida</td><td align="center">N/A</td><td align="center">N/A</td><td align="center">Multicast</td></tr><tr><td align="center"><strong>E</strong></td><td align="center">240 - 255</td><td align="center">No definida</td><td align="center">N/A</td><td align="center">N/A</td><td align="center">Investigación</td></tr></tbody></table>
 
 ### Clase A
 
@@ -56,5 +51,5 @@ Las direcciones IP están compuestas por 32 bits de 4 octetos cada uno. Cada cla
 
 Se utiliza para diferenciar la parte de red de la parte de host. Los bits en `1` representan la red y los bits en `0` representan los hosts.
 
-1. Porción de red: Representa los bits encendidos (identificación del segmento).
-2. Porción de hosts: Representa los bits apagados (identificación del dispositivo).
+1. **Porción de red:** Representa los bits encendidos (identificación del segmento).
+2. **Porción de hosts:** Representa los bits apagados (identificación del dispositivo).
