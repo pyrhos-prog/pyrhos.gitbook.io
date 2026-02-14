@@ -22,13 +22,12 @@ Las direcciones IP están compuestas por 32 bits de 4 octetos cada uno. Cada cla
 
 ## Dirección clase A, B, C, D y E
 
-| **CLASE** | \*\*RANGO | **MÁSCARA POR DEFECTO** | **CANTIDAD DE REDES** | **CANTIDAD DE HOSTS** |    **APLICACIÓN**   |
-| :-------: | :-------: | :---------------------: | :-------------------: | :-------------------: | :-----------------: |
-|   **A**   |  1 - 126  |        255.0.0.0        |          128          |       16,777,214      |  Redes muy grandes  |
-|   **B**   | 128 - 191 |       255.255.0.0       |         16,384        |         65,534        |    Redes medianas   |
-|   **C**   | 192 - 223 |      255.255.255.0      |       2,097,152       |          254          | Redes locales (LAN) |
-|   **D**   | 224 - 239 |       No definida       |          N/A          |          N/A          |      Multicast      |
-|   **E**   | 240 - 255 |       No definida       |          N/A          |          N/A          |    Investigación    |
+| **A** |  1 - 126  |   255.0.0.0   |    128    | 16,777,214 |  Redes muy grandes  |
+| :---: | :-------: | :-----------: | :-------: | :--------: | :-----------------: |
+| **B** | 128 - 191 |  255.255.0.0  |   16,384  |   65,534   |    Redes medianas   |
+| **C** | 192 - 223 | 255.255.255.0 | 2,097,152 |     254    | Redes locales (LAN) |
+| **D** | 224 - 239 |  No definida  |    N/A    |     N/A    |      Multicast      |
+| **E** | 240 - 255 |  No definida  |    N/A    |     N/A    |    Investigación    |
 
 ### Clase A
 
