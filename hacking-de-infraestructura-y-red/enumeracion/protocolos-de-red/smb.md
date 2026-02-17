@@ -1,3 +1,7 @@
+---
+icon: building-magnifying-glass
+---
+
 # SMB
 
 es un protocolo cliente-servidor utilizado para compartir archivos, directorios, impresoras y otros recursos en red. Opera principalmente sobre **TCP 445** (SMB directo) y, en entornos con NetBIOS, sobre **137–139**.
