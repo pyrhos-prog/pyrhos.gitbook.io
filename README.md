@@ -1,19 +1,5 @@
 ---
 description: Welcome to your team’s developer platform
-layout:
-  width: default
-  title:
-    visible: false
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: false
-  pagination:
-    visible: false
-  metadata:
-    visible: true
 metaLinks:
   alternates:
     - https://app.gitbook.com/s/RIRQCYD2AGCWNBeobcEn/

@@ -1,22 +1,8 @@
 ---
 icon: compact-disc
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
 ---
 
-# Instalación de Linux
+# Kali Linux en Virtualbox
 
 ## Instalación de kali linux en VirtualBox
 
