@@ -63,6 +63,7 @@
   * [Wireshark](redes/analisis-de-trafico/wireshark.md)
   * [Nmap](redes/analisis-de-trafico/nmap.md)
 * [Subnetting](redes/subnetting.md)
+* [Cisco Packet Tracer](redes/cisco-packet-tracer.md)
 
 ## Python
 
