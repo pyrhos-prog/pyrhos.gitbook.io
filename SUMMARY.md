@@ -177,7 +177,7 @@
 
 ## Hacking Active Directory
 
-* [Introducción](hacking-active-directory/introduccion.md)
+* [Introducción y Conceptos Básicos](hacking-active-directory/introduccion-y-conceptos-basicos.md)
 * [Enumeración](hacking-active-directory/enumeracion/README.md)
   * [Enumeración inicial](hacking-active-directory/enumeracion/enumeracion-inicial.md)
   * [Enumeracion de la red](hacking-active-directory/enumeracion/enumeracion-de-la-red.md)
@@ -185,7 +185,8 @@
   * [Enumeración de usuarios Active Directory y Looksupid](hacking-active-directory/enumeracion/enumeracion-de-usuarios-active-directory-y-looksupid.md)
   * [Enumeración de usuario](hacking-active-directory/enumeracion/enumeracion-de-usuario.md)
   * [Enumeración de dominio](hacking-active-directory/enumeracion/enumeracion-de-dominio.md)
-* [Ataques](hacking-active-directory/ataques.md)
+* [Ataques](hacking-active-directory/ataques/README.md)
+  * [Ataques de Autenticación](hacking-active-directory/ataques/ataques-de-autenticacion.md)
 * [Tools](hacking-active-directory/tools/README.md)
   * [Kerbrute](hacking-active-directory/tools/kerbrute.md)
 * [Cheat sheet  Active Directory](hacking-active-directory/cheat-sheet-active-directory.md)
