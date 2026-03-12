@@ -1,7 +1,3 @@
----
-icon: database
----
-
 # Union-Based SQL
 
 Utiliza el operador `UNION` de SQL para añadir una segunda consulta a la original y recuperar datos de otras tablas. El resultado de la consulta inyectada se devuelve junto con los datos legítimos.

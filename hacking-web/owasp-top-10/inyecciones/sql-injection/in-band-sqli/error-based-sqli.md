@@ -1,7 +1,3 @@
----
-icon: database
----
-
 # Error based SQLI
 
 Aprovecha los mensajes de error de la base de datos que se muestran en la respuesta HTTP para extraer información directamente. Es la técnica más rápida cuando los errores son visibles.

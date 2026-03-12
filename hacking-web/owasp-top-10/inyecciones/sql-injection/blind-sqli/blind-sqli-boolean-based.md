@@ -1,7 +1,3 @@
----
-icon: database
----
-
 # Blind-SQLI Boolean-based
 
 No hay output visible de la base de datos. En su lugar, la aplicación devuelve respuestas diferentes según si la condición inyectada es TRUE o FALSE. A partir de esa diferencia se infiere información carácter a carácter.
