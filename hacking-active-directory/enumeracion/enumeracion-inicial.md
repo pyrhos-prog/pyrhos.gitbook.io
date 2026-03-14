@@ -1,7 +1,3 @@
----
-icon: windows
----
-
 # Enumeración inicial
 
 | Comando                                                                                             | Descripción                                                                                                                                                                                                                                                                                                                                                                    |

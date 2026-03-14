@@ -1,7 +1,3 @@
----
-icon: windows
----
-
 # Enumeracion de la red
 
 {% stepper %}

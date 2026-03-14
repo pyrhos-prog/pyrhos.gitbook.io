@@ -1,7 +1,3 @@
----
-icon: windows
----
-
 # Kerbrute
 
 ## KERBRUTE — Enumeración de usuarios en Active Directory

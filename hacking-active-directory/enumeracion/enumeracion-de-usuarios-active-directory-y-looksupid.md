@@ -1,7 +1,3 @@
----
-icon: windows
----
-
 # Enumeración de usuarios Active Directory y Looksupid
 
 Podemos enumerar usuarios de un dominio con una herramienta que se llama `lookupsid` encontrando como invitado de esta forma:

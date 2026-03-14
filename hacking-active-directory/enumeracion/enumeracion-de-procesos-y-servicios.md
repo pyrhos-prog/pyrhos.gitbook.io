@@ -1,7 +1,3 @@
----
-icon: windows
----
-
 # Enumeración de procesos y servicios
 
 ## Como enumerar procesos de Windows
