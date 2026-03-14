@@ -1,7 +1,3 @@
----
-icon: database
----
-
 # Out-of-Band SQLi
 
 En lugar de extraer datos por el canal HTTP de respuesta, los datos se exfiltran por un canal alternativo: DNS o HTTP hacia un servidor controlado por el atacante. Es útil cuando:

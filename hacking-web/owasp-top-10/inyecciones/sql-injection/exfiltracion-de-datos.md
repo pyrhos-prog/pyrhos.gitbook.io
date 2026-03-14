@@ -1,7 +1,3 @@
----
-icon: database
----
-
 # Exfiltración de Datos
 
 Una vez confirmada y explotada la inyección, el siguiente paso es extraer la información relevante: credenciales, datos sensibles, archivos del sistema, o estructuras de la base de datos completa.

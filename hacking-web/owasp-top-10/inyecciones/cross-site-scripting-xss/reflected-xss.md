@@ -1,7 +1,3 @@
----
-icon: js
----
-
 # Reflected XSS
 
 El payload no se almacena en el servidor. El input malicioso viaja en la petición HTTP (URL, formulario) y se refleja inmediatamente en la respuesta. La víctima debe hacer clic en un enlace especialmente crafteado.

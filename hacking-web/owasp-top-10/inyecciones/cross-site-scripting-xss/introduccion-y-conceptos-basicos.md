@@ -1,7 +1,3 @@
----
-icon: js
----
-
 # Introducción y Conceptos Básicos
 
 XSS es una vulnerabilidad que permite a un atacante inyectar código JavaScript malicioso en páginas web que otros usuarios visualizan. El script se ejecuta en el navegador de la víctima con los mismos privilegios que el sitio legítimo.

@@ -1,7 +1,3 @@
----
-icon: database
----
-
 # Bypass de Filtros - WAF
 
 Las aplicaciones pueden implementar filtros personalizados o WAFs (Web Application Firewalls) que bloquean patrones comunes de SQLi. Esta sección recoge las técnicas más usadas para evadir estas protecciones.

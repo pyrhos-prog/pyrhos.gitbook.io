@@ -1,7 +1,3 @@
----
-icon: js
----
-
 # Herramientas
 
 ### Burp Suite

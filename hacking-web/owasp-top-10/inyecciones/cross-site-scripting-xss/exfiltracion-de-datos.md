@@ -1,7 +1,3 @@
----
-icon: js
----
-
 # Exfiltración de Datos
 
 Una vez confirmado el XSS, el siguiente paso es aprovechar la ejecución de código en el navegador de la víctima para extraer información sensible o realizar acciones en su nombre.

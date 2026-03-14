@@ -1,7 +1,3 @@
----
-icon: database
----
-
 # Herramientas y recursos
 
 ### SQLmap

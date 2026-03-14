@@ -1,5 +1,5 @@
 ---
-icon: square-js
+icon: database
 ---
 
 # Cross-Site Scripting (XSS)

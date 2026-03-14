@@ -1,7 +1,3 @@
----
-icon: js
----
-
 # DOM-Based XSS
 
 El payload nunca llega al servidor. La vulnerabilidad está en el JavaScript del lado del cliente: el código JS lee datos de una fuente controlable (URL, localStorage...) y los escribe en el DOM de forma insegura.

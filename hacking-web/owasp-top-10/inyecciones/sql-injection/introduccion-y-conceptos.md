@@ -1,7 +1,3 @@
----
-icon: database
----
-
 # Introducción y conceptos
 
 ### ¿Qué es SQL Injection?

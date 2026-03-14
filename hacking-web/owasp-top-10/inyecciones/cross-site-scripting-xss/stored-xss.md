@@ -1,7 +1,3 @@
----
-icon: js
----
-
 # Stored XSS
 
 El payload se almacena de forma permanente en el servidor (base de datos, archivo, log) y se ejecuta cada vez que cualquier usuario cargue la página que muestra ese contenido. Es el tipo de XSS con mayor impacto porque no requiere que la víctima haga clic en ningún enlace.

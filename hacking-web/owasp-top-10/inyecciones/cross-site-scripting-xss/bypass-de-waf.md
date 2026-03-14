@@ -1,7 +1,3 @@
----
-icon: js
----
-
 # Bypass de WAF
 
 Las aplicaciones implementan filtros que bloquean patrones de XSS como `<script>`, `onerror=`, `javascript:`, etc. Esta sección recoge las técnicas para evadir estas protecciones.
