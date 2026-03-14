@@ -110,7 +110,7 @@
 * [OWASP TOP 10](hacking-web/owasp-top-10/README.md)
   * [Broken Access Control](hacking-web/owasp-top-10/broken-access-control/README.md)
     * [Path Traversal](hacking-web/owasp-top-10/broken-access-control/path-traversal.md)
-    * [IDOR](hacking-web/owasp-top-10/broken-access-control/idor.md)
+    * [IDOR -  Insecure Direct Object Reference](hacking-web/owasp-top-10/broken-access-control/idor-insecure-direct-object-reference.md)
   * [Fallos criptográficos](hacking-web/owasp-top-10/fallos-criptograficos.md)
   * [Inyecciones](hacking-web/owasp-top-10/inyecciones/README.md)
     * [SQL Injection](hacking-web/owasp-top-10/inyecciones/sql-injection/README.md)
