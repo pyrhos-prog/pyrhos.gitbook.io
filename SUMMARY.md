@@ -186,9 +186,12 @@
   * [Wireshark](hacking-wifi/herramientas/wireshark.md)
 * [Ataques Wi-Fi](hacking-wifi/ataques-wi-fi/README.md)
   * [Reconocimiento](hacking-wifi/ataques-wi-fi/reconocimiento.md)
-  * [Ataque a hashes WPA2](hacking-wifi/ataques-wi-fi/ataque-a-hashes-wpa2.md)
-  * [Evil Twin](hacking-wifi/ataques-wi-fi/evil-twin.md)
-  * [Rogue AP](hacking-wifi/ataques-wi-fi/rogue-ap.md)
+  * [WPA2 PSK - Handshake y Cracking](hacking-wifi/ataques-wi-fi/wpa2-psk-handshake-y-cracking.md)
+  * [Evil Twin y Rogue AP](hacking-wifi/ataques-wi-fi/evil-twin-y-rogue-ap.md)
+  * [PMKID Attack](hacking-wifi/ataques-wi-fi/pmkid-attack.md)
+  * [WPS Attacks - Pixie Dust y Fuerza Bruta](hacking-wifi/ataques-wi-fi/wps-attacks-pixie-dust-y-fuerza-bruta.md)
+  * [WPA2 Enterprise Attacks](hacking-wifi/ataques-wi-fi/wpa2-enterprise-attacks.md)
+  * [Ataques en Redes Abiertas y MITM Wi-Fi](hacking-wifi/ataques-wi-fi/ataques-en-redes-abiertas-y-mitm-wi-fi.md)
 
 ## Hacking de Infraestructura y red
 
