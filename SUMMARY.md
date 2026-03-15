@@ -150,7 +150,11 @@
     * [Exposed Directories](hacking-web/owasp-top-10/security-misconfiguration/exposed-directories.md)
   * [Identification and Authentication Failures](hacking-web/owasp-top-10/identification-and-authentication-failures/README.md)
     * [Login bypass](hacking-web/owasp-top-10/identification-and-authentication-failures/login-bypass.md)
-  * [Server Side Request Forgery](hacking-web/owasp-top-10/server-side-request-forgery.md)
+  * [Server Side Request Forgery](hacking-web/owasp-top-10/server-side-request-forgery/README.md)
+    * [Enumeración interna](hacking-web/owasp-top-10/server-side-request-forgery/enumeracion-interna.md)
+    * [Entornos Cloud (AWS, Azure, GCP)](hacking-web/owasp-top-10/server-side-request-forgery/entornos-cloud-aws-azure-gcp.md)
+    * [SSRF → RCE](hacking-web/owasp-top-10/server-side-request-forgery/ssrf-rce.md)
+    * [Bypass](hacking-web/owasp-top-10/server-side-request-forgery/bypass.md)
 
 ## Hacking Wifi
 

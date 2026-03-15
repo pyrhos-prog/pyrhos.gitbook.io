@@ -21,8 +21,6 @@ echo $twig->createTemplate("Hola " . $_GET['name'])->render([]);
 {{_self.env}}   → objeto Environment de Twig
 ```
 
-***
-
 #### Twig — Exploración del entorno
 
 ```php
