@@ -155,6 +155,14 @@
     * [Entornos Cloud (AWS, Azure, GCP)](hacking-web/owasp-top-10/server-side-request-forgery/entornos-cloud-aws-azure-gcp.md)
     * [SSRF → RCE](hacking-web/owasp-top-10/server-side-request-forgery/ssrf-rce.md)
     * [Bypass](hacking-web/owasp-top-10/server-side-request-forgery/bypass.md)
+* [OWASP API Security Top 10](hacking-web/owasp-api-security-top-10/README.md)
+  * [API1 & API5 — BOLA y Broken Function Level Authorization](hacking-web/owasp-api-security-top-10/api1-and-api5-bola-y-broken-function-level-authorization.md)
+  * [API2 — Broken Authentication](hacking-web/owasp-api-security-top-10/api2-broken-authentication.md)
+  * [API3 — Broken Object Property Level Authorization](hacking-web/owasp-api-security-top-10/api3-broken-object-property-level-authorization.md)
+  * [API4 & API6 — Rate Limiting y Business Flow Abuse](hacking-web/owasp-api-security-top-10/api4-and-api6-rate-limiting-y-business-flow-abuse.md)
+  * [API8 & API9 — Security Misconfiguration y Shadow APIs](hacking-web/owasp-api-security-top-10/api8-and-api9-security-misconfiguration-y-shadow-apis.md)
+  * [API10 & GraphQL Attacks](hacking-web/owasp-api-security-top-10/api10-and-graphql-attacks.md)
+  * [Herramientas y Metodología](hacking-web/owasp-api-security-top-10/herramientas-y-metodologia.md)
 
 ## Hacking Wifi
 
