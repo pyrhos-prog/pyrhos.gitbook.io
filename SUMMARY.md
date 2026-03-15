@@ -97,6 +97,7 @@
 
 ## HACKING WEB
 
+* [Metodología — Hacking Web Completo](hacking-web/metodologia-hacking-web-completo.md)
 * [Reconocimiento](hacking-web/reconocimiento/README.md)
   * [Enumeración web](hacking-web/reconocimiento/enumeracion-web.md)
   * [Enumeracion de subdominios](hacking-web/reconocimiento/enumeracion-de-subdominios.md)
