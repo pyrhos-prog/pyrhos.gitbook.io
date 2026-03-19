@@ -255,4 +255,11 @@
 
 ## Blue Team
 
-* [Introducción al Blue Team](blue-team/introduccion-al-blue-team.md)
+* [Introducción al SOC](blue-team/introduccion-al-soc.md)
+* [Tipos y Roles de SOC](blue-team/tipos-y-roles-de-soc.md)
+* [Analista de SOC - Responsabilidades](blue-team/analista-de-soc-responsabilidades.md)
+* [Relación SIEM y Analista](blue-team/relacion-siem-y-analista.md)
+* [Gestión de Registros (Log Management)](blue-team/gestion-de-registros-log-management.md)
+* [EDR — Detección y Respuesta de Endpoints](blue-team/edr-deteccion-y-respuesta-de-endpoints.md)
+* [SOAR — Automatización y Respuesta de Orquestación de Seguridad](blue-team/soar-automatizacion-y-respuesta-de-orquestacion-de-seguridad.md)
+* [Feed de Inteligencia sobre Amenazas (Threat Intelligence)](blue-team/feed-de-inteligencia-sobre-amenazas-threat-intelligence.md)
