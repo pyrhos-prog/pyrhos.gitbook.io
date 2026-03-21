@@ -264,3 +264,4 @@
 * [EDR — Detección y Respuesta de Endpoints](blue-team/edr-deteccion-y-respuesta-de-endpoints.md)
 * [SOAR — Automatización y Respuesta de Orquestación de Seguridad](blue-team/soar-automatizacion-y-respuesta-de-orquestacion-de-seguridad.md)
 * [Feed de Inteligencia sobre Amenazas (Threat Intelligence)](blue-team/feed-de-inteligencia-sobre-amenazas-threat-intelligence.md)
+* [Errores Comunes de los Analistas de SOC](blue-team/errores-comunes-de-los-analistas-de-soc.md)

