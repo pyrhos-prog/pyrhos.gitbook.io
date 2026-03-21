@@ -23,6 +23,7 @@
   * [Debian](linux/distribuciones/debian.md)
   * [Arch Linux](linux/distribuciones/arch-linux.md)
   * [Kali Linux](linux/distribuciones/kali-linux.md)
+  * [Fedora](linux/distribuciones/fedora.md)
 * [Uso de la terminal](linux/uso-de-la-terminal/README.md)
   * [Lista de comandos](linux/uso-de-la-terminal/lista-de-comandos.md)
   * [Concatenar comandos](linux/uso-de-la-terminal/concatenar-comandos.md)
