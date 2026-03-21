@@ -1,3 +1,7 @@
+---
+icon: shield-halved
+---
+
 # Errores Comunes de los Analistas de SOC
 
 Los errores en un SOC pueden tener consecuencias graves:&#x20;
