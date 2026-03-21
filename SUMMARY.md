@@ -199,10 +199,16 @@
 * [Enumeración](hacking-de-infraestructura-y-red/enumeracion/README.md)
   * [Protocolos de red](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/README.md)
     * [FTP - File Transfer Protocol](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/ftp-file-transfer-protocol.md)
-    * [SMB](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/smb.md)
-    * [NFS](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/nfs.md)
-    * [DNS](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/dns.md)
-    * [SMTP](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/smtp.md)
+    * [SMB — Server Message Block](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/smb-server-message-block.md)
+    * [NFS — Network File System](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/nfs-network-file-system.md)
+    * [DNS — Domain Name System](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/dns-domain-name-system.md)
+    * [SMTP — Simple Mail Transfer Protocol](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/smtp-simple-mail-transfer-protocol.md)
+    * [IMAP / POP3](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/imap-pop3.md)
+    * [SNMP — Simple Network Management Protocol](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/snmp-simple-network-management-protocol.md)
+    * [MySQL](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/mysql.md)
+    * [MSSQL — Microsoft SQL Server](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/mssql-microsoft-sql-server.md)
+    * [Oracle TNS — Transparent Network Substrate](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/oracle-tns-transparent-network-substrate.md)
+    * [IPMI — Intelligent Platform Management Interface](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/ipmi-intelligent-platform-management-interface.md)
 
 ## Hacking Active Directory
 
