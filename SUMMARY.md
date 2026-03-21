@@ -224,8 +224,10 @@
   * [Ataques de Autenticación](hacking-active-directory/ataques/ataques-de-autenticacion.md)
 * [Movimiento lateral](hacking-active-directory/movimiento-lateral.md)
 * [Escalada de privilegios](hacking-active-directory/escalada-de-privilegios.md)
-* [Escalada de Privilegios](hacking-active-directory/escalada-de-privilegios-1.md)
+* [Persistencia](hacking-active-directory/persistencia.md)
 * [Tools](hacking-active-directory/tools/README.md)
+  * [Impacket](hacking-active-directory/tools/impacket.md)
+  * [BloodHound](hacking-active-directory/tools/bloodhound.md)
   * [Kerbrute](hacking-active-directory/tools/kerbrute.md)
 * [Cheat sheet  Active Directory](hacking-active-directory/cheat-sheet-active-directory.md)
 
