@@ -216,6 +216,9 @@
   * [Nessus — Escaneos y Configuración Avanzada](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/nessus-escaneos-y-configuracion-avanzada.md)
   * [Nessus — Resultados y Resolución de Problemas](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/nessus-resultados-y-resolucion-de-problemas.md)
   * [Nessus — Evaluación de Habilidades y Referencia Rápida](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/nessus-evaluacion-de-habilidades-y-referencia-rapida.md)
+  * [OpenVAS / GVM — Introducción y Primeros Pasos](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/openvas-gvm-introduccion-y-primeros-pasos.md)
+  * [OpenVAS — Escaneos](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/openvas-escaneos.md)
+  * [OpenVAS — Exportar Resultados y Referencia Rápida](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/openvas-exportar-resultados-y-referencia-rapida.md)
 
 ## Hacking Active Directory
 
