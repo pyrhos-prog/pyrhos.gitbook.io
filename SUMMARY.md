@@ -210,6 +210,8 @@
     * [Oracle TNS — Transparent Network Substrate](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/oracle-tns-transparent-network-substrate.md)
     * [IPMI — Intelligent Platform Management Interface](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/ipmi-intelligent-platform-management-interface.md)
 * [Escaneo de vulnerabilidades](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/README.md)
+  * [CVSS — Sistema de Puntuación de Vulnerabilidades](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/cvss-sistema-de-puntuacion-de-vulnerabilidades.md)
+  * [CVE y OVAL — Estándares de Clasificación de Vulnerabilidades](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/cve-y-oval-estandares-de-clasificacion-de-vulnerabilidades.md)
   * [Nessus — Introducción y Primeros Pasos](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/nessus-introduccion-y-primeros-pasos.md)
   * [Nessus — Escaneos y Configuración Avanzada](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/nessus-escaneos-y-configuracion-avanzada.md)
   * [Nessus — Resultados y Resolución de Problemas](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/nessus-resultados-y-resolucion-de-problemas.md)
