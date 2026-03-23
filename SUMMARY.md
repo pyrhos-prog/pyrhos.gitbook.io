@@ -219,6 +219,8 @@
   * [OpenVAS / GVM — Introducción y Primeros Pasos](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/openvas-gvm-introduccion-y-primeros-pasos.md)
   * [OpenVAS — Escaneos](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/openvas-escaneos.md)
   * [OpenVAS — Exportar Resultados y Referencia Rápida](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/openvas-exportar-resultados-y-referencia-rapida.md)
+* [Transferencia de archivos](hacking-de-infraestructura-y-red/transferencia-de-archivos/README.md)
+  * [Métodos de transferencia de archivos en Windows](hacking-de-infraestructura-y-red/transferencia-de-archivos/metodos-de-transferencia-de-archivos-en-windows.md)
 
 ## Hacking Active Directory
 
