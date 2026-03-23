@@ -42,5 +42,3 @@ Un pentester que solo conoce un método de transferencia se habría quedado bloq
 | **Catching Files over HTTP/S**    | Nginx y Apache como receptores de uploads            |
 | **Living off The Land**           | LOLBins — usar binarios del sistema para transferir  |
 | **Detección y Evasión**           | Cómo se detectan las transferencias y cómo evadirlas |
-
-> Este módulo también sirve como **referencia rápida** durante otros módulos de HTB. Cuando necesites mover un archivo en un lab, consulta la página correspondiente al sistema operativo del objetivo.
