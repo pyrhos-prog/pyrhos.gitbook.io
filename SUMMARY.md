@@ -220,7 +220,14 @@
   * [OpenVAS — Escaneos](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/openvas-escaneos.md)
   * [OpenVAS — Exportar Resultados y Referencia Rápida](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/openvas-exportar-resultados-y-referencia-rapida.md)
 * [Transferencia de archivos](hacking-de-infraestructura-y-red/transferencia-de-archivos/README.md)
-  * [Métodos de transferencia de archivos en Windows](hacking-de-infraestructura-y-red/transferencia-de-archivos/metodos-de-transferencia-de-archivos-en-windows.md)
+  * [Transferencia de Archivos en Windows](hacking-de-infraestructura-y-red/transferencia-de-archivos/transferencia-de-archivos-en-windows.md)
+  * [Transferencia de Archivos en Linux](hacking-de-infraestructura-y-red/transferencia-de-archivos/transferencia-de-archivos-en-linux.md)
+  * [Transferencia de Archivos con Código](hacking-de-infraestructura-y-red/transferencia-de-archivos/transferencia-de-archivos-con-codigo.md)
+  * [Métodos Misceláneos de Transferencia de Archivos](hacking-de-infraestructura-y-red/transferencia-de-archivos/metodos-miscelaneos-de-transferencia-de-archivos.md)
+  * [Transferencias de Archivos Protegidas](hacking-de-infraestructura-y-red/transferencia-de-archivos/transferencias-de-archivos-protegidas.md)
+  * [Recibir Archivos vía HTTP/S](hacking-de-infraestructura-y-red/transferencia-de-archivos/recibir-archivos-via-http-s.md)
+  * [Living off The Land — LOLBins](hacking-de-infraestructura-y-red/transferencia-de-archivos/living-off-the-land-lolbins.md)
+  * [Detección y Evasión](hacking-de-infraestructura-y-red/transferencia-de-archivos/deteccion-y-evasion.md)
 
 ## Hacking Active Directory
 
