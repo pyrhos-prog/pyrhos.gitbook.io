@@ -2,7 +2,7 @@
 description: Welcome to your team’s developer platform
 metaLinks:
   alternates:
-    - https://app.gitbook.com/s/RIRQCYD2AGCWNBeobcEn/
+    - /broken/spaces/RIRQCYD2AGCWNBeobcEn/pages/JsKd452Nu8XTrHz68zaF
 ---
 
 # Home
