@@ -228,6 +228,12 @@
   * [Recibir Archivos vía HTTP/S](hacking-de-infraestructura-y-red/transferencia-de-archivos/recibir-archivos-via-http-s.md)
   * [Living off The Land — LOLBins](hacking-de-infraestructura-y-red/transferencia-de-archivos/living-off-the-land-lolbins.md)
   * [Detección y Evasión](hacking-de-infraestructura-y-red/transferencia-de-archivos/deteccion-y-evasion.md)
+* [Shells y Payloads](hacking-de-infraestructura-y-red/shells-y-payloads/README.md)
+  * [Bind Shells y Reverse Shells](hacking-de-infraestructura-y-red/shells-y-payloads/bind-shells-y-reverse-shells.md)
+  * [Payloads metasploit](hacking-de-infraestructura-y-red/shells-y-payloads/payloads-metasploit.md)
+  * [Infiltrar windows y linux](hacking-de-infraestructura-y-red/shells-y-payloads/infiltrar-windows-y-linux.md)
+  * [WebShells](hacking-de-infraestructura-y-red/shells-y-payloads/webshells.md)
+  * [Detección y Prevención de Shells y Payloads](hacking-de-infraestructura-y-red/shells-y-payloads/deteccion-y-prevencion-de-shells-y-payloads.md)
 
 ## Hacking Active Directory
 
