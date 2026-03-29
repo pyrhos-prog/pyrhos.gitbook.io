@@ -6,7 +6,7 @@ Existen dos grandes modelos para establecer una conexión de shell remota: **bin
 
 En una bind shell, el **sistema objetivo** inicia un listener en un puerto y el atacante se conecta a él.
 
-<div data-with-frame="true"><figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure></div>
+<div data-with-frame="true"><figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure></div>
 
 #### Problemas de las bind shells
 
@@ -43,10 +43,7 @@ nc -nv 10.10.14.20 7777
 
 En una reverse shell, el **atacante** tiene el listener y el **objetivo** inicia la conexión de vuelta.
 
-```
-Atacante (10.10.14.15:443)  ◄──conecta──  Objetivo (10.10.14.20)
-[listener activo]
-```
+<div data-with-frame="true"><figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure></div>
 
 Es el método preferido en la práctica porque el tráfico **saliente** del objetivo raramente está tan restringido como el entrante. Los administradores suelen olvidarse de monitorizar conexiones salientes con la misma atención que las entrantes.
 
