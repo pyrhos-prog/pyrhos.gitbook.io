@@ -234,6 +234,11 @@
   * [Infiltrar windows y linux](hacking-de-infraestructura-y-red/shells-y-payloads/infiltrar-windows-y-linux.md)
   * [WebShells](hacking-de-infraestructura-y-red/shells-y-payloads/webshells.md)
   * [Detección y Prevención de Shells y Payloads](hacking-de-infraestructura-y-red/shells-y-payloads/deteccion-y-prevencion-de-shells-y-payloads.md)
+* [Metasploit Framework](hacking-de-infraestructura-y-red/metasploit-framework/README.md)
+  * [Módulos, Targets, Payloads y Encoders](hacking-de-infraestructura-y-red/metasploit-framework/modulos-targets-payloads-y-encoders.md)
+  * [Sesiones, Jobs y Meterpreter](hacking-de-infraestructura-y-red/metasploit-framework/sesiones-jobs-y-meterpreter.md)
+  * [MSFvenom — Generación de Payloads](hacking-de-infraestructura-y-red/metasploit-framework/msfvenom-generacion-de-payloads.md)
+  * [Evasión y Módulos Personalizados](hacking-de-infraestructura-y-red/metasploit-framework/evasion-y-modulos-personalizados.md)
 
 ## Hacking Active Directory
 
