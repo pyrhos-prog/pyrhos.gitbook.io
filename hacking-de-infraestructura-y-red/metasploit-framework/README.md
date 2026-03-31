@@ -8,6 +8,8 @@ icon: building-magnifying-glass
 
 ### ¿Qué es Metasploit?
 
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
 **Metasploit Framework** es el framework de explotación de código abierto más utilizado en el sector. Desarrollado por Rapid7, centraliza en una sola plataforma el proceso de enumeración, explotación, generación de payloads y post-explotación. Es la herramienta de referencia en certificaciones como OSCP, eCPPT y CPTS.
 
 Metasploit no es solo para explotar vulnerabilidades — también sirve para escaneo, enumeración, generación de payloads personalizados y automatización de tareas repetitivas de pentesting.
@@ -176,6 +178,8 @@ quit
 ```
 
 ### Estructura de navegación en MSFconsole
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 El prompt cambia según el contexto:
 
