@@ -239,6 +239,7 @@
   * [Sesiones, Jobs y Meterpreter](hacking-de-infraestructura-y-red/metasploit-framework/sesiones-jobs-y-meterpreter.md)
   * [MSFvenom — Generación de Payloads](hacking-de-infraestructura-y-red/metasploit-framework/msfvenom-generacion-de-payloads.md)
   * [Evasión y Módulos Personalizados](hacking-de-infraestructura-y-red/metasploit-framework/evasion-y-modulos-personalizados.md)
+  * [Importación de Módulos Externos](hacking-de-infraestructura-y-red/metasploit-framework/importacion-de-modulos-externos.md)
 
 ## Hacking Active Directory
 
