@@ -240,6 +240,15 @@
   * [MSFvenom — Generación de Payloads](hacking-de-infraestructura-y-red/metasploit-framework/msfvenom-generacion-de-payloads.md)
   * [Evasión y Módulos Personalizados](hacking-de-infraestructura-y-red/metasploit-framework/evasion-y-modulos-personalizados.md)
   * [Importación de Módulos Externos](hacking-de-infraestructura-y-red/metasploit-framework/importacion-de-modulos-externos.md)
+* [Ataques de contraseñas](hacking-de-infraestructura-y-red/ataques-de-contrasenas/README.md)
+  * [Técnicas de descifrado](hacking-de-infraestructura-y-red/ataques-de-contrasenas/tecnicas-de-descifrado/README.md)
+    * [John the Ripper](hacking-de-infraestructura-y-red/ataques-de-contrasenas/tecnicas-de-descifrado/john-the-ripper.md)
+    * [Hashcat](hacking-de-infraestructura-y-red/ataques-de-contrasenas/tecnicas-de-descifrado/hashcat.md)
+    * [Wordlists y Reglas Personalizadas](hacking-de-infraestructura-y-red/ataques-de-contrasenas/tecnicas-de-descifrado/wordlists-y-reglas-personalizadas.md)
+    * [Descifrado de Archivos Protegidos](hacking-de-infraestructura-y-red/ataques-de-contrasenas/tecnicas-de-descifrado/descifrado-de-archivos-protegidos.md)
+  * [Ataques Remotos](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/README.md)
+    * [Hydra](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/hydra.md)
+    * [Password Spraying, Credential Stuffing y Defaults](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/password-spraying-credential-stuffing-y-defaults.md)
 
 ## Hacking Active Directory
 
