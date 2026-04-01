@@ -255,6 +255,18 @@
     * [Credential Manager de Windows](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/credential-manager-de-windows.md)
     * [Active Directory y NTDS.dit](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/active-directory-y-ntds.dit.md)
     * [Búsqueda de Credenciales en Windows](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/busqueda-de-credenciales-en-windows.md)
+  * [Linux](hacking-de-infraestructura-y-red/ataques-de-contrasenas/linux/README.md)
+    * [Proceso de Autenticación de Linux](hacking-de-infraestructura-y-red/ataques-de-contrasenas/linux/proceso-de-autenticacion-de-linux.md)
+    * [Búsqueda de Credenciales en Linux](hacking-de-infraestructura-y-red/ataques-de-contrasenas/linux/busqueda-de-credenciales-en-linux.md)
+  * [Red](hacking-de-infraestructura-y-red/ataques-de-contrasenas/red/README.md)
+    * [Búsqueda de Credenciales en Tráfico de Red](hacking-de-infraestructura-y-red/ataques-de-contrasenas/red/busqueda-de-credenciales-en-trafico-de-red.md)
+    * [Búsqueda de Credenciales en Recursos Compartidos de Red](hacking-de-infraestructura-y-red/ataques-de-contrasenas/red/busqueda-de-credenciales-en-recursos-compartidos-de-red.md)
+  * [Movimiento Lateral](hacking-de-infraestructura-y-red/ataques-de-contrasenas/movimiento-lateral/README.md)
+    * [Pass-the-Hash (PtH)](hacking-de-infraestructura-y-red/ataques-de-contrasenas/movimiento-lateral/pass-the-hash-pth.md)
+    * [Pass-the-Ticket (PtT) desde Windows](hacking-de-infraestructura-y-red/ataques-de-contrasenas/movimiento-lateral/pass-the-ticket-ptt-desde-windows.md)
+    * [Pass-the-Ticket (PtT) desde Linux](hacking-de-infraestructura-y-red/ataques-de-contrasenas/movimiento-lateral/pass-the-ticket-ptt-desde-linux.md)
+    * [Pass-the-Certificate](hacking-de-infraestructura-y-red/ataques-de-contrasenas/movimiento-lateral/pass-the-certificate.md)
+  * [Gestión de contraseñas](hacking-de-infraestructura-y-red/ataques-de-contrasenas/gestion-de-contrasenas.md)
 
 ## Hacking Active Directory
 
