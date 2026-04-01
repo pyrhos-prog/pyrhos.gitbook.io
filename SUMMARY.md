@@ -249,6 +249,12 @@
   * [Ataques Remotos](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/README.md)
     * [Hydra](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/hydra.md)
     * [Password Spraying, Credential Stuffing y Defaults](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/password-spraying-credential-stuffing-y-defaults.md)
+  * [Windows](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/README.md)
+    * [Ataque a SAM, SYSTEM y SECURITY](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/ataque-a-sam-system-y-security.md)
+    * [Atacando LSASS](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/atacando-lsass.md)
+    * [Credential Manager de Windows](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/credential-manager-de-windows.md)
+    * [Active Directory y NTDS.dit](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/active-directory-y-ntds.dit.md)
+    * [Búsqueda de Credenciales en Windows](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/busqueda-de-credenciales-en-windows.md)
 
 ## Hacking Active Directory
 
