@@ -248,7 +248,7 @@
     * [Descifrado de Archivos Protegidos](hacking-de-infraestructura-y-red/ataques-de-contrasenas/tecnicas-de-descifrado/descifrado-de-archivos-protegidos.md)
   * [Ataques Remotos](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/README.md)
     * [Hydra](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/hydra.md)
-    * [Password Spraying, Credential Stuffing y Defaults](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/password-spraying-credential-stuffing-y-defaults.md)
+    * [Password Spraying, Stuffing y Credenciales por Defecto](hacking-de-infraestructura-y-red/ataques-de-contrasenas/ataques-remotos/password-spraying-stuffing-y-credenciales-por-defecto.md)
   * [Windows](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/README.md)
     * [Ataque a SAM, SYSTEM y SECURITY](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/ataque-a-sam-system-y-security.md)
     * [Atacando LSASS](hacking-de-infraestructura-y-red/ataques-de-contrasenas/windows/atacando-lsass.md)
