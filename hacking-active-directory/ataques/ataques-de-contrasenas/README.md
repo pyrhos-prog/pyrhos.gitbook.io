@@ -1,8 +1,8 @@
 ---
-icon: building-magnifying-glass
+icon: windows
 ---
 
-# Windows
+# Ataques de contraseñas
 
 ## Proceso de Autenticación de Windows
 
