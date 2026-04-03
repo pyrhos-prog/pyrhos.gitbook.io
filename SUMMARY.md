@@ -209,6 +209,7 @@
     * [MSSQL — Microsoft SQL Server](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/mssql-microsoft-sql-server.md)
     * [Oracle TNS — Transparent Network Substrate](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/oracle-tns-transparent-network-substrate.md)
     * [IPMI — Intelligent Platform Management Interface](hacking-de-infraestructura-y-red/enumeracion/protocolos-de-red/ipmi-intelligent-platform-management-interface.md)
+  * [Enumeración de dispositivos IoT](hacking-de-infraestructura-y-red/enumeracion/enumeracion-de-dispositivos-iot.md)
 * [Escaneo de vulnerabilidades](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/README.md)
   * [CVSS — Sistema de Puntuación de Vulnerabilidades](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/cvss-sistema-de-puntuacion-de-vulnerabilidades.md)
   * [CVE y OVAL — Estándares de Clasificación de Vulnerabilidades](hacking-de-infraestructura-y-red/escaneo-de-vulnerabilidades/cve-y-oval-estandares-de-clasificacion-de-vulnerabilidades.md)
