@@ -2,6 +2,8 @@
 
 El Credential Manager (Administrador de credenciales) es el almacén seguro de Windows donde se guardan credenciales de red, aplicaciones y sitios web. Permite que el sistema recuerde contraseñas para recursos de red (shares SMB, RDP, sitios web con autenticación básica) sin que el usuario las reintroduzca. Para un atacante con sesión activa, es una fuente de credenciales ya descifradas.
 
+<figure><img src="../../../.gitbook/assets/image (52).png" alt=""><figcaption></figcaption></figure>
+
 ### Tipos de credenciales almacenadas
 
 | Tipo                              | Descripción                                                                           |
