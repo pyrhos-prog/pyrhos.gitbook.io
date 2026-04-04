@@ -1,26 +1,32 @@
 # Búsqueda de Credenciales en Windows
 
-Más allá de LSASS y SAM, los sistemas Windows acumulan credenciales en decenas de ubicaciones: archivos de configuración, scripts, bases de datos de aplicaciones, variables de entorno, historial de PowerShell y registros. Una búsqueda sistemática del filesystem suele revelar contraseñas en texto claro que los usuarios y administradores dejan inadvertidamente.
+Más allá de LSASS y SAM, los sistemas Windows acumulan credenciales en decenas de ubicaciones: archivos de configuración, scripts, bases de datos de aplicaciones, historial de PowerShell y el registro. El contexto del sistema condiciona dónde mirar — una estación de trabajo de un admin de IT acumula mucho más material que la de un usuario estándar.
+
+### Términos clave para buscar
+
+Independientemente de la herramienta, estos son los términos que más resultados dan:
+
+`password` `passphrase` `passwd` `pwd` `keys` `username` `creds` `credentials` `login` `configuration` `dbcredential` `dbpassword` `passkeys`
 
 ### Búsqueda en el filesystem
 
-#### Comandos básicos (CMD)
+#### CMD — findstr
 
 ```cmd
-# Buscar archivos con "password" en el nombre
+# Buscar contenido con términos sensibles en tipos de archivo habituales
+findstr /SIM /C:"password" *.txt *.ini *.cfg *.config *.xml *.git *.ps1 *.yml *.bat *.cmd
+
+# Buscar archivos por nombre
 dir /s /b *password* *pass* *cred* *secret* 2>nul
 
-# Buscar contenido con términos sensibles en archivos de texto
-findstr /si "password" *.txt *.xml *.ini *.config *.cfg *.ps1 *.bat *.cmd
-
-# Buscar en todo el disco
+# Búsqueda en todo el disco (más lento)
 findstr /spin "password" *.*
 ```
 
 #### PowerShell
 
 ```powershell
-# Buscar recursivamente
+# Buscar contenido recursivamente
 Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *.txt,*.xml,*.ini,*.config,*.ps1,*.bat |
   Select-String -Pattern "password","passwd","pwd","secret","credential" |
   Select-Object Path, LineNumber, Line
@@ -29,25 +35,29 @@ Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *.txt,*.
 Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Filter "*pass*"
 ```
 
+#### Windows Search (GUI)
+
+Con acceso gráfico, Windows Search indexa ajustes del sistema y el filesystem. Buscar términos como `pass`, `credential` o `config` puede revelar archivos que los comandos anteriores no alcanzan si están en rutas no estándar.
+
 ### Ubicaciones de alto valor
 
-#### Archivos de automatización y despliegue
+#### Archivos de despliegue — unattend.xml
 
-Los archivos de unattended install de Windows con frecuencia contienen la contraseña del administrador local en texto claro o Base64:
+Los archivos de instalación desatendida suelen contener la contraseña del administrador local en texto claro o Base64:
 
 ```cmd
-# Buscar archivos unattended
 dir /s /b C:\unattend.xml C:\Panther\unattend.xml C:\Windows\system32\sysprep\unattend.xml
+```
 
-# Contenido típico a buscar
+```xml
 <AutoLogon>
   <Password><Value>P4ssw0rd!</Value></Password>
 ```
 
-#### Configuraciones de IIS
+#### Configuraciones de IIS y aplicaciones web
 
 ```cmd
-C:\inetpub\wwwroot\web.config       # connection strings, API keys
+C:\inetpub\wwwroot\web.config
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config\machine.config
 ```
 
@@ -59,20 +69,34 @@ Get-ChildItem C:\inetpub -Recurse -Filter "web.config" |
 #### Historial de PowerShell
 
 ```powershell
-# El historial de PS puede contener comandos con credenciales en claro
 Get-Content C:\Users\*\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
 ```
 
-#### Archivos de configuración de herramientas
+Los comandos como `mysql -u root -pPassword123` o `Invoke-WebRequest -Credential` quedan registrados aquí en texto claro.
+
+#### Herramientas de administración remota
 
 ```cmd
-# Putty — sesiones guardadas (pueden incluir usuario/contraseña)
+# PuTTY — sesiones guardadas
 reg query HKCU\Software\SimonTatham\PuTTY\Sessions /s
 
-# WinSCP — contraseñas de sesiones (cifradas pero crackeables)
-reg query HKCU\Software\Martin Prikryl\WinSCP 2\Sessions /s
+# WinSCP — contraseñas cifradas pero crackeables
+reg query "HKCU\Software\Martin Prikryl\WinSCP 2\Sessions" /s
+```
 
-# FileZilla
+LaZagne es especialmente efectivo aquí — detectó WinSCP en el ejemplo de HTB y devolvió credenciales en texto claro:
+
+```
+[+] Password found !!!
+URL: 10.129.202.51
+Login: admin
+Password: SteveisReallyCool123
+Port: 22
+```
+
+#### FileZilla
+
+```cmd
 type C:\Users\*\AppData\Roaming\FileZilla\recentservers.xml
 type C:\Users\*\AppData\Roaming\FileZilla\sitemanager.xml
 ```
@@ -84,49 +108,74 @@ type C:\Users\*\AppData\Roaming\FileZilla\sitemanager.xml
 reg query HKLM /f password /t REG_SZ /s
 reg query HKCU /f password /t REG_SZ /s
 
-# Autologon — contraseña del usuario en texto claro si está configurado
+# AutoLogon — contraseña en texto claro si está configurado
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 ```
 
-#### Scripts y configuraciones de red
+#### Scripts y shares de red
 
 ```cmd
 dir /s /b C:\Scripts\*.bat C:\Scripts\*.ps1 C:\Scripts\*.cmd
 dir /s /b \\dc01\NETLOGON\*.bat \\dc01\SYSVOL\*.xml
 ```
 
-#### GPP Passwords (Group Policy Preferences)
+#### GPP Passwords — SYSVOL
 
-Un clásico: las contraseñas en GPP se cifran con AES-256 pero con una clave publicada por Microsoft. `Get-GPPPassword` o `gpp-decrypt` las descifran trivialmente:
+Las contraseñas en Group Policy Preferences se cifran con AES-256 pero con una clave publicada por Microsoft. Son trivialmente descifrables:
 
 ```bash
-# Desde Linux con Impacket/NetExec
+# Desde Linux
 netexec smb dc01.dominio.local -u user -p pass -M gpp_password
+```
 
+```powershell
 # Desde Windows con PowerSploit
 Get-GPPPassword
 ```
 
-### Herramientas automatizadas de búsqueda
+### Herramientas automatizadas
 
 #### LaZagne
 
-LaZagne busca contraseñas almacenadas en aplicaciones: navegadores, clientes de correo, bases de datos, VPNs, gestores de contraseñas, etc.:
+LaZagne cubre 35 navegadores en Windows y múltiples categorías de aplicaciones:
+
+| Módulo     | Objetivo                                              |
+| ---------- | ----------------------------------------------------- |
+| `browsers` | Chrome, Firefox, Edge, Opera — credenciales guardadas |
+| `chats`    | Skype y otros clientes de mensajería                  |
+| `mails`    | Outlook, Thunderbird                                  |
+| `memory`   | KeePass y LSASS                                       |
+| `sysadmin` | OpenVPN, WinSCP, configuraciones de herramientas IT   |
+| `windows`  | LSA secrets, Credential Manager                       |
+| `wifi`     | Contraseñas de redes WiFi guardadas                   |
 
 ```cmd
-lazagne.exe all
+start LaZagne.exe all
 lazagne.exe browsers
 lazagne.exe sysadmin
 ```
 
+> Los navegadores son de los objetivos más interesantes — Chrome, Edge y Firefox cifran las credenciales pero con claves derivadas de DPAPI, accesibles si se tiene la sesión del usuario. LaZagne maneja el descifrado automáticamente.
+
 #### Snaffler
 
-Orientado a redes AD: escanea shares accesibles buscando archivos con contenido sensible:
+Orientado a redes AD: escanea todos los shares accesibles en el dominio buscando archivos con contenido sensible:
 
 ```cmd
 Snaffler.exe -s -d dominio.local -o snaffler_output.log
 ```
 
-> En un pentest interno, combinar Snaffler sobre shares de red con una búsqueda local con LaZagne sobre el host comprometido captura la mayoría de credenciales hardcodeadas en el entorno.
+### Checklist de ubicaciones adicionales
 
-> Revisar siempre los directorios de los usuarios administradores y del equipo de IT/sysadmin — sus estaciones de trabajo tienden a acumular más credenciales que las de usuarios estándar.
+| Ubicación                                                    | Contenido potencial                                               |
+| ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| `SYSVOL\*\Policies\**\Groups.xml`                            | GPP passwords                                                     |
+| `SYSVOL\*\scripts\*.bat` / `*.ps1`                           | Credenciales hardcodeadas en scripts de login                     |
+| Shares de IT (`\\srv\IT\`)                                   | Scripts, configs, documentación interna                           |
+| `web.config` en máquinas de desarrollo                       | Connection strings con credenciales de BD                         |
+| `unattend.xml`, `sysprep.xml`                                | Contraseñas de despliegue                                         |
+| Descripción de usuarios/equipos en AD                        | Admins que documentan contraseñas en el campo Description         |
+| Archivos `pass.txt`, `passwords.xlsx` en shares y SharePoint | Inventarios de contraseñas                                        |
+| Bases de datos KeePass (`.kdbx`)                             | Credenciales corporativas si se puede crackear la master password |
+
+> Revisar siempre los directorios de administradores de IT — sus estaciones de trabajo acumulan más credenciales que las de usuarios estándar. En un pentest interno, comprometer la máquina de un sysadmin suele ser suficiente para obtener acceso a la mayoría del entorno sin necesidad de técnicas adicionales.
