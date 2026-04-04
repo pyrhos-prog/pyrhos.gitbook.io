@@ -84,7 +84,7 @@ reg query HKCU\Software\SimonTatham\PuTTY\Sessions /s
 reg query "HKCU\Software\Martin Prikryl\WinSCP 2\Sessions" /s
 ```
 
-LaZagne es especialmente efectivo aquí — detectó WinSCP en el ejemplo de HTB y devolvió credenciales en texto claro:
+LaZagne es especialmente efectivo:
 
 ```
 [+] Password found !!!
