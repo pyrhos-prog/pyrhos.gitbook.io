@@ -298,7 +298,7 @@
   * [PowerView / PowerSploit](hacking-active-directory/tools/powerview-powersploit.md)
   * [Rubeus](hacking-active-directory/tools/rubeus.md)
   * [Mimikatz](hacking-active-directory/tools/mimikatz.md)
-  * [NetExec (nxc) / CrackMapExec (cme)](hacking-active-directory/tools/netexec-nxc-crackmapexec-cme.md)
+  * [NetExec](hacking-active-directory/tools/netexec.md)
   * [Impacket](hacking-active-directory/tools/impacket.md)
   * [BloodHound](hacking-active-directory/tools/bloodhound.md)
   * [Kerbrute](hacking-active-directory/tools/kerbrute.md)
