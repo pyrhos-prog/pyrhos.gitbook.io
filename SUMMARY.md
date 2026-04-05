@@ -263,6 +263,15 @@
     * [Pass-the-Certificate](hacking-de-infraestructura-y-red/ataques-de-contrasenas/movimiento-lateral/pass-the-certificate.md)
   * [Gestión de contraseñas](hacking-de-infraestructura-y-red/ataques-de-contrasenas/gestion-de-contrasenas.md)
 
+## Frameworks C2
+
+* [Introducción](frameworks-c2/introduccion.md)
+* [Sliver C2](frameworks-c2/sliver-c2.md)
+* [Cobalt Strike](frameworks-c2/cobalt-strike.md)
+* [Havoc C2](frameworks-c2/havoc-c2.md)
+* [Mythic C2](frameworks-c2/mythic-c2.md)
+* [Infraestructura C2 — Redirectores y OPSEC](frameworks-c2/infraestructura-c2-redirectores-y-opsec.md)
+
 ## Hacking Active Directory
 
 * [Introducción y Conceptos Básicos](hacking-active-directory/introduccion-y-conceptos-basicos.md)
