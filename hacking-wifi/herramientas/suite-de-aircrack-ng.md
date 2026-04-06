@@ -18,7 +18,7 @@ icon: wifi
 
 Con este comando podemos capturar paquetes para guardarlos con el fin de cracking de la contraseña o analisis de dispositivos y la red.
 
-```
+```bash
 airodump-ng <interfaz>
 ```
 

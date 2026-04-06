@@ -4,9 +4,9 @@ icon: wifi
 
 # Wireshark
 
-Wireshark es una herramienta para analizar el tráfico de una red, en hacking web nos va a servir para analizar y comprender el tráfico.
+> Wireshark es una herramienta para analizar el tráfico de una red, en hacking wifi nos va a servir para analizar y comprender el tráfico.
 
-#### Funciones en hacking web
+#### Funciones en hacking Wifi
 
 * Capturar trafico de red.
 * Analizar tramas Wi-Fi.

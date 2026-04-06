@@ -51,7 +51,7 @@ grep -r "password\|passwd\|secret\|token\|api_key" /mnt/share/ 2>/dev/null \
   --include="*.csv" --include="*.xlsx" -l
 ```
 
-### Snaffler — búsqueda automatizada desde Windows
+### Snaffler — Windows
 
 Snaffler es la herramienta más completa para escanear shares en entornos Active Directory. Ejecutada desde un host unido al dominio, enumera automáticamente todos los shares accesibles y busca patrones de credenciales, claves y certificados. Clasifica los hallazgos por severidad: **Red** (crítico), **Yellow** (interesante), **Green** (revisión manual).
 
@@ -74,7 +74,7 @@ Snaffler.exe -s -i \\DC01\IT,\\DC01\Finance
 
 Snaffler detecta automáticamente: contraseñas en `.ps1`, `.bat`, `.cmd`, cadenas de conexión en `web.config`, archivos KeePass (`.kdbx`), claves privadas SSH y certificados PFX, hashes en archivos de configuración y GPP passwords en SYSVOL.
 
-### PowerHuntShares — informe HTML desde Windows
+### PowerHuntShares — Windows
 
 PowerHuntShares es un script PowerShell que no requiere máquina unida al dominio y genera un **informe HTML** con los resultados, lo que facilita la revisión posterior. Especialmente útil para auditorías donde se necesita documentar el alcance de la exposición.
 
@@ -113,7 +113,7 @@ docker run --rm -v ./manspider:/root/.manspider \
 
 Los archivos que coincidan se descargan automáticamente a `./manspider/loot/`.
 
-### NetExec spider — búsqueda integrada
+### NetExec spider
 
 NetExec incluye funcionalidad de spider para buscar contenido en shares sin herramientas adicionales:
 
