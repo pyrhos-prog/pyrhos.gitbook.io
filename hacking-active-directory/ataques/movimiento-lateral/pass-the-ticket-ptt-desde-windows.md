@@ -1,6 +1,6 @@
 # Pass-the-Ticket (PtT) desde Windows
 
-Pass-the-Ticket explota la autenticación Kerberos inyectando tickets TGT o TGS directamente en la sesión activa, sin conocer la contraseña ni el hash NT. Los tickets son credenciales Kerberos temporales que el sistema almacena en memoria; si se extraen, pueden importarse en otra sesión para autenticarse como el usuario propietario del ticket.
+Pass-the-Ticket explota la autenticación **Kerberos** inyectando tickets TGT o TGS directamente en la sesión activa, sin conocer la contraseña ni el hash NT. Los tickets son credenciales Kerberos temporales que el sistema almacena en memoria; si se extraen, pueden importarse en otra sesión para autenticarse como el usuario propietario del ticket.
 
 ### Conceptos previos
 
