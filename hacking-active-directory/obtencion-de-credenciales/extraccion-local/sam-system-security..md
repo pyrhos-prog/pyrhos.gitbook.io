@@ -1,4 +1,4 @@
-# Ataque a SAM, SYSTEM y SECURITY
+# SAM - SYSTEM - SECURITY.
 
 La base de datos SAM almacena los hashes NT de todas las cuentas locales de Windows. Está protegida por el kernel mientras el sistema está activo (no puede copiarse directamente), pero existen múltiples vías para extraerla: mediante el registro, desde un sistema offline o usando Volume Shadow Copies.
 

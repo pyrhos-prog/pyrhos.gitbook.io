@@ -1,0 +1,6 @@
+---
+icon: windows
+---
+
+# Extracción local
+

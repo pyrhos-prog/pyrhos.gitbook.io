@@ -2,13 +2,13 @@
 icon: windows
 ---
 
-# Ataques de contraseñas
+# Obtención de credenciales
 
 ## Proceso de Autenticación de Windows
 
 Entender cómo Windows autentica a los usuarios es la base para saber por qué SAM, LSASS y NTDS.dit son objetivos tan valiosos. El proceso implica varios componentes que interactúan entre sí y que, en cada paso, almacenan o transmiten credenciales de formas distintas.
 
-<figure><img src="../../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
 
 ### Componentes principales
 

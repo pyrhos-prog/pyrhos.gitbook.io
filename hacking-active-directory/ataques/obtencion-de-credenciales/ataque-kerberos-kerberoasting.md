@@ -1,2 +1,0 @@
-# Ataque kerberos: Kerberoasting
-

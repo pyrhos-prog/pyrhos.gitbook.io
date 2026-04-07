@@ -1,4 +1,4 @@
-# Ataques de Autenticación
+# Cheatsheet
 
 Los ataques de autenticación en AD explotan los protocolos Kerberos y NTLM para obtener credenciales o tickets que permitan acceder a recursos o escalar privilegios.
 

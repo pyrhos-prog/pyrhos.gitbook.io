@@ -2,7 +2,7 @@
 icon: windows
 ---
 
-# Movimiento lateral
+# Movimiento Lateral
 
 El movimiento lateral consiste en usar las credenciales/tickets obtenidos para desplazarse por la red hacia sistemas de mayor valor: otros equipos, servidores críticos, y finalmente el Domain Controller.
 
