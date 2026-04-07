@@ -12,7 +12,7 @@ SMB es uno de los vectores de ataque más explotados en redes Windows. Vulnerabi
 | **SMBv2** | Windows Vista, Server 2008 | Más eficiente, mejoras de seguridad.                |
 | **SMBv3** | Windows 8, Server 2012     | Cifrado end-to-end disponible.                      |
 
-### Enumeración
+### Enumeración en remoto
 
 #### Nmap
 
@@ -144,6 +144,48 @@ enumshares            # listar shares
 querydominfo          # información del dominio
 lookupnames admin     # obtener SID de un usuario
 lookupsids S-1-5-...  # obtener usuario de un SID
+```
+
+### Enumeración local
+
+Podemos ver un recurso compartido desde windows dando a `CTRL + R`  para abrir el cuadro de dialogo de ejecutar y introduciendo la ruta al recurso compartido `\\dominio.local\recurso`&#x20;
+
+<figure><img src="../../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+
+En caso de no tener acceso al recurso porque no acepta usuarios anonimos o no tenemos credenciales válidas no saldra una solicitud de autenticación.
+
+<figure><img src="../../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
+
+#### Enumeración desde CMD&#x20;
+
+También podemos enumerar un recurso compartido a traves del CMD con el comando dir para que nos muestre lo que hay dentro del recurso.
+
+```cmd
+C:\htb> dir \\192.168.220.129\Finance\
+
+Volume in drive \\192.168.220.129\Finance has no label.
+Volume Serial Number is ABCD-EFAA
+
+Directory of \\192.168.220.129\Finance
+
+02/23/2022  11:35 AM    <DIR>          Contracts
+               0 File(s)          4,096 bytes
+               1 Dir(s)  15,207,469,056 bytes free
+```
+
+Y con el comando `net use` conectarnos al recursos para poder entrar a el.
+
+```cmd
+# Sin credenciales
+C:\htb> net use n: \\192.168.220.129\Finance
+
+The command completed successfully.
+
+
+# Con Credenciales
+C:\htb> net use n: \\192.168.220.129\Finance /user:plaintext Password123
+
+The command completed successfully.
 ```
 
 ### Riesgos y misconfiguraciones
