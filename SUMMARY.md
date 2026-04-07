@@ -183,7 +183,7 @@
   * [Modo monitor e inyección de paquetes](hacking-wifi/preparacion-del-entorno-de-auditorias/modo-monitor-e-inyeccion-de-paquetes.md)
 * [Herramientas](hacking-wifi/herramientas/README.md)
   * [Suite de aircrack-ng](hacking-wifi/herramientas/suite-de-aircrack-ng.md)
-  * [Suite de hxctools](hacking-wifi/herramientas/suite-de-hxctools.md)
+  * [Suite de hcxtools](hacking-wifi/herramientas/suite-de-hcxtools.md)
   * [Wireshark](hacking-wifi/herramientas/wireshark.md)
 * [Ataques Wi-Fi](hacking-wifi/ataques-wi-fi/README.md)
   * [Reconocimiento](hacking-wifi/ataques-wi-fi/reconocimiento.md)

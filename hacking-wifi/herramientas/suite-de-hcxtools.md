@@ -2,7 +2,7 @@
 icon: wifi
 ---
 
-# Suite de hxctools
+# Suite de hcxtools
 
 > hxctools es una suite de herramientas para capturar convertir y manipular el tráfico Wi-Fi, especialmente para handshakes WPA/WPA2/WPA3, PMKID y ataques offline.
 
@@ -13,7 +13,7 @@ icon: wifi
 * Convertir las capturas a un formato compatible en hashcat
 * Manipular hashes
 
-### Diferencias de hxctools y aircrack-ng
+### Diferencias de hcxtools y aircrack-ng
 
 | Enfoque moderno         | Enfoque clásico            |
 | ----------------------- | -------------------------- |
