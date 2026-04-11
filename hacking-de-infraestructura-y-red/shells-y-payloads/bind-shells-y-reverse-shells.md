@@ -6,7 +6,7 @@ Existen dos grandes modelos para establecer una conexión de shell remota: **bin
 
 En una bind shell, el **sistema objetivo** inicia un listener en un puerto y el atacante se conecta a él.
 
-<div data-with-frame="true"><figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure></div>
+<div data-with-frame="true"><figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure></div>
 
 #### Problemas de las bind shells
 

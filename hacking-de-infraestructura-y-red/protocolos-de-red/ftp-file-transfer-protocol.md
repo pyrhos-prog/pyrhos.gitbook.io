@@ -69,17 +69,6 @@ wget -m --no-passive ftp://anonymous:anonymous@target
 lftp -c "open -u anonymous, ftp://target; mirror --parallel=10 / ./ftp-content/"
 ```
 
-#### Herramientas de brute force
-
-```bash
-# Hydra
-hydra -l usuario -P /usr/share/wordlists/rockyou.txt ftp://target
-hydra -L users.txt -P passwords.txt ftp://target -t 10
-
-# Medusa
-medusa -h target -u admin -P /usr/share/wordlists/rockyou.txt -M ftp
-```
-
 ### Riesgos y misconfiguraciones
 
 | Riesgo                           | Descripción                                                                                                              |
@@ -97,6 +86,48 @@ medusa -h target -u admin -P /usr/share/wordlists/rockyou.txt -M ftp
 Filtro Wireshark para ver credenciales FTP:
 ftp.request.command == "USER" || ftp.request.command == "PASS"
 ```
+
+### Ataques
+
+#### Brute Force
+
+```bash
+# Hydra
+hydra -l usuario -P /usr/share/wordlists/rockyou.txt ftp://target
+hydra -L users.txt -P passwords.txt ftp://target -t 10
+
+# Medusa
+medusa -h target -u admin -P /usr/share/wordlists/rockyou.txt -M ftp
+```
+
+
+
+#### FTP Bounce Attack
+
+Es una técnica en la que se abusa de un servidor FTP mal configurado para que actúe como intermediario y envíe conexiones o datos a otros sistemas.
+
+<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Cómo funciona**
+
+1. El atacante se conecta a un servidor FTP vulnerable.
+2. Usa comandos como `PORT` para indicar una **IP y puerto de un tercero**.
+3. El servidor FTP intenta conectarse a ese tercero.
+
+**Para qué se usa**
+
+* Ocultar la IP real del atacante.
+* Saltarse filtros/firewalls.
+* Reconocimiento de red (escaneo).
+
+**Ejemplo**
+
+```bash
+# Bounce Attack con Nmap para escanear el puerto 80 de una IP victima
+nmap -Pn -v -n -p80 -b anonymous:password@10.10.110.213 172.17.0.2
+```
+
+* El parametro -b se utiliza para hacer el bounce attack
 
 ### FTPS y SFTP
 

