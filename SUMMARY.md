@@ -259,6 +259,10 @@
     * [Búsqueda de Credenciales en Recursos Compartidos de Red](hacking-de-infraestructura-y-red/ataques-de-contrasenas/red/busqueda-de-credenciales-en-recursos-compartidos-de-red.md)
   * [Gestión de contraseñas](hacking-de-infraestructura-y-red/ataques-de-contrasenas/gestion-de-contrasenas.md)
 
+## Pivoting
+
+* [Introducción](pivoting/introduccion.md)
+
 ## Frameworks C2
 
 * [Introducción](frameworks-c2/introduccion.md)
