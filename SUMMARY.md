@@ -262,6 +262,7 @@
 ## Pivoting
 
 * [Introducción](pivoting/introduccion.md)
+* [La red detrás del pivoting](pivoting/la-red-detras-del-pivoting.md)
 
 ## Frameworks C2
 
