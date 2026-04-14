@@ -263,6 +263,7 @@
 
 * [Introducción](pivoting/introduccion.md)
 * [La red detrás del pivoting](pivoting/la-red-detras-del-pivoting.md)
+* [Elegir lugar de excavado y empezar los tuneles](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles.md)
 
 ## Frameworks C2
 
