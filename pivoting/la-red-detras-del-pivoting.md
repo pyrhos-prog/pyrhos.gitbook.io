@@ -1,107 +1,211 @@
 # La red detrás del pivoting
 
-## Creación de redes detrás del Pivoting — Apuntes
-
-### Contexto general
-
-El pivoting depende directamente de fundamentos de redes. Para aplicarlo correctamente es necesario comprender direccionamiento IP, interfaces de red, enrutamiento y puertos/protocolos.
-
-***
+El pivoting ocurre cuando un equipo comprometido actúa como “puente” hacia otras redes internas.\
+En la práctica, el objetivo no es entender la red en teoría, sino identificar **desde qué interfaces, rutas y puertos puedes moverte a otros segmentos**.
 
 ### Direccionamiento IP y NIC
 
-Cada equipo en una red necesita una dirección IP para comunicarse. Esta puede asignarse de forma dinámica mediante DHCP o de forma estática en dispositivos como servidores, routers, impresoras o infraestructura crítica.
+#### Qué miras en un sistema comprometido
 
-La IP siempre está asociada a una interfaz de red (NIC). Una NIC puede ser física o virtual, y un mismo sistema puede tener varias NICs simultáneamente, cada una con una o varias direcciones IP.
+En Linux:
 
-Esto es relevante en pivoting porque la presencia de múltiples interfaces suele implicar acceso a distintas redes internas.
+```
+ip a
+```
 
-Herramientas básicas para inspección:
+Ejemplo típico:
 
-* Linux/macOS: `ifconfig`
-* Windows: `ipconfig`
+* eth0 → 192.168.1.50 (red externa o DMZ)
+* eth1 → 10.10.10.5 (red interna)
+* tun0 → 10.8.0.2 (VPN)
 
-***
+#### Interpretación práctica
 
-### Interfaces de red y significado operativo
+Si ves esto:
 
-En sistemas Linux es habitual observar múltiples interfaces:
+* 192.168.1.50 → red “visible” desde fuera o semi pública
+* 10.10.10.5 → red interna privada
 
-* Interfaces Ethernet como `eth0` o `eth1`, asociadas a redes distintas
-* `lo` como interfaz de loopback local (127.0.0.1)
-* `tun0` como interfaz virtual de VPN
+**Conclusión**: el host ya está dentro de dos redes → **es candidato directo a pivot**
 
-La existencia de varias interfaces indica conectividad simultánea a diferentes segmentos de red.
+#### Ejemplo real de pivoting
 
-Las direcciones IP pueden ser de dos tipos principales:
+Supón:
 
-* IP pública: accesible desde Internet, normalmente en sistemas expuestos o DMZ
-* IP privada: utilizada dentro de redes internas, no enrutable directamente en Internet
+* Tu máquina atacante: 192.168.0.10
+* Máquina comprometida: 192.168.0.50 + 10.0.0.5
 
-En entornos reales, la traducción entre ambos tipos se realiza mediante NAT, que convierte tráfico entre redes privadas y públicas.
+Acciones típicas:
 
-***
+* Desde 192.168.0.50 haces escaneo a 10.0.0.0/24
+* Descubres un servidor interno no expuesto
 
-### Interfaces en Windows
+### Interfaces de red
 
-En Windows, `ipconfig` muestra los adaptadores disponibles. Es habitual encontrar múltiples interfaces, incluyendo adaptadores físicos, virtuales y VPN.
+#### Linux
 
-Un sistema puede operar en configuración dual stack, con IPv4 e IPv6 simultáneamente.
+* lo → localhost (irrelevante para pivoting)
+* eth0 / eth1 → redes físicas o virtuales
+* tun0 → VPN (muy común en labs y entornos reales)
 
-El gateway predeterminado es la ruta de salida hacia otras redes. Normalmente corresponde a un router interno.
+#### Caso práctico
 
-***
+Si tienes:
+
+```
+eth0 → Internet / red externa
+eth1 → red interna corporativa
+```
+
+Significa:
+
+* El sistema puede actuar como router manual
+* Puedes encaminar tráfico hacia redes que tu máquina atacante no ve
+
+### IP pública vs privada
+
+#### Ejemplo típico
+
+* IP pública: 80.120.x.x → servidor expuesto
+* IP privada: 10.x.x.x / 192.168.x.x → red interna
+
+#### Situación real
+
+Si comprometes un servidor con IP pública:
+
+* Solo ves ese host desde Internet
+* Pero desde dentro puedes ver:
+
+```
+10.10.0.0/24 (base de datos)
+10.10.1.0/24 (AD)
+```
+
+Pivoting = explotar ese salto hacia redes privadas
+
+### Gateway y salida
+
+Ver gateway en Linux:
+
+```
+ip route
+```
+
+Ejemplo:
+
+```
+default via 192.168.1.1 dev eth0
+10.10.0.0/24 via 10.10.0.1 dev eth1
+```
+
+#### Interpretación directa:
+
+* Todo lo desconocido sale por 192.168.1.1
+* La red 10.10.0.0/24 tiene ruta específica
+
+Si puedes modificar rutas o usar el host como proxy:
+
+* puedes alcanzar redes internas sin acceso directo
 
 ### Máscara de subred
 
-La máscara de subred define qué parte de una dirección IP corresponde a la red y qué parte al host.
+Ejemplo:
 
-Su función principal es determinar si un destino está dentro de la misma red o en una red diferente.
+* 192.168.1.0/24 → red local
+* 10.10.10.0/24 → red interna
 
-* Si está en la misma red → comunicación directa
-* Si está en otra red → tráfico enviado al gateway
+#### Qué implica en la práctica:
 
-***
+Si estás en:
+
+```
+192.168.1.50/24
+```
+
+puedes hablar directamente con:
+
+```
+192.168.1.1 – 192.168.1.254
+```
+
+Pero NO con:
+
+```
+10.10.10.0/24
+```
+
+A menos que el host comprometido actúe como puente
 
 ### Enrutamiento
 
-El enrutamiento determina cómo se reenvía el tráfico entre redes.
+Ver rutas:
 
-Los sistemas mantienen una tabla de rutas que indica:
+```
+ip route
+```
 
-* Redes conocidas directamente
-* Gateways para redes externas
-* Ruta por defecto (default route)
+#### Caso práctico:
 
-Si no existe una ruta específica, el tráfico se envía a la ruta por defecto.
+Antes del pivot:
 
-En pivoting, la tabla de enrutamiento es crítica porque define qué redes son alcanzables desde un host comprometido y qué rutas adicionales pueden necesitarse.
+```
+solo Internet
+```
 
-***
+Después de comprometer host:
 
-### Puertos, protocolos y servicios
+```
+192.168.1.0/24 directo
+10.10.10.0/24 vía 192.168.1.50
+```
 
-Los protocolos definen cómo se comunican los sistemas en red. Cada servicio expuesto normalmente está asociado a un puerto lógico.
+Esto es literalmente pivoting a nivel de red
 
-* La dirección IP identifica el host
-* El puerto identifica el servicio dentro del host
+#### Ejemplo mental claro
 
-Ejemplo: HTTP suele operar en el puerto 80.
+Tu máquina:
 
-Los puertos abiertos representan puntos de interacción con servicios que pueden estar permitidos por firewall, lo que puede facilitar el acceso inicial o movimiento dentro de una red.
+* no ve 10.10.10.0/24
 
-También existe el puerto de origen, usado para rastrear conexiones desde el lado cliente.
+Host comprometido:
 
-***
+* sí lo ve
 
-### Relación con pivoting
+tú usas ese host como “router manual”
 
-El pivoting depende directamente de estos conceptos:
+### Puertos y servicios
 
-* Múltiples NICs → acceso a múltiples redes
-* Máscara de subred → define límites de red
-* Gateway → salida hacia otras redes
-* Tabla de rutas → define caminos disponibles
-* Puertos → acceso a servicios internos
+Escaneo típico:
+
+```
+nmap 10.10.10.5
+```
+
+Ejemplo resultado:
+
+```
+22/tcp open ssh
+80/tcp open http
+3306/tcp open mysql
+```
+
+#### Interpretación:
+
+* 22 → posible acceso lateral
+* 80 → panel web interno
+* 3306 → base de datos interna crítica
+
+En pivoting, estos puertos no estaban accesibles desde fuera, solo desde la red interna.
+
+### Ejemplo completo de escenario real
+
+> * Comprometes servidor web:
+>   * 192.168.1.50
+> * Descubres otra interfaz:
+>   * 10.10.10.5
+> * Escaneas red interna desde ese host:
+>   * Encuentras DC (Domain Controller) en 10.10.10.10
+> * Usas el host como pivot:
+>   * accedes a servicios internos no expuestos
 
 La identificación de estas propiedades en hosts comprometidos permite determinar posibles rutas de acceso hacia redes no directamente alcanzables.
