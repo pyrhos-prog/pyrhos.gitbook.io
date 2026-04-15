@@ -106,7 +106,7 @@ medusa -h target -u admin -P /usr/share/wordlists/rockyou.txt -M ftp
 
 Es una técnica en la que se abusa de un servidor FTP mal configurado para que actúe como intermediario y envíe conexiones o datos a otros sistemas.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 **Cómo funciona**
 

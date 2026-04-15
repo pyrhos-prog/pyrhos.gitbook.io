@@ -4,7 +4,7 @@
 
 Cuando un sistema Windows se une a un dominio, deja de validar logins contra SAM local y pasa a enviar las solicitudes al DC. Esto no inutiliza SAM (los logins locales siguen funcionando especificando `hostname\usuario` o `.\usuario`), pero el objetivo principal en un dominio es siempre NTDS.dit.
 
-<figure><img src="../../../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### Ubicación y requisitos
 
