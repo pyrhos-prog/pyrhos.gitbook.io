@@ -6,7 +6,7 @@ El pivoting es una tecnica que nos permite acceder a un host que no es directame
 
 Basicamente el pivoting es movernos a otra red a traves de un equipo comprometido para encontrar nuevos equipos o nuevos segmentos de red.
 
-<figure><img src="../.gitbook/assets/PivotingandTunnelingVisualized.gif" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/PivotingandTunnelingVisualized.gif" alt=""><figcaption></figcaption></figure>
 
 Hay muchos términos diferentes que se utilizan para describir un host comprometido y que podemos usar para pivotar a un segmento de red previamente inalcanzable. Los mas comunes son:
 
