@@ -264,7 +264,8 @@
 * [Introducción](pivoting/introduccion/README.md)
   * [La red detrás del pivoting](pivoting/introduccion/la-red-detras-del-pivoting.md)
 * [Elegir lugar de excavado y empezar los tuneles](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/README.md)
-  * [Reenvío dinámico de puertos con túneles SSH y SOCKS](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/reenvio-dinamico-de-puertos-con-tuneles-ssh-y-socks.md)
+  * [Port forwarding con SSH y SOCKS](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/port-forwarding-con-ssh-y-socks.md)
+  * [Meterpreter port forwarding](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/meterpreter-port-forwarding.md)
 
 ## Frameworks C2
 
