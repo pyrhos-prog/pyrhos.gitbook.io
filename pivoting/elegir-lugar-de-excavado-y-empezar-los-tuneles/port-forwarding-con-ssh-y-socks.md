@@ -120,9 +120,7 @@ proxychains msfconsole
 
 Útil cuando el host objetivo no puede alcanzar al atacante directamente pero sí puede conectarse al pivot host. Permite recibir reverse shells de redes segmentadas.
 
-```
-Atacante:8000 ← SSH ← PivotHost:8080 ← objetivo_interno
-```
+<figure><img src="../../.gitbook/assets/image (57).png" alt=""><figcaption><p>Atacante - SSH - PivotHost - Objetivo_interno</p></figcaption></figure>
 
 ```bash
 # El atacante pide al pivot que escuche en 8080 y reenvíe al atacante:8000
