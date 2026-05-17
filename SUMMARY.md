@@ -266,6 +266,7 @@
 * [Elegir lugar de excavado y empezar los tuneles](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/README.md)
   * [Port forwarding con SSH y SOCKS](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/port-forwarding-con-ssh-y-socks.md)
   * [Meterpreter port forwarding](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/meterpreter-port-forwarding.md)
+* [Rpivot](pivoting/rpivot.md)
 * [SOCAT](pivoting/socat.md)
 * [Ligolo-ng](pivoting/ligolo-ng.md)
 
