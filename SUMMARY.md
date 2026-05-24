@@ -266,6 +266,7 @@
 * [Elegir lugar de excavado y empezar los tuneles](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/README.md)
   * [Port forwarding con SSH y SOCKS](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/port-forwarding-con-ssh-y-socks.md)
   * [Meterpreter port forwarding](pivoting/elegir-lugar-de-excavado-y-empezar-los-tuneles/meterpreter-port-forwarding.md)
+* [Doble Pivot y SocksOverRDP](pivoting/doble-pivot-y-socksoverrdp.md)
 * [Túneles SOCKS con CHISEL](pivoting/tuneles-socks-con-chisel.md)
 * [Túneles DNS con Dnscat2](pivoting/tuneles-dns-con-dnscat2.md)
 * [Netsh](pivoting/netsh.md)
