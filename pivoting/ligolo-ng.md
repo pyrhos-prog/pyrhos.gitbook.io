@@ -356,7 +356,7 @@ Ctrl+C en la terminal del proxy
 
 ***
 
-### ⚡ Flujo Completo — Cheatsheet
+### Flujo Completo — Cheatsheet
 
 ```bash
 # ── ATACANTE ──────────────────────────────────────

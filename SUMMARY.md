@@ -287,6 +287,7 @@
 
 * [Introducción y Conceptos Básicos](hacking-active-directory/introduccion-y-conceptos-basicos.md)
 * [Enumeración](hacking-active-directory/enumeracion/README.md)
+  * [Enumeración externa](hacking-active-directory/enumeracion/enumeracion-externa.md)
   * [Enumeración inicial](hacking-active-directory/enumeracion/enumeracion-inicial.md)
   * [Enumeracion de la red](hacking-active-directory/enumeracion/enumeracion-de-la-red.md)
   * [Enumeración de procesos y servicios](hacking-active-directory/enumeracion/enumeracion-de-procesos-y-servicios.md)
