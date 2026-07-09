@@ -110,7 +110,6 @@
   * [Transferencias de zona DNS](hacking-web/reconocimiento/transferencias-de-zona-dns.md)
   * [Servicios de email](hacking-web/reconocimiento/servicios-de-email.md)
 * [Login Bruteforce](hacking-web/login-bruteforce/README.md)
-  * [Fundamentos](hacking-web/login-bruteforce/fundamentos.md)
   * [Ataques de fuerza bruta](hacking-web/login-bruteforce/ataques-de-fuerza-bruta.md)
 * [OWASP TOP 10](hacking-web/owasp-top-10/README.md)
   * [Broken Access Control](hacking-web/owasp-top-10/broken-access-control/README.md)

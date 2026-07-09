@@ -1,5 +1,23 @@
 ---
 description: Welcome to your team’s developer platform
+layout:
+  width: default
+  title:
+    visible: false
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: false
+  pagination:
+    visible: false
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 metaLinks:
   alternates:
     - /broken/spaces/RIRQCYD2AGCWNBeobcEn/pages/JsKd452Nu8XTrHz68zaF

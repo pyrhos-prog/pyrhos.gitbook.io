@@ -1,3 +1,24 @@
+---
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
+---
+
 # Introducción a las redes
 
 Una red informática es un conjunto de equipos interconectados que comparten información, recursos y servicios. Se compone de una parte física (hardware, cables, routers, switches) y una parte lógica (software, protocolos como TCP/IP).
