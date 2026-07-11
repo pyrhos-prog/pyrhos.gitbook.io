@@ -1,3 +1,7 @@
+---
+icon: globe-www
+---
+
 # Hydra
 
 > Hydra es un cracker de login de red rápido con soporte para numerosos protocolos: SSH, FTP, HTTP (básico y formularios), SMTP, bases de datos, RDP, VNC, y más. Su ventaja principal es la paralelización de intentos, lo que acelera significativamente el ataque frente a scripts secuenciales.

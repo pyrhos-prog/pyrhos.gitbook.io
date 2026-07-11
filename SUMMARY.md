@@ -112,6 +112,7 @@
 * [Login Bruteforce](hacking-web/login-bruteforce/README.md)
   * [Ataques de fuerza bruta](hacking-web/login-bruteforce/ataques-de-fuerza-bruta.md)
   * [Hydra](hacking-web/login-bruteforce/hydra.md)
+  * [Medusa](hacking-web/login-bruteforce/medusa.md)
 * [OWASP TOP 10](hacking-web/owasp-top-10/README.md)
   * [Broken Access Control](hacking-web/owasp-top-10/broken-access-control/README.md)
     * [Path Traversal](hacking-web/owasp-top-10/broken-access-control/path-traversal.md)
