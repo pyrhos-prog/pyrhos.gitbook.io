@@ -1,16 +1,10 @@
+---
+icon: database
+---
+
 # Introducción a las bases de datos
 
-
-
-## Introducción a las bases de datos
-
-### Descripción
-
-Fundamentos teóricos previos a trabajar con cualquier motor concreto: qué es una base de datos, para qué sirve, y las grandes familias de modelos existentes.
-
-### Qué es una base de datos
-
-Una base de datos es una colección organizada de datos, almacenada y accesible electrónicamente, diseñada para que se pueda consultar, insertar, actualizar y eliminar información de forma eficiente y consistente. Frente a guardar datos en archivos planos (CSV, TXT), una base de datos gestionada por un motor (DBMS) aporta:
+> Una base de datos es una colección organizada de datos, almacenada y accesible electrónicamente, diseñada para que se pueda consultar, insertar, actualizar y eliminar información de forma eficiente y consistente. Frente a guardar datos en archivos planos (CSV, TXT), una base de datos gestionada por un motor (DBMS) aporta:
 
 | Ventaja                  | Por qué importa                                                                 |
 | ------------------------ | ------------------------------------------------------------------------------- |
@@ -20,7 +14,7 @@ Una base de datos es una colección organizada de datos, almacenada y accesible 
 | Rendimiento a escala     | Índices y motores de consulta optimizados para grandes volúmenes                |
 | Seguridad granular       | Permisos por usuario, rol, tabla o incluso columna                              |
 
-### Modelo relacional vs no relacional
+### Modelo relacional y no relacional
 
 |                 | Relacional (SQL)                                                            | No relacional (NoSQL)                                                          |
 | --------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
@@ -30,8 +24,6 @@ Una base de datos es una colección organizada de datos, almacenada y accesible 
 | Escalado típico | Vertical (más recursos en un servidor)                                      | Horizontal (más nodos)                                                         |
 | Ejemplos        | MySQL, PostgreSQL, MSSQL, Oracle, SQLite                                    | MongoDB, Redis, Cassandra, Neo4j                                               |
 | Cuándo usarlo   | Datos estructurados con relaciones claras, necesidad de integridad estricta | Datos semiestructurados, alta escritura/lectura distribuida, esquema cambiante |
-
-Esta wiki se centra en el modelo relacional por ser el más común en aplicaciones web tradicionales y el más relevante para SQLi y administración clásica.
 
 ### Conceptos básicos del modelo relacional
 

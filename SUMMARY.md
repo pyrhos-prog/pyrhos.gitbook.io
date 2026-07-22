@@ -69,6 +69,8 @@
 ## Bases de Datos
 
 * [Introducción a las bases de datos](bases-de-datos/introduccion-a-las-bases-de-datos.md)
+* [Lenguaje SQL](bases-de-datos/lenguaje-sql.md)
+* [Motores de bases de datos](bases-de-datos/motores-de-bases-de-datos.md)
 
 ## Python
 
