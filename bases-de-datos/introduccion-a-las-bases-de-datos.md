@@ -1,97 +1,60 @@
 # Introducción a las bases de datos
 
-Una base de datos es un sistema organizado para almacenar, gestionar y recuperar datos de forma persistente.
 
-| Tipo                  | Ejemplos                                 | Lenguaje de consulta     |
-| --------------------- | ---------------------------------------- | ------------------------ |
-| Relacional (SQL)      | MySQL, PostgreSQL, MSSQL, Oracle, SQLite | SQL                      |
-| No relacional (NoSQL) | MongoDB, Redis, Cassandra, Elasticsearch | Específico de cada motor |
 
-### Modelo relacional
+## Introducción a las bases de datos
 
-* **Tabla**: conjunto de filas y columnas que representa una entidad (ej. `usuarios`).
-* **Fila (registro)**: una instancia concreta de esa entidad.
-* **Columna (campo)**: un atributo de la entidad (ej. `username`, `password_hash`).
-* **Clave primaria (PK)**: identificador único de cada fila.
-* **Clave foránea (FK)**: referencia a la PK de otra tabla, define relaciones entre tablas.
+### Descripción
 
-```sql
-CREATE TABLE usuarios (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    rol_id INT,
-    FOREIGN KEY (rol_id) REFERENCES roles(id)
-);
-```
+Fundamentos teóricos previos a trabajar con cualquier motor concreto: qué es una base de datos, para qué sirve, y las grandes familias de modelos existentes.
 
-### SQL básico
+### Qué es una base de datos
 
-#### Consultas (SELECT)
+Una base de datos es una colección organizada de datos, almacenada y accesible electrónicamente, diseñada para que se pueda consultar, insertar, actualizar y eliminar información de forma eficiente y consistente. Frente a guardar datos en archivos planos (CSV, TXT), una base de datos gestionada por un motor (DBMS) aporta:
 
-```sql
-SELECT username, rol_id FROM usuarios;
-SELECT * FROM usuarios WHERE id = 1;
-SELECT * FROM usuarios ORDER BY username DESC LIMIT 10;
-```
+| Ventaja                  | Por qué importa                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| Integridad               | Restricciones (claves, tipos de dato, unicidad) evitan datos inconsistentes     |
+| Concurrencia             | Múltiples usuarios/procesos pueden leer y escribir a la vez sin corromper datos |
+| Recuperación ante fallos | Transacciones y logs permiten deshacer cambios o recuperar tras un corte        |
+| Rendimiento a escala     | Índices y motores de consulta optimizados para grandes volúmenes                |
+| Seguridad granular       | Permisos por usuario, rol, tabla o incluso columna                              |
 
-#### Filtros y operadores comunes
+### Modelo relacional vs no relacional
 
-```sql
-SELECT * FROM usuarios WHERE username = 'admin' AND rol_id = 1;
-SELECT * FROM usuarios WHERE username LIKE '%admin%';
-SELECT * FROM usuarios WHERE id IN (1, 2, 3);
-```
+|                 | Relacional (SQL)                                                            | No relacional (NoSQL)                                                          |
+| --------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Estructura      | Tablas con filas y columnas, esquema fijo                                   | Documentos, clave-valor, grafos o columnas anchas; esquema flexible            |
+| Relaciones      | Explícitas, mediante claves foráneas                                        | Normalmente embebidas o gestionadas a nivel de aplicación                      |
+| Consistencia    | Fuerte (ACID)                                                               | Habitualmente eventual (modelo BASE), varía según motor                        |
+| Escalado típico | Vertical (más recursos en un servidor)                                      | Horizontal (más nodos)                                                         |
+| Ejemplos        | MySQL, PostgreSQL, MSSQL, Oracle, SQLite                                    | MongoDB, Redis, Cassandra, Neo4j                                               |
+| Cuándo usarlo   | Datos estructurados con relaciones claras, necesidad de integridad estricta | Datos semiestructurados, alta escritura/lectura distribuida, esquema cambiante |
 
-#### Joins (relación entre tablas)
+Esta wiki se centra en el modelo relacional por ser el más común en aplicaciones web tradicionales y el más relevante para SQLi y administración clásica.
 
-```sql
-SELECT u.username, r.nombre AS rol
-FROM usuarios u
-JOIN roles r ON u.rol_id = r.id;
-```
+### Conceptos básicos del modelo relacional
 
-| Tipo de JOIN | Descripción                                     |
-| ------------ | ----------------------------------------------- |
-| `INNER JOIN` | Solo filas con coincidencia en ambas tablas     |
-| `LEFT JOIN`  | Todas las filas de la izquierda, coincidan o no |
-| `RIGHT JOIN` | Todas las filas de la derecha, coincidan o no   |
-| `FULL JOIN`  | Todas las filas de ambas tablas                 |
+* **Tabla**: conjunto de datos organizados en filas y columnas, equivalente a una entidad (ej. `usuarios`, `pedidos`).
+* **Fila (registro/tupla)**: una instancia concreta de esa entidad (ej. un usuario concreto).
+* **Columna (campo/atributo)**: una propiedad de la entidad (ej. `nombre`, `email`), con un tipo de dato definido.
+* **Clave primaria (Primary Key, PK)**: columna (o combinación) que identifica de forma única cada fila. No admite nulos ni duplicados.
+* **Clave foránea (Foreign Key, FK)**: columna que referencia la PK de otra tabla, estableciendo una relación entre ambas.
+* **Relaciones**: uno-a-uno, uno-a-muchos, muchos-a-muchos (esta última requiere una tabla intermedia).
+* **Normalización**: proceso de organizar las tablas para reducir redundancia y dependencias inconsistentes, dividido en formas normales (1FN, 2FN, 3FN...). A mayor normalización, menos duplicidad pero más JOINs necesarios.
+* **Índice**: estructura auxiliar que acelera búsquedas sobre una o varias columnas, a costa de espacio y de ralentizar ligeramente escrituras.
+* **Transacción**: conjunto de operaciones que se ejecutan como una unidad atómica — o se aplican todas, o ninguna (propiedades ACID).
 
-#### Inserción, actualización y borrado
+#### Propiedades ACID
 
-```sql
-INSERT INTO usuarios (username, password_hash, rol_id) VALUES ('bob', '<hash>', 2);
-UPDATE usuarios SET rol_id = 1 WHERE id = 5;
-DELETE FROM usuarios WHERE id = 5;
-```
+| Propiedad    | Significado                                                                         |
+| ------------ | ----------------------------------------------------------------------------------- |
+| Atomicidad   | Una transacción se ejecuta completa o no se ejecuta en absoluto                     |
+| Consistencia | La base de datos pasa de un estado válido a otro estado válido                      |
+| Aislamiento  | Transacciones concurrentes no interfieren entre sí                                  |
+| Durabilidad  | Una vez confirmada (commit), la transacción persiste aunque haya un fallo posterior |
 
-### Metadatos útiles en auditorías
+### Sistemas gestores de bases de datos (SGBD/DBMS)
 
-Tablas de sistema que suelen consultarse durante enumeración o explotación (ej. tras una inyección SQL):
+Un DBMS es el software que gestiona el almacenamiento, acceso y seguridad de las bases de datos (MySQL, PostgreSQL, MSSQL...). Se encarga de traducir las consultas SQL en operaciones sobre el almacenamiento físico, gestionar la concurrencia, aplicar los permisos y mantener la integridad definida en el esquema.
 
-| Motor      | Consulta para listar bases de datos | Consulta para listar tablas                    |
-| ---------- | ----------------------------------- | ---------------------------------------------- |
-| MySQL      | `SHOW DATABASES;`                   | `SHOW TABLES;`                                 |
-| MSSQL      | `SELECT name FROM sys.databases;`   | `SELECT name FROM sysobjects WHERE xtype='U';` |
-| PostgreSQL | `SELECT datname FROM pg_database;`  | `SELECT tablename FROM pg_tables;`             |
-
-```sql
--- Enumeración típica vía information_schema (MySQL, MSSQL, PostgreSQL)
-SELECT table_name FROM information_schema.tables WHERE table_schema = 'nombre_bd';
-SELECT column_name FROM information_schema.columns WHERE table_name = 'usuarios';
-```
-
-### Relevancia ofensiva
-
-* Las bases de datos mal configuradas (autenticación por defecto, puertos expuestos) son un vector de acceso directo.
-* Entender SQL es prerrequisito para SQL injection: sin dominar `SELECT`, `UNION`, subconsultas y `information_schema`, no se puede construir ni interpretar un payload de inyección.
-* Los hashes de contraseñas casi siempre viven en una tabla de usuarios — de ahí la conexión directa con ataques de fuerza bruta y cracking (ver Hydra/Hashcat).
-
-### Próximos pasos
-
-Esta página es la base para el módulo de SQL Injection: identificación de puntos de inyección, técnicas UNION-based, error-based, blind (boolean/time), y uso de sqlmap.
-
-***
-
-**Ver también**: Fuzzing web con FFuF · Ataques de contraseñas (Hydra, Medusa, Hashcat) · Herramientas de proxy web (Burp Suite, Caido, OWASP ZAP)
