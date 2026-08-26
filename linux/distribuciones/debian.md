@@ -34,7 +34,7 @@ Debian es una de las distribuciones más antiguas y respetadas de Linux, conocid
 | **Ciclo de versiones**     | \~2 años (sin fecha fija)    |
 | **Soporte por versión**    | \~5 años (3 activo + 2 LTS)  |
 | **Empresa**                | Comunidad (Debian Project)   |
-| **Versión actual**         | Debian 12 "Bookworm"         |
+| **Versión actual**         | Debian 13 "Trixie"           |
 
 #### Ramas de Debian
 
