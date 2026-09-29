@@ -46,6 +46,7 @@
 ## Redes
 
 * [Introducción a las redes](redes/introduccion-a-las-redes.md)
+* [Topologias de red](redes/topologias-de-red.md)
 * [Modelos de referencia](redes/modelos-de-referencia/README.md)
   * [Modelo OSI](redes/modelos-de-referencia/modelo-osi.md)
   * [Modelo TCP/IP](redes/modelos-de-referencia/modelo-tcp-ip.md)
