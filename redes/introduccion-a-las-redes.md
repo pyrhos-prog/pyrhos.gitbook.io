@@ -17,6 +17,8 @@ layout:
     visible: true
   actions:
     visible: true
+  anchors:
+    visible: true
 ---
 
 # Introducción a las redes
@@ -29,7 +31,7 @@ Una red informática es un conjunto de equipos interconectados que comparten inf
 
 ## Conceptos básicos
 
-<table><thead><tr><th width="184.33333333333331">Nombre</th><th>Definición</th><th data-hidden data-type="files"></th><th data-hidden></th><th data-hidden data-type="content-ref"></th></tr></thead><tbody><tr><td><i class="fa-share-nodes">:share-nodes:</i> <strong>Cliente</strong></td><td><strong>Dispositivo que se conecta a un servidor para utilizar un servicio.</strong></td><td></td><td></td><td></td></tr><tr><td><i class="fa-signal-stream">:signal-stream:</i> <strong>Servidor</strong></td><td><strong>Proporciona un servicio a otros dispositivos</strong></td><td></td><td></td><td><a href="https://github.com/GitbookIO/gitbook-templates/blob/main/product-docs/broken-reference/README.md">https://github.com/GitbookIO/gitbook-templates/blob/main/product-docs/broken-reference/README.md</a></td></tr><tr><td><i class="fa-router">:router:</i> <strong>IP</strong></td><td><strong>Es el identificador del dispositivo conectado a una red, puede ser pública o privada.</strong></td><td></td><td></td><td></td></tr><tr><td><i class="fa-scale-balanced">:scale-balanced:</i> <strong>Puerto</strong></td><td><strong>Es un número que identifica una aplicación o servicio específico (21,22,80,443...)</strong></td><td></td><td></td><td></td></tr><tr><td><i class="fa-scale-balanced">:scale-balanced:</i> <strong>Protocolo</strong></td><td><strong>Reglas y estándares para la comunicación en una red.</strong></td><td></td><td></td><td></td></tr></tbody></table>
+<table><thead><tr><th width="184.33333333333331">Nombre</th><th>Definición</th><th data-hidden data-type="files"></th><th data-hidden></th><th data-hidden data-type="content-ref"></th></tr></thead><tbody><tr><td><i class="fa-share-nodes">:share-nodes:</i> <strong>Cliente</strong></td><td><strong>Dispositivo que se conecta a un servidor para utilizar un servicio.</strong></td><td></td><td></td><td></td></tr><tr><td><i class="fa-signal-stream">:signal-stream:</i> <strong>Servidor</strong></td><td><strong>Proporciona un servicio a otros dispositivos</strong></td><td></td><td></td><td><a href="https://github.com/GitbookIO/gitbook-templates/blob/main/product-docs/broken-reference/README.md">https://github.com/GitbookIO/gitbook-templates/blob/main/product-docs/broken-reference/README.md</a></td></tr><tr><td><i class="fa-router">:router:</i> <strong>IP</strong></td><td><strong>Es el identificador del dispositivo conectado a una red, puede ser pública o privada.</strong></td><td></td><td></td><td></td></tr><tr><td><i class="fa-scale-balanced">:scale-balanced:</i> <strong>Puerto</strong></td><td><strong>Es un número que identifica una aplicación o servicio específico (21,22,80,443...)</strong></td><td></td><td></td><td></td></tr><tr><td><i class="fa-scale-balanced">:scale-balanced:</i> <strong>Protocolo</strong></td><td><strong>Reglas y estándares para la comunicación en una red.</strong></td><td></td><td></td><td></td></tr><tr><td><strong>Arquitectura de red</strong></td><td><strong>conjunto de elementos, normas, protocolos y estándares necesarios para definir cómo funciona un determinado tipo de red.</strong></td><td></td><td></td><td></td></tr></tbody></table>
 
 ## Diagrama básico de una red
 
