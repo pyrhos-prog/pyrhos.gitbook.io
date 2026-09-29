@@ -1,3 +1,7 @@
+---
+icon: chart-diagram
+---
+
 # Topologias de red
 
 > La **topología de una red** describe cómo están conectados sus dispositivos y cómo circulan los datos entre ellos.
