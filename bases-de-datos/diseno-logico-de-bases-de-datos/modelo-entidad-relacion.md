@@ -40,6 +40,13 @@ Por ejemplo: en una base de datos de un centro educativo, una ocurrencia de la e
 
 #### Entidades débiles
 
+Son entidades que no pueden identificarse completamente mediante sus propios atributos y necesitan utilizar la clave de una entidad fuerte relacionada, se representan mediante un doble rectángulo.
+
+**Presentan dos tipos de dependencia:**
+
+* Dependencia en existencia: Una ocurrencia de una entidad dependiente no puede existir sin estar asociada a una ocurrencia de la entidad de la que depende. Si desaparece esta última, puede perder también su sentido la existencia de la primera.
+* Dependencia en identificación: Además de existir dependencia, una ocurrencia de la entidad débil no puede identificarse únicamente mediante sus propios atributos, por lo que necesita incorporar la clave de la entidad fuerte asociada.
+
 
 
 
