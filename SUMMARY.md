@@ -70,6 +70,8 @@
 ## Bases de Datos
 
 * [Introducción a las bases de datos](bases-de-datos/introduccion-a-las-bases-de-datos.md)
+* [Diseño lógico de bases de datos](bases-de-datos/diseno-logico-de-bases-de-datos/README.md)
+  * [Modelo entidad-relación](bases-de-datos/diseno-logico-de-bases-de-datos/modelo-entidad-relacion.md)
 * [Lenguaje SQL](bases-de-datos/lenguaje-sql.md)
 * [Motores de bases de datos](bases-de-datos/motores-de-bases-de-datos.md)
 
