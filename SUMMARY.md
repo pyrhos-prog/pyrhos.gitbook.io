@@ -105,6 +105,10 @@
   * [os](python/librerias/os.md)
   * [requests](python/librerias/requests.md)
 
+## Lenguajes de marcas
+
+* [GML](lenguajes-de-marcas/gml.md)
+
 ## HACKING WEB
 
 * [Metodología — Hacking Web Completo](hacking-web/metodologia-hacking-web-completo.md)
