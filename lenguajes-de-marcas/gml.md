@@ -1,3 +1,7 @@
+---
+icon: html5
+---
+
 # GML
 
 > **GML** (_Generalized Markup Language_, Lenguaje de Marcado Generalizado) es un lenguaje concebido para describir la **estructura lógica** y los **elementos semánticos** de un documento (títulos, párrafos, listas, tablas) de forma totalmente independiente de su aspecto visual final, del hardware y del software utilizado para procesarlo.
