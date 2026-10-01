@@ -109,6 +109,9 @@
 
 * [Introducción](lenguajes-de-marcas/introduccion.md)
 * [GML](lenguajes-de-marcas/gml.md)
+* [SGML](lenguajes-de-marcas/sgml.md)
+* [HTML](lenguajes-de-marcas/html.md)
+* [XML](lenguajes-de-marcas/xml.md)
 
 ## HACKING WEB
 
