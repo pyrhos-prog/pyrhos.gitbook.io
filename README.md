@@ -35,7 +35,7 @@ metaLinks:
 
 Pyrhos Wiki es un proyecto personal con el que comparto y organizo mis conocimientos de ciberseguridad e informática.
 
-#### Temas que encontrararas
+#### Temas que encontraras
 
 | **Redes**          | Fundamentos, configuración y seguridad en redes de datos.                               |
 | ------------------ | --------------------------------------------------------------------------------------- |
