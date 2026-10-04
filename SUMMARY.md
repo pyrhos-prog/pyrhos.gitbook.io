@@ -280,6 +280,10 @@
     * [Búsqueda de Credenciales en Recursos Compartidos de Red](hacking-de-infraestructura-y-red/ataques-de-contrasenas/red/busqueda-de-credenciales-en-recursos-compartidos-de-red.md)
   * [Gestión de contraseñas](hacking-de-infraestructura-y-red/ataques-de-contrasenas/gestion-de-contrasenas.md)
 
+## Escalada de Privilegios
+
+* [Escalada de Privilegios en Linux](escalada-de-privilegios/escalada-de-privilegios-en-linux.md)
+
 ## Pivoting
 
 * [Introducción](pivoting/introduccion/README.md)
