@@ -4,44 +4,86 @@ icon: wifi
 
 # Modo monitor e inyección de paquetes
 
-### Modo monitor
+> El modo monitor o modo promiscuo es un modo de funcionamiento de una tarjeta de red inalámbrica que permite escuchar todos los paquetes que hay en el aire. No se limita a capturar solo los datos dirigidos a nuestro equipo, sino que registra todo el intercambio de información de las redes Wi-Fi al alcance.
 
-El modo monitor o modo promiscuo es un modo de funcionamiento de una antena wifi que permite escuchar todos los paquetes que hay en el aire, no solo los que nos envia nuestros router sino también el intercambio de información que hay en otras redes Wi-Fi al alcance.
+### Funciones Principales
 
-**Funciones**
+* **Capturar paquetes:** Analizar el tráfico completo del espectro.
+* **Identificar dispositivos:** Ver las direcciones MAC de los dispositivos cliente y puntos de acceso alrededor.
+* **Capturar tramas Wi-Fi:** Esencial para auditorías, captura de _handshakes_ e inyección de paquetes.
 
-* Capturar paquetes
-* Ver las direcciones MAC de los dispositivos alrededor
-* Catpurar las tramas Wi-Fi
+{% hint style="info" %}
+Compatibilidad Dependiendo del chipset de la tarjeta Wi-Fi, se podrá o no usar el modo monitor y la inyección de paquetes. No todas las tarjetas integradas en portátiles lo soportan.
+{% endhint %}
 
-Dependiendo del chipset de tu tarjeta Wi-Fi podrás o no usar el modo monitor
+### Cómo Activar y Desactivar el Modo Monitor
 
-**Estos son los chipset y modelos mas usados para auditorias Wi-Fi**
-
-| **Chipset**            | **Modelos Recomendados**                             | **Nivel de Compatibilidad**                          |
-| ---------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| **Atheros AR9271**     | <p>• Alfa AWUS036NHA<br>• Panda PAU09</p>            | **Excelente** - Soporte nativo en Kali Linux         |
-| **Realtek RTL8812AU**  | <p>• Alfa AWUS036ACH<br>• TP-Link AC1200 T3U</p>     | **Excelente** - Compatible con drivers actualizados  |
-| **Realtek RTL8821AU**  | <p>• Alfa AWUS036ACS<br>• Netgear A6150</p>          | **Excelente** - Amplio soporte en distribuciones     |
-| **Realtek RTL8814AU**  | <p>• Alfa AWUS1900<br>• EDUP AC1900</p>              | **Excelente** - Ideal para auditorías avanzadas      |
-| **Ralink RT3070**      | <p>• Alfa AWUS036NH<br>• Panda PAU06</p>             | **Buena** - Soporte estable pero tecnología anterior |
-| **Realtek RTL8188EUS** | <p>• Alfa AWUS036EAC<br>• TP-Link AC600 T2U Plus</p> | **Buena** - Requiere drivers adicionales             |
-| **Atheros AR9462**     | <p>• Qualcomm QCA9377<br>• Intel 7265 (limitado)</p> | **Variable** - Depende de la implementación          |
-
-#### Activar el modo monitor
-
-Para activar el modo monitor en la tarjeta hay que tener la suite de aircrack-ng instalada en el sistema, una vez la tengamos hay que saber cual es el nombre de nuestra antena.
+Antes de empezar, siempre es necesario identificar el nombre lógico que el sistema le ha asignado a nuestra tarjeta de red (por ejemplo, `wlan0`, `wlp2s0`, etc.).
 
 ```
-ifconfig
-<terminar>
+# Ver las interfaces inalámbricas disponibles
+iwconfig
+# o también
+iw dev
+
 ```
 
-El siguiente paso es utilizar airmon-ng para activar el modo monitor en la antena.
+#### Método 1: Usando `airmon-ng`&#x20;
+
+Este es el método recomendado para auditorías, ya que la herramienta gestiona automáticamente los procesos conflictivos y suele crear una interfaz virtual específica para el modo monitor.
+
+**Activar el modo monitor:**
 
 ```
-sudo airmon-ng start wlan0 # El nombre de tu antena puede ser direferente a wlan0
-<terminar>
+# 1. Matar procesos que puedan interferir (NetworkManager, wpa_supplicant...)
+sudo airmon-ng check kill
+
+# 2. Activar el modo monitor en la interfaz
+sudo airmon-ng start wlan0
+
 ```
 
-Con esto ya esta activado el modo monitor para poder a escanear las redes Wi-Fi de alrededor.
+**Desactivar el modo monitor:**
+
+```
+# 1. Detener la interfaz en modo monitor
+sudo airmon-ng stop wlan0mon
+
+# 2. Reiniciar el gestor de red para recuperar la conexión a Internet
+sudo systemctl start NetworkManager
+
+```
+
+#### Método 2: Usando `iw` y manual (Nativo en Linux)
+
+Este método es más puro y no depende de la suite de Aircrack. Es ideal para configuraciones de red estándar o scripting.
+
+**Activar el modo monitor:**
+
+```
+# 1. Bajar la interfaz para poder modificarla
+sudo ip link set wlan0 down
+
+# 2. Cambiar el modo de operación a "monitor"
+sudo iw dev wlan0 set type monitor
+
+# 3. Volver a levantar la interfaz
+sudo ip link set wlan0 up
+
+```
+
+**Desactivar el modo monitor y volver a modo "managed" (cliente):**
+
+```
+# 1. Bajar la interfaz
+sudo ip link set wlan0 down
+
+# 2. Cambiar el modo de operación a "managed" (modo estación normal)
+sudo iw dev wlan0 set type managed
+
+# 3. Levantar la interfaz
+sudo ip link set wlan0 up
+
+# 4. (Opcional) Reiniciar el servicio de red si no se conecta automáticamente
+sudo systemctl restart NetworkManager
+```
