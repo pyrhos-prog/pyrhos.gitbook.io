@@ -217,6 +217,7 @@
 
 ## Hacking de Infraestructura y red
 
+* [Fundamentos de Redes](hacking-de-infraestructura-y-red/fundamentos-de-redes.md)
 * [Protocolos de red](hacking-de-infraestructura-y-red/protocolos-de-red/README.md)
   * [FTP - File Transfer Protocol](hacking-de-infraestructura-y-red/protocolos-de-red/ftp-file-transfer-protocol.md)
   * [SMB — Server Message Block](hacking-de-infraestructura-y-red/protocolos-de-red/smb-server-message-block.md)
