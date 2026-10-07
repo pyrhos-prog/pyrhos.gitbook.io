@@ -96,7 +96,62 @@ Haz clic en cada sección para expandir la información de cada clasificación:
 
 _Normalmente no es necesario almacenarlos, aunque a veces se "materializan" en el diseño físico por motivos de rendimiento del sistema._
 
+## Las Claves en el Modelo Entidad-Relación
 
+> Las claves (o llaves) son atributos o conjuntos de atributos que permiten identificar de forma única e inequívoca cada ocurrencia (registro) de una entidad. Garantizan que ningún par de entidades tengan exactamente los mismos valores en esos atributos identificadores.
+
+### Tipos de Claves Naturales
+
+Haz clic en cada sección para expandir la información de la evolución y selección de claves:
+
+<details>
+
+<summary><strong>1. Superclave (Superllave)</strong></summary>
+
+Es cualquier conjunto de atributos que permite identificar de forma única una ocurrencia de entidad. _Nota: Una superclave puede contener atributos adicionales o innecesarios para realizar dicha identificación, no está optimizada._
+
+</details>
+
+<details>
+
+<summary><strong>2. Clave Candidata</strong></summary>
+
+Es una superclave mínima. Es decir, si eliminamos cualquiera de sus atributos, deja de permitir la identificación única de cada ocurrencia. Una entidad puede tener varias claves candidatas.
+
+</details>
+
+<details>
+
+<summary><strong>3. Clave Primaria o Principal (Primary Key)</strong></summary>
+
+De todas las claves candidatas, el diseñador de la base de datos escoge una, que se convertirá en la clave principal. Lo ideal es que esté formada por el menor número de atributos posible (preferiblemente uno solo).
+
+**Requisitos indispensables:**
+
+1. Sus valores deben ser únicos.
+2. No puede contener valores nulos (vacíos).
+3. Debe identificar de manera estable cada ocurrencia (su valor no debería cambiar con el tiempo).
+
+</details>
+
+<details>
+
+<summary><strong>4. Claves Alternativas</strong></summary>
+
+Son el resto de claves candidatas que cumplen todos los requisitos para identificar registros unívocamente, pero que finalmente no han sido escogidas como clave primaria.
+
+</details>
+
+### Ejemplo
+
+```
+Entidad: CLIENTES
+
+* Superclaves posibles: CodigoCliente + Nombre, CodigoCliente + DNI...
+* Claves candidatas: CodigoCliente y DNI (asumiendo que ambos sean únicos y no nulos).
+* Clave primaria seleccionada: CodigoCliente.
+* Clave alternativa: DNI (pasará a tener una restricción de valor único en la base de datos).
+```
 
 
 
