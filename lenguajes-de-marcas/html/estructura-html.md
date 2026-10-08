@@ -6,7 +6,7 @@ icon: html5
 
 > **La estructura básica de HTML permite que el navegador identifique correctamente la página, sus metadatos y el contenido visible.**
 
-### 1. Declaración del tipo de documento (`DOCTYPE`)
+### Declaración del tipo de documento
 
 Todo documento HTML moderno debe comenzar con la siguiente línea:
 
@@ -24,7 +24,7 @@ HTML 4.01 (Obsoleto) Antiguamente existían tres declaraciones, que ya no deben 
 \- Frameset: Se usaba en documentos organizados mediante marcos.
 {% endhint %}
 
-### 2. El Documento HTML: Elemento raíz
+### El Documento HTML: Elemento raíz
 
 Todo el contenido se engloba dentro de la etiqueta `<html>`. Lo habitual y recomendado es incluir el atributo `lang` para definir el idioma de la página:
 
@@ -49,7 +49,7 @@ Contiene la información visible de la página web.
 
 * Aquí van los títulos, párrafos, imágenes, enlaces, tablas, formularios, etc.
 
-### Estructura Básica Actual (Plantilla)
+### Estructura Básica
 
 ```html
 <!DOCTYPE html>
