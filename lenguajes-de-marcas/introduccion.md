@@ -4,49 +4,92 @@ icon: html5
 
 # Introducción
 
-> Los lenguajes de marcas permiten organizar y escribir la información para que pueda ser interpretada por personas y aplicaciones.
+> Un **lenguaje de marcas** codifica un documento combinando el texto plano con **etiquetas, marcas o anotaciones**. Su objetivo es organizar la información para que la entiendan tanto personas como máquinas.
 
-En el lenguaje de marcas, junto al texto se incorpora:
+#### ¿Qué información aportan estas etiquetas?
 
-* Etiquetas
-* Marcas
-* Anotaciones\
-  Para aportar información sobre su estructura, significado o presentación, Con ello podemos identificar elementos como titulos, parrafos, enlaces, tablas...
+1. **Estructura:** Identifican partes del documento (títulos, párrafos, enlaces, tablas).
+2. **Semántica (Significado):** Indican qué representa el dato (ej. el autor, una fecha).
+3. **Presentación:** Indican el aspecto visual (aunque la tendencia actual es separar esto del contenido).
 
-{% hint style="info" %}
-Un mismo documento puede guardar diferentes tipos de marcado
-{% endhint %}
+### Reglas y Validación de Documentos
 
-**Clasificación de los lenguajes de marcas:**
+Para que un documento (especialmente en XML/SGML) esté correctamente estructurado, existen archivos que dictan las reglas:
 
-* _De presentación_: Indican el formato o apariencia del texto.
-* _De procedimientos_: Contiene instrucciones que deben representarse en el mismo orden que aparecen en el documento.
-* _Descriptivos o semánticos_: Identifican partes del documento sin determinar necesariamente como deben mostrarse.
+| **Sistema**                          | **Descripción**                                                                                                        |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| **DTD** _(Document Type Definition)_ | Establece qué elementos, etiquetas y reglas de uso están permitidos en un documento. Es el sistema más clásico.        |
+| **XSD** _(XML Schema)_               | Sistema más moderno. Hace lo mismo que la DTD, pero además permite definir **tipos de datos** (números, fechas, etc.). |
+| **Excepción: HTML5**                 | Estándar del W3C. No necesita una DTD tradicional, se rige por su propia especificación oficial.                       |
 
-## Evolución de los lenguajes de marcas
+### Clasificación de los Lenguajes de Marcas
 
-#### 1. Etapa inicial: Dependencia de plataforma
+Un documento puede mezclar varios tipos, pero se clasifican en 3 categorías principales:
 
-* **Códigos propietarios:** El marcado estaba atado a máquinas, programas o procesadores de texto específicos.
-* **Falta de abstracción:** Resultaba imposible separar la estructura lógica del texto de su estilo o apariencia final.
+1. **De Presentación:**
+   * Indican _cómo debe verse_ el texto (formato, apariencia).
+   * _Ejemplo:_ Etiquetas para poner negritas o cambiar el color.
+2. **De Procedimientos:**
+   * Contienen instrucciones.
+   * Se deben interpretar por el programa exactamente en el **mismo orden** en que aparecen.
+3. **Descriptivos o Semánticos (El estándar actual):**
+   * Identifican **el significado** de las partes (esto es un título, esto es una dirección).
+   * No determinan cómo deben mostrarse en pantalla.
 
-#### 2. Transición: Interfaces visuales
+### Evolución Histórica
 
-* **Inserción indirecta:** La edición manual de etiquetas se sustituyó por interfaces más accesibles (botones, menús, atajos de teclado).
-* **Marcas ocultas:** Aunque el usuario dejaba de ver las etiquetas, las herramientas continuaban procesándolas internamente para definir el formato.
+La forma de estructurar documentos ha pasado por 3 grandes etapas:
 
-#### 3. Normalización: Marcado semántico
+| **Etapa**            | **Paradigma**         | **Características Principales**                                                                                                                             |
+| -------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Inicial**       | _Dependencia_         | Códigos **propietarios** (atados a una máquina o programa). **No se podía separar** el contenido de su apariencia final.                                    |
+| **2. Transición**    | _Interfaces Visuales_ | Nacen los botones y atajos (WYSIWYG). Las marcas se **ocultan al usuario**, pero el programa las sigue usando internamente para el formato.                 |
+| **3. Normalización** | _Marcado Semántico_   | El marcado sirve para describir el **significado y estructura**, no la estética. **Separación total de capas**: Contenido (HTML/XML) vs Presentación (CSS). |
 
-* **Cambio de paradigma:** El propósito del marcado evolucionó de dictar la _presentación_ a describir el _significado y la estructura_ del contenido.
-* **Separación de capas:** Creación de estándares universales capaces de aislar por completo el contenido de su aspecto visual.
+### Ámbitos de Aplicación y Ejemplos
 
-### Ejemplo
+Conoce los lenguajes más importantes según para qué se utilizan:
 
-Código de marcas anterior a GML.
+#### Documentación Electrónica
 
-```html
-<times 14><color verde><centrado> Este texto es un ejemplo para mostrar la utilización primitiva de las marcas</centrado></color></times 14>
-<color granate><times 10><cursiva>Para realiza este ejemplo se utilizan etiquetas de nuestra invención. </cursiva> 
-Las partes importantes del texto pueden resaltarse usando la 
-<negrita>negrita</negrita>, o el <subrayar>subrayado</subrayar></times 10></color>
+* **RTF (Microsoft):** Intercambio de texto enriquecido entre distintos procesadores.
+* **TeX:** Documentos científicos y fórmulas matemáticas complejas.
+* **Wikitexto:** Edición rápida en plataformas wiki (ej. MediaWiki).
+* **DocBook (XML):** Separa estructura de presentación. Permite exportar a múltiples formatos (HTML, PDF, EPUB).
+
+#### Tecnologías de Internet
+
+* **HTML / XHTML:** Estructura de páginas web. **HTML5** es el estándar actual más extendido.
+* **RSS:** Formato en XML para distribuir/sindicar novedades de blogs y medios digitales.
+
+#### Lenguajes Especializados
+
+* **MathML:** Representación de expresiones **matemáticas** entre aplicaciones.
+* **VoiceXML:** Aplicaciones de reconocimiento y síntesis de **voz** (interacción hablada).
+* **MusicXML:** Intercambio de **partituras** en programas de composición musical.
+
+### Comparativa de Código
+
+#### Antes (Marcado de Presentación)
+
+Se centra solo en lo estético. Una máquina no sabe qué significan los datos.
+
+```
+<times 14><color verde><centrado> 
+Ejemplo primitivo de presentación
+</centrado></color></times 14>
+
+```
+
+#### Ahora (Marcado Semántico / XML)
+
+Se centra en el **significado**. Cualquier sistema entiende quién envía la carta y cuándo.
+
+```
+<carta>
+    <fecha>22/11/2006</fecha>
+    <presentacion>Estimado cliente:</presentacion>
+    <contenido>Bla bla bla...</contenido>
+    <firma>Don José Gutiérrez</firma>
+</carta>
 ```
