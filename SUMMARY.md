@@ -114,7 +114,10 @@
 * [SGML](lenguajes-de-marcas/sgml.md)
 * [HTML](lenguajes-de-marcas/html/README.md)
   * [Estructura HTML](lenguajes-de-marcas/html/estructura-html.md)
-* [XML](lenguajes-de-marcas/xml.md)
+* [XML](lenguajes-de-marcas/xml/README.md)
+  * [Estructura XML](lenguajes-de-marcas/xml/estructura-xml.md)
+  * [Documento XML bien formado](lenguajes-de-marcas/xml/documento-xml-bien-formado.md)
+  * [Utilización de Espacios de Nombres](lenguajes-de-marcas/xml/utilizacion-de-espacios-de-nombres.md)
 * [Utilización de lenguajes de marcas en entornos web](lenguajes-de-marcas/utilizacion-de-lenguajes-de-marcas-en-entornos-web/README.md)
   * [Entorno y versiones](lenguajes-de-marcas/utilizacion-de-lenguajes-de-marcas-en-entornos-web/entorno-y-versiones.md)
 

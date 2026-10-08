@@ -21,6 +21,8 @@ icon: html5
 * **XML Namespaces:** evitan conflictos entre etiquetas con el mismo nombre procedentes de vocabularios diferentes.
 * **XML Schema (XSD):** permite definir con precisión la estructura, los tipos de datos y las restricciones de un documento XML. También pueden emplearse **DTD** o alternativas como Relax NG.
 
+####
+
 #### Ejemplo
 
 ```xml
