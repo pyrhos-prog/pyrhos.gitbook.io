@@ -13,9 +13,9 @@ En el lenguaje de marcas, junto al texto se incorpora:
 * Anotaciones\
   Para aportar información sobre su estructura, significado o presentación, Con ello podemos identificar elementos como titulos, parrafos, enlaces, tablas...
 
-Nota
-
+{% hint style="info" %}
 Un mismo documento puede guardar diferentes tipos de marcado
+{% endhint %}
 
 **Clasificación de los lenguajes de marcas:**
 
@@ -30,7 +30,7 @@ Un mismo documento puede guardar diferentes tipos de marcado
 * **Códigos propietarios:** El marcado estaba atado a máquinas, programas o procesadores de texto específicos.
 * **Falta de abstracción:** Resultaba imposible separar la estructura lógica del texto de su estilo o apariencia final.
 
-#### 2. Transición: Interfaces visuales (WYSIWYG)
+#### 2. Transición: Interfaces visuales
 
 * **Inserción indirecta:** La edición manual de etiquetas se sustituyó por interfaces más accesibles (botones, menús, atajos de teclado).
 * **Marcas ocultas:** Aunque el usuario dejaba de ver las etiquetas, las herramientas continuaban procesándolas internamente para definir el formato.
@@ -44,7 +44,7 @@ Un mismo documento puede guardar diferentes tipos de marcado
 
 Código de marcas anterior a GML.
 
-```markup
+```html
 <times 14><color verde><centrado> Este texto es un ejemplo para mostrar la utilización primitiva de las marcas</centrado></color></times 14>
 <color granate><times 10><cursiva>Para realiza este ejemplo se utilizan etiquetas de nuestra invención. </cursiva> 
 Las partes importantes del texto pueden resaltarse usando la 
