@@ -178,6 +178,7 @@
     * [XPath Injection](hacking-web/owasp-top-10/inyecciones/xpath-injection.md)
   * [Security Misconfiguration](hacking-web/owasp-top-10/security-misconfiguration/README.md)
     * [Unrestricted File Upload](hacking-web/owasp-top-10/security-misconfiguration/unrestricted-file-upload.md)
+    * [XXE - XML External Entity](hacking-web/owasp-top-10/security-misconfiguration/xxe-xml-external-entity.md)
     * [Exposed Directories](hacking-web/owasp-top-10/security-misconfiguration/exposed-directories.md)
   * [Identification and Authentication Failures](hacking-web/owasp-top-10/identification-and-authentication-failures/README.md)
     * [Login bypass](hacking-web/owasp-top-10/identification-and-authentication-failures/login-bypass.md)
