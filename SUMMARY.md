@@ -4,7 +4,7 @@
 
 ## Fundamentos de hardware
 
-* [Page 1](fundamentos-de-hardware/page-1.md)
+* [Introducción](fundamentos-de-hardware/introduccion.md)
 
 ## Linux
 

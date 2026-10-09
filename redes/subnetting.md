@@ -17,6 +17,8 @@ layout:
     visible: true
   actions:
     visible: true
+  anchors:
+    visible: true
 ---
 
 # Subnetting
@@ -36,10 +38,10 @@ Una subred es un segmento lógico de red donde todas las IP comparten la misma d
 
 En cualquier subred IPv4 siempre existen:
 
-* **Network address** (identifica la subred)
-* **Broadcast address(** envía tráfico a todos los hosts)
-* **Primer host usable**
-* **Último host usable**
+* **Dirección de red** (Identifica la subred)
+* **Dirección de broadcast (** envía tráfico a todos los hosts)
+* **Primer host utilizable**
+* **Último host utilizable**
 * **Número total de hosts**
 
 ### Ejemplo
@@ -48,7 +50,7 @@ En cualquier subred IPv4 siempre existen:
 **Máscara:** `255.255.255.192`\
 **CIDR:** `/26`
 
-### IP y máscara en binario
+### IP y máscara de red en binario
 
 #### Dirección IPv4
 
@@ -76,8 +78,6 @@ Máscara: 11111111.11111111.11111111.11|000000
 
 * Parte de red: fija
 * Parte de host: variable
-
-***
 
 ### Cálculo de direcciones importantes
 
