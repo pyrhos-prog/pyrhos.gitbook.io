@@ -79,9 +79,85 @@ hostname -I          # IPs asignadas, forma rápida
 cat /etc/hosts         # resolución local de nombres
 ```
 
+### Firewall: iptables, nftables y ufw
+
+#### iptables (el clásico, aún muy presente)
+
+```bash
+iptables -L                       # listar reglas activas
+iptables -L -v -n                   # con contadores y sin resolver DNS (más rápido y claro)
+iptables -L -n --line-numbers         # con número de línea, útil para borrar reglas concretas
+
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT    # permitir entrada por el puerto 22
+iptables -A INPUT -s 192.168.1.10 -j DROP          # bloquear todo el tráfico de una IP
+iptables -A INPUT -p tcp --dport 80 -j DROP          # bloquear el puerto 80
+iptables -D INPUT 3                                    # borrar la regla número 3 de la cadena INPUT
+
+iptables -P INPUT DROP             # política por defecto: descartar todo lo no permitido explícitamente
+iptables -F                          # vaciar todas las reglas (flush) — cuidado, deja el firewall abierto
+```
+
+| Cadena    | Para qué tráfico                                 |
+| --------- | ------------------------------------------------ |
+| `INPUT`   | Tráfico entrante hacia esta máquina              |
+| `OUTPUT`  | Tráfico saliente desde esta máquina              |
+| `FORWARD` | Tráfico que atraviesa esta máquina (routing/NAT) |
+
+```bash
+# Guardar reglas para que sobrevivan a un reinicio (Debian/Ubuntu)
+apt install iptables-persistent
+netfilter-persistent save
+```
+
+#### nftables (sucesor moderno de iptables)
+
+```bash
+nft list ruleset                    # ver todas las reglas activas
+nft list tables                       # listar tablas
+
+nft add table inet filter
+nft add chain inet filter input { type filter hook input priority 0 \; }
+nft add rule inet filter input tcp dport 22 accept
+nft add rule inet filter input drop
+```
+
+\{% hint style="info" %\} `nftables` sustituye a `iptables` en distros modernas, pero la sintaxis de `iptables` se sigue viendo muchísimo en guías, CTFs y sistemas en producción. Vale la pena conocer ambos. \{% endhint %\}
+
+#### ufw (Uncomplicated Firewall, capa simplificada sobre iptables)
+
+```bash
+ufw status                    # ver estado y reglas
+ufw status verbose              # con más detalle
+
+ufw enable                       # activar el firewall
+ufw disable                        # desactivar
+
+ufw allow 22                         # permitir un puerto
+ufw allow 22/tcp                       # permitir un puerto + protocolo concreto
+ufw allow from 192.168.1.10              # permitir todo el tráfico de una IP
+ufw deny 80                                # bloquear un puerto
+ufw delete allow 22                          # borrar una regla
+
+ufw default deny incoming         # política por defecto: denegar entrante
+ufw default allow outgoing          # política por defecto: permitir saliente
+```
+
+#### Comprobar qué está realmente filtrando el tráfico
+
+```bash
+# Ver si un puerto está realmente alcanzable desde fuera (no solo si el servicio escucha)
+nmap -p 22 <tu_ip_publica>
+
+# Ver reglas activas del kernel, independientemente de la herramienta usada para crearlas
+iptables -L -n -v
+```
+
+***
+
 ### Escaneo rápido de puertos sin nmap
 
 ```bash
 nc -zv 192.168.1.1 1-100      # netcat en modo escaneo (z=sin enviar datos, v=verbose)
 timeout 1 bash -c "</dev/tcp/192.168.1.1/22" && echo "abierto"   # bash puro, sin herramientas extra
 ```
+

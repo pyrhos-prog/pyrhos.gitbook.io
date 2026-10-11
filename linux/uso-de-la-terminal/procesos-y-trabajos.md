@@ -123,7 +123,7 @@ Para procesos que necesitas poder recuperar después (no solo que sobrevivan), m
 &#x20;Ver [13 — tmux y screen](https://claude.ai/chat/13-tmux-screen.md).
 {% endhint %}
 
-### systemctl básico
+### systemctl&#x20;
 
 Gestión de servicios en sistemas con systemd.
 
@@ -138,3 +138,118 @@ systemctl disable nginx              # desactivar en el arranque
 systemctl is-enabled nginx            # comprobar si está activado en el arranque
 journalctl -u nginx -f                # logs del servicio en tiempo real
 ```
+
+### systemd&#x20;
+
+Lo visto antes (`systemctl start/stop/status/enable`) opera sobre "unidades" (units). Un **unit file** es el fichero que define cómo se comporta un servicio.
+
+#### Dónde viven los unit files
+
+```bash
+/etc/systemd/system/        # unidades creadas/modificadas por el administrador (prioridad más alta)
+/lib/systemd/system/          # unidades instaladas por paquetes del sistema
+```
+
+#### Anatomía de un unit file (.service)
+
+```ini
+[Unit]
+Description=Mi servicio personalizado
+After=network.target            # arranca después de que la red esté lista
+
+[Service]
+Type=simple                       # simple, forking, oneshot, notify...
+ExecStart=/usr/local/bin/mi-script.sh
+Restart=on-failure                   # reinicia si el proceso falla
+User=pyrhos                            # usuario con el que corre el proceso
+
+[Install]
+WantedBy=multi-user.target         # a qué target se asocia su activación en el arranque
+```
+
+```bash
+sudo systemctl daemon-reload        # recarga la configuración tras crear/editar un unit file
+sudo systemctl start mi-servicio
+sudo systemctl enable mi-servicio
+```
+
+#### Targets (equivalente moderno a los runlevels)
+
+```bash
+systemctl get-default              # target por defecto del sistema
+systemctl list-units --type=target   # listar todos los targets activos
+systemctl isolate multi-user.target   # cambiar de target (ej. salir de modo gráfico)
+```
+
+| Target              | Equivalente runlevel clásico |
+| ------------------- | ---------------------------- |
+| `poweroff.target`   | 0                            |
+| `rescue.target`     | 1 (modo rescate)             |
+| `multi-user.target` | 3 (multiusuario, sin GUI)    |
+| `graphical.target`  | 5 (multiusuario con GUI)     |
+| `reboot.target`     | 6                            |
+
+#### Ver dependencias de un servicio
+
+```bash
+systemctl list-dependencies nginx     # qué necesita para arrancar
+systemctl list-units --failed           # servicios que han fallado al arrancar
+```
+
+#### Timers de systemd (alternativa moderna a cron)
+
+```bash
+systemctl list-timers                 # ver todos los timers activos y cuándo se disparan
+```
+
+Se tratan con más detalle en la página de tareas programadas, junto con `cron`.
+
+***
+
+### Logs y journald
+
+#### journalctl
+
+```bash
+journalctl                      # todos los logs del sistema, paginado
+journalctl -f                     # seguir en tiempo real (como tail -f)
+journalctl -u nginx                 # logs de un servicio concreto
+journalctl -u nginx -f                # seguir en tiempo real, solo ese servicio
+journalctl -p err                       # solo nivel error o superior
+journalctl --since "1 hour ago"           # filtrar por tiempo relativo
+journalctl --since "2026-10-01" --until "2026-10-05"   # rango de fechas
+journalctl -b                               # logs solo del arranque actual
+journalctl -b -1                              # logs del arranque anterior
+journalctl -k                                   # solo mensajes del kernel (equivalente a dmesg)
+journalctl --disk-usage                           # espacio ocupado por los logs
+```
+
+{% hint style="info" %}
+`journalctl` centraliza en un único sitio (el journal binario) lo que antes estaba repartido en varios ficheros de texto en `/var/log/`. En sistemas con systemd es la primera herramienta a usar para depurar por qué un servicio no arrancó.
+{% endhint %}
+
+#### /var/log — logs clásicos en texto plano
+
+| Fichero                                 | Contenido                                        |
+| --------------------------------------- | ------------------------------------------------ |
+| `/var/log/auth.log`                     | Autenticación: logins, sudo, SSH (Debian/Ubuntu) |
+| `/var/log/syslog`                       | Log general del sistema (Debian/Ubuntu)          |
+| `/var/log/messages`                     | Equivalente a syslog en RedHat/CentOS            |
+| `/var/log/dmesg`                        | Mensajes del kernel al arrancar                  |
+| `/var/log/apache2/` o `/var/log/nginx/` | Logs de servidores web, por aplicación           |
+
+```bash
+tail -f /var/log/auth.log                       # seguir intentos de login en vivo
+grep "Failed password" /var/log/auth.log           # intentos fallidos de SSH
+grep "sudo" /var/log/auth.log                         # uso de sudo
+```
+
+#### rsyslog
+
+Demonio que gestiona el enrutado y almacenamiento de logs clásicos en texto plano. Su configuración está en `/etc/rsyslog.conf` y `/etc/rsyslog.d/`.
+
+```bash
+systemctl status rsyslog        # comprobar que el servicio está activo
+```
+
+Útil saber que existe cuando necesitas reenviar logs a un servidor centralizado (SIEM, syslog remoto) — se configura ahí, no en journald.

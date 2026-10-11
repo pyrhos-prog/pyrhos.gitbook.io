@@ -77,6 +77,59 @@ type cd               # indica si es builtin, alias o ejecutable
 export PATH=$PATH:/ruta/nueva    # añadir un directorio (temporal, solo sesión actual)
 ```
 
+Lo visto antes (`$HOME`, `$PATH`, `export`) solo dura mientras la sesión actual está abierta. Para que una variable o un cambio en el `PATH` persista entre sesiones, hay que escribirlo en el fichero de inicio correcto.
+
+#### Qué fichero se carga y cuándo
+
+| Fichero            | Cuándo se carga                                                                |
+| ------------------ | ------------------------------------------------------------------------------ |
+| `/etc/environment` | Al iniciar sesión, a nivel de todo el sistema (todos los usuarios)             |
+| `/etc/profile`     | Shells de login, a nivel de sistema                                            |
+| `~/.profile`       | Shells de login del usuario (independiente de bash/zsh)                        |
+| `~/.bashrc`        | Cada nueva shell interactiva de bash (lo más común para alias y PATH personal) |
+| `~/.bash_profile`  | Shell de login en bash — si existe, sustituye a `~/.profile` para bash         |
+| `~/.zshrc`         | Equivalente a `.bashrc` pero para zsh                                          |
+
+{% hint style="info" %}
+"Shell de login" es la que se abre al iniciar sesión (ej. consola física, `ssh usuario@host`). Una terminal gráfica nueva dentro de un escritorio ya logueado normalmente abre una shell no-login, interactiva — por eso `.bashrc` es el sitio más fiable para persistir cosas: se carga en casi todos los casos.
+{% endhint %}
+
+#### Hacer persistente una variable o el PATH
+
+```bash
+# Añadir al final de ~/.bashrc
+echo 'export PATH=$PATH:/opt/herramientas/bin' >> ~/.bashrc
+echo 'export EDITOR=vim' >> ~/.bashrc
+
+# Aplicar sin cerrar sesión
+source ~/.bashrc
+```
+
+#### A nivel de todo el sistema (requiere privilegios)
+
+```bash
+# /etc/environment usa formato KEY="value", sin "export" y sin referenciar otras variables
+echo 'MI_VARIABLE="valor"' | sudo tee -a /etc/environment
+```
+
+#### Comprobar el origen de una variable o función
+
+```bash
+type -a nombre          # muestra todas las definiciones (builtin, alias, función, ejecutable)
+declare -p PATH            # muestra cómo está declarada una variable
+set | grep NOMBRE            # buscar una variable entre todas las definidas en la sesión actual
+```
+
+#### Orden de carga en una shell de login interactiva (bash)
+
+```
+/etc/profile → ~/.bash_profile (o ~/.bash_login o ~/.profile, el primero que exista) → ~/.bashrc (si se invoca desde .bash_profile)
+```
+
+{% hint style="info" %}
+Si defines la misma variable en varios ficheros, gana la que se carga último. Es una fuente habitual de confusión cuando "algo que configuré no funciona" — comprobar siempre con `echo $VARIABLE` tras un `source` para confirmar qué valor quedó activo.
+{% endhint %}
+
 ### Atajos de teclado esenciales
 
 | Atajo    | Acción                                             |
@@ -124,3 +177,4 @@ alias                   # ver alias activos
 ```
 
 Para que un alias persista, añádelo a `~/.bashrc` o `~/.zshrc` y recarga con `source ~/.bashrc`.
+
