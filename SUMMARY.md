@@ -32,6 +32,7 @@
   * [Control del flujo stdout, stdin y stderr](linux/uso-de-la-terminal/control-del-flujo-stdout-stdin-y-stderr.md)
   * [Descriptores de archivos](linux/uso-de-la-terminal/descriptores-de-archivos.md)
   * [Cheat sheet de comandos](linux/uso-de-la-terminal/cheat-sheet-de-comandos.md)
+* [Scripting en bash](linux/scripting-en-bash.md)
 * [Hardening](linux/hardening.md)
 
 ## Redes
