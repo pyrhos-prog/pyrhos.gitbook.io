@@ -4,7 +4,9 @@
 
 ## Fundamentos de hardware
 
-* [Introducción](fundamentos-de-hardware/introduccion.md)
+* [Arquitectura y estructura del Ordenador](fundamentos-de-hardware/arquitectura-y-estructura-del-ordenador/README.md)
+  * [Modelo de Von neumann](fundamentos-de-hardware/arquitectura-y-estructura-del-ordenador/modelo-de-von-neumann.md)
+  * [Elementos funcionales](fundamentos-de-hardware/arquitectura-y-estructura-del-ordenador/elementos-funcionales.md)
 
 ## Linux
 

@@ -2,13 +2,15 @@
 icon: memory
 ---
 
-# Introducción
+# Modelo de Von neumann
 
 > Un **ordenador** es una **máquina electrónica programable** que recibe **datos**, los procesa mediante **instrucciones** y genera **información útil**.&#x20;
 
 ## Esquema y estructura de un ordenador
 
 ### **Arquitectura Von Neumann**
+
+La característica fundamental de este modelo es que almacena en la misma memoria física tanto los datos como las instrucciones que forman los programas, codificados en formato binario.
 
 La **arquitectura Von Neumann** establece la organización básica de la mayoría de los ordenadores actuales.&#x20;
 
@@ -21,7 +23,7 @@ En este modelo
 
 trabajan de forma coordinada para ejecutar instrucciones, procesar datos y comunicarse con los periféricos.
 
-<figure><img src="../.gitbook/assets/image (66).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (66).png" alt="" width="375"><figcaption></figcaption></figure>
 
 #### Unidad Central de Proceso (CPU)
 
@@ -63,4 +65,3 @@ Son los dispositivos externos que se conectan a un ordenador y pueden ser de:
 * Almacenamiento
 * Comunicación
 * Entrada/Salida
-
