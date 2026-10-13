@@ -40,6 +40,7 @@
 * [Introducción a las redes](redes/introduccion-a-las-redes.md)
 * [Fundamentos de Redes](redes/fundamentos-de-redes/README.md)
   * [Nivel Físico](redes/fundamentos-de-redes/nivel-fisico.md)
+  * [Cableado estructurado](redes/fundamentos-de-redes/cableado-estructurado.md)
 * [Topologias de red](redes/topologias-de-red.md)
 * [Modelos de referencia](redes/modelos-de-referencia/README.md)
   * [Modelo OSI](redes/modelos-de-referencia/modelo-osi.md)
