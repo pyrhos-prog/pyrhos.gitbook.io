@@ -2,15 +2,6 @@
 
 > Conceptos básicos para empezar a trabajar con Bash: qué es, cómo se ejecuta un script, permisos, convenciones y dónde buscar ayuda.
 
-### Índice
-
-1. Qué es Bash
-2. Terminal, shell e intérprete
-3. Primer script
-4. Permisos de ejecución
-5. Comentarios y convenciones
-6. Cómo obtener ayuda
-
 ### Qué es Bash
 
 Bash (Bourne Again SHell) es un intérprete de comandos y a la vez un lenguaje de scripting. Es la shell por defecto en la mayoría de distribuciones Linux.
