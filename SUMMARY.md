@@ -50,7 +50,8 @@
 
 * [Introducción a las redes](redes/introduccion-a-las-redes.md)
 * [Fundamentos de Redes](redes/fundamentos-de-redes/README.md)
-  * [Nivel Físico](redes/fundamentos-de-redes/nivel-fisico.md)
+  * [Nivel Físico](redes/fundamentos-de-redes/nivel-fisico/README.md)
+    * [Perturbaciones y ancho de banda](redes/fundamentos-de-redes/nivel-fisico/perturbaciones-y-ancho-de-banda.md)
   * [Nivel de enlace](redes/fundamentos-de-redes/nivel-de-enlace.md)
   * [Cableado estructurado](redes/fundamentos-de-redes/cableado-estructurado.md)
 * [Topologias de red](redes/topologias-de-red.md)
