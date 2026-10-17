@@ -23,7 +23,7 @@
 
 ### Los 7 subsistemas
 
-<figure><img src="../../.gitbook/assets/image (67).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (67).png" alt="" width="375"><figcaption></figcaption></figure>
 
 1. Área de trabajo
 2. Cableado horizontal
